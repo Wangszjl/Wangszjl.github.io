@@ -172,13 +172,43 @@ id="摘译-使用有限元方法求解泊松方程一">摘译-使用有限元方
 Brieda，2019），用于在三维空间内求解泊松方程。</p>
 <h2 id="强形式">1 强形式</h2>
 <p>泊松方程可以写为 <span
-class="math display">\[\nabla^2u\equiv\frac{\partial^2}{\partial
-x^2}+\frac{\partial^2}{\partial y^2}+\frac{\partial^2}{\partial
+class="math display">\[\nabla^2u\equiv\frac{\partial^2u}{\partial
+x^2}+\frac{\partial^2u}{\partial y^2}+\frac{\partial^2u}{\partial
 z^2}\equiv u_{,ii}=f\tag{1.1}\]</span></p>
 <p>在强形式中，我们通常将方程和边界条件写成积分形式，其中下标跟在逗号后面的表示导数，重复的下标意味着求和。这种记号方法被称为指标记号或爱因斯坦记号。我们感兴趣的是在某个空间域<span
 class="math inline">\(\Omega\)</span>上求解这个方程。为了获得唯一解，我们还需要指定边界条件。我们假设我们知道在边界的一个子集<span
 class="math inline">\(\Gamma_g\)</span>上的解。即满足<strong>狄利克雷边界条件</strong>。我们还假设在另一个子集<span
-class="math inline">\(\Gamma_h\)</span>上我们知道解的导数,即满足<strong>纽曼边界条件</strong>。因此，按照爱因斯坦标记法，上述强形式表述为</p>
+class="math inline">\(\Gamma_h\)</span>上我们知道解的导数,即满足<strong>纽曼边界条件</strong>。因此，按照爱因斯坦标记法，上述强形式表述为：
+<br>给定<span class="math inline">\(f\)</span>：<span
+class="math inline">\(\Omega\rightarrow R\)</span>，<span
+class="math inline">\(g:\Gamma_g\rightarrow R\)</span>，且<span
+class="math inline">\(h:\Gamma_h\rightarrow R\)</span>，寻找<span
+class="math inline">\(u:\Omega\rightarrow R\)</span>使得<span
+class="math inline">\(-ku_{,ii}=f(\Omega)\)</span>,<span
+class="math inline">\(u=g(\Gamma_g)\)</span>
+<br>针对泊松方程求解问题，<span
+class="math inline">\(u=\phi，k=1\)</span>且<span
+class="math inline">\(f=\rho/\epsilon_0\)</span>。需要注意的是，<span
+class="math inline">\(\Gamma_g\notin\emptyset\)</span>，但是<span
+class="math inline">\(\Gamma_h\)</span>可以是一个空集。狄利克雷边界条件是获得唯一解所必须的边界条件，但是纽曼边界条件可选。两类边界条件不需要连续，我们可以拥有多个非连续的<span
+class="math inline">\(\Gamma_g\)</span>和<span
+class="math inline">\(\Gamma_h\)</span>区域。</p>
+<h2 id="弱形式">2 弱形式</h2>
+<p>弱形式使用两种函数定义解：</p>
+<ul>
+<li>试解</li>
+<li>权重函数（变量） <br>解需要满足边界条件，即在<span
+class="math inline">\(\Gamma_g\)</span>上<span
+class="math inline">\(u=g\)</span>。同时要求解的导数平方可积： <br><span
+class="math display">\[\int_\Omega(u_{,i})^2d\Omega&lt;\infin\tag{2.1}\]</span>
+<br>满足上述条件的函数称作<span
+class="math inline">\(H^1\)</span>函数，因此<span
+class="math inline">\(u\in H^1\)</span>。试解的集合由下式给出：<span
+class="math inline">\(S=\{u|u\in H^1,u=g | \Gamma_g\}\)</span>
+<br>权重函数与解相似，不同的是他们只满足<span
+class="math inline">\(g\)</span>边界条件的齐次形式： <span
+class="math inline">\(V=\{w|w\in H^1,w=0|\Gamma_g\}\)</span></li>
+</ul>
 
       </div>
     </div>
