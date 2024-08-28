@@ -179,14 +179,14 @@ z^2}\equiv u_{,ii}=f\tag{1.1}\]</span></p>
 class="math inline">\(\Omega\)</span>上求解这个方程。为了获得唯一解，我们还需要指定边界条件。我们假设我们知道在边界的一个子集<span
 class="math inline">\(\Gamma_g\)</span>上的解。即满足<strong>狄利克雷边界条件</strong>。我们还假设在另一个子集<span
 class="math inline">\(\Gamma_h\)</span>上我们知道解的导数,即满足<strong>纽曼边界条件</strong>。因此，按照爱因斯坦标记法，上述强形式表述为：
-<br>给定<span class="math inline">\(f\)</span>：<span
+&gt;给定<span class="math inline">\(f\)</span>：<span
 class="math inline">\(\Omega\rightarrow R\)</span>，<span
 class="math inline">\(g:\Gamma_g\rightarrow R\)</span>，且<span
 class="math inline">\(h:\Gamma_h\rightarrow R\)</span>，寻找<span
 class="math inline">\(u:\Omega\rightarrow R\)</span>使得<span
 class="math inline">\(-ku_{,ii}=f(\Omega)\)</span>,<span
-class="math inline">\(u=g(\Gamma_g)\)</span>
-<br>针对泊松方程求解问题，<span
+class="math inline">\(u=g(\Gamma_g)\)</span></p>
+<p><br>针对泊松方程求解问题，<span
 class="math inline">\(u=\phi，k=1\)</span>且<span
 class="math inline">\(f=\rho/\epsilon_0\)</span>。需要注意的是，<span
 class="math inline">\(\Gamma_g\notin\emptyset\)</span>，但是<span
@@ -207,8 +207,27 @@ class="math inline">\(u\in H^1\)</span>。试解的集合由下式给出：<span
 class="math inline">\(S=\{u|u\in H^1,u=g | \Gamma_g\}\)</span>
 <br>权重函数与解相似，不同的是他们只满足<span
 class="math inline">\(g\)</span>边界条件的齐次形式： <span
-class="math inline">\(V=\{w|w\in H^1,w=0|\Gamma_g\}\)</span></li>
+class="math inline">\(V=\{w|w\in H^1,w=0|\Gamma_g\}\)</span>
+<br>于是弱形式由下述形式给出： &gt;给定<span
+class="math inline">\(f:\Omega R, g:\Gamma_g\rightarrow R,
+h:\Gamma_h\rightarrow R, 找到u\in S,使得对所有的w\in V,满足\int_\Omega
+w_{,i}(ku_{,i})d\Omega=\int_\Omega
+wfd\Omega+\int_{\Omega_h}whd\Gamma\)</span></li>
 </ul>
+<p><br>与强形式不同，弱形式通过<span
+class="math inline">\(u\)</span>的导数来定义解。这两个解是相同的，如果<span
+class="math inline">\(u\)</span>是<span
+class="math inline">\((S)\)</span>的解，那么它也是<span
+class="math inline">\((W)\)</span>的解，如果<span
+class="math inline">\(u\)</span>是<span
+class="math inline">\((W)\)</span>的解，那么它也是<span
+class="math inline">\((S)\)</span>的解。我们现在定义几个新的算子以简化记号:
+<span class="math display">\[a(w,u)=\int_\Omega
+w_{,i}ku_{,i}d\Omega\tag{2.2}\]</span> <span
+class="math display">\[(w,f)=\int_\Omega wfd\Omega\tag{2.3}\]</span>
+<span
+class="math display">\[(w,f)=\int_{\Omega_h}wfd\Omega\tag{2.4}\]</span></p>
+<h2 id="伽辽金形式">3 伽辽金形式</h2>
 
       </div>
     </div>
