@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     <title>
       
-        探寻有限元 | 芥川龙之介的幽灵
+        有限元理论推导（一） | 芥川龙之介的幽灵
       
     </title>
     <meta name="description" content="" />
@@ -58,7 +58,8 @@
           href='/css/layout.css' />
     
     
-  <link rel="stylesheet" type="text/css" href="/css/category.css" />
+  <link rel="stylesheet" type="text/css" href="/css/post.css"/>
+  
 
   <meta name="generator" content="Hexo 7.3.0"></head>
   <body>
@@ -146,76 +147,114 @@
     </div>
     <div class="body">
       
-  <div class="wall wall-category--plain">
-    <div class="wall-main">
-      <div class="wall-category-title">
-        <div class="title-icon"
-             style="background-image: url(/images/icon/icon-pi.svg)"></div>
-        探寻有限元
+  <article class="post-content">
+    <div class="post-inner">
+      <div class="post-content__head">
+        <div class="post-title">有限元理论推导（一）</div>
+        <div class="post-info">
+          
+  
+
+
+          <span class="post-date">2024-08-31</span>
+        </div>
       </div>
-      <div class="wall-category-description">介绍有限元相关内容</div>
-      <div class="wall-category-tags">
-        <div id="tags-outer"></div>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <h1 id="加权残差法和伽辽金近似">1 加权残差法和伽辽金近似</h1>
+<h2 id="经典问题引入">1.1 经典问题引入</h2>
+<p>考虑确定一根长度为<span
+class="math inline">\(L\)</span>、横截面恒定的细长均质金属丝的热传导情况。假定左端暴露在规定的热通量<span
+class="math inline">\(q\)</span>下，右端保持恒温<span
+class="math inline">\(T=T_L\)</span>，并且棒的长度方向被绝缘材料包围。利用傅立叶定律，我们可以写出控制整个棒的温度分布的导线方程，即：
+<span
+class="math display">\[-K\frac{d^2T}{dx^2}=Q，0&lt;x&lt;L\tag{1.1}\]</span>
+式中 <br><span class="math inline">\(x\)</span>为长度坐标 <br><span
+class="math inline">\(K\)</span>是材料的热传导率（假定为常数） <br><span
+class="math inline">\(Q\)</span>是单位体积产生的热量
+与这一问题相应的边界条件是 <span
+class="math display">\[-K\frac{dT}{dx}=q，x=0\tag{1.2}\]</span></p>
+
       </div>
     </div>
-  </div>
-  <div class="post-list">
     
-      
+      <script src='https://unpkg.com/mermaid@latest/dist/mermaid.min.js'></script>
+      <script>
+        if (window.mermaid) {
+          mermaid.initialize({"startOnload":true});
+        }
+      </script>
+    
+  </article>
+  <div class="post__foot">
+    
+      <div class="like-author">
+  <input type="checkbox" id="likeCode" />
+  <div class="author-face">
+    <img height="100px"
+         width="100px"
+         id="front-face"
+         alt="author face"
+         src="/" />
+    <img height="100px"
+         width="100px"
+         id="back-face"
+         alt="like code"
+         src="/" />
+  </div>
+  <div class="like-text">“给作者倒杯卡布奇诺”</div>
+  <label for="likeCode" class="like-btn">
+    <svg viewBox="0 0 1024 1024"
+         width="20px"
+         style="margin-right: 10px"
+         height="20px">
+      <path d="M466.88 908.96L113.824 563.296a270.08 270.08 0 0 1 0-387.392c108.8-106.56 284.896-106.56 393.696 0 1.504 1.472 2.976 2.944 4.448 4.48 1.472-1.536 2.944-3.008 4.448-4.48 108.8-106.56 284.896-106.56 393.696 0a269.952 269.952 0 0 1 34.016 347.072l-387.392 385.6a64 64 0 0 1-89.92 0.384z" p-id="13650" fill="#ee4242" />
+    </svg>
+    喜欢作者
+  </label>
+</div>
+
+    
+    <div class="post-nav">
   
-  <div class="post-card">
-    <div class="post__head">
-      <a href="/2024/08/31/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E4%B8%80%EF%BC%89/" class="post-title hover-line">有限元理论推导（一）</a>
-      
-    </div>
-    <div class="post__body">
-      
-      <div class="post-excerpt"></div>
-    </div>
-    <div class="post__foot">
-      <div class="post-tags">
+    <div class="post-nav-item-left"></div>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2024/08/31/%E6%9C%89%E9%99%90%E5%85%83%E5%88%9D%E6%AD%A5%EF%BC%88%E4%BA%8C%EF%BC%89/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596" />
+        </svg>
+      </div>
+      有限元初步（二）（翻译）
+    </a>
+  
+</div>
+
+    
+      <div class="related-post">
+  <div class="related__head">
   
 
 </div>
-    </div>
+  <div class="realated__body">
+    
+      <div class="null"><div class="null-item"><div class="null-title"><a href="\2024\07\30\有限元初步（一）\" title="有限元初步（一）（翻译）" rel="bookmark">有限元初步（一）（翻译）</a></div></div><div class="null-item"><div class="null-title"><a href="\2024\08\31\有限元初步（二）\" title="有限元初步（二）（翻译）" rel="bookmark">有限元初步（二）（翻译）</a></div></div></div>
+    
   </div>
-
-  
-  <div class="post-card">
-    <div class="post__head">
-      <a href="/2024/08/31/%E6%9C%89%E9%99%90%E5%85%83%E5%88%9D%E6%AD%A5%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title hover-line">有限元初步（二）（翻译）</a>
-      
-    </div>
-    <div class="post__body">
-      
-      <div class="post-excerpt"></div>
-    </div>
-    <div class="post__foot">
-      <div class="post-tags">
-  
-
 </div>
-    </div>
-  </div>
-
-  
-  <div class="post-card">
-    <div class="post__head">
-      <a href="/2024/07/30/%E6%9C%89%E9%99%90%E5%85%83%E5%88%9D%E6%AD%A5%EF%BC%88%E4%B8%80%EF%BC%89/" class="post-title hover-line">有限元初步（一）（翻译）</a>
-      
-    </div>
-    <div class="post__body">
-      
-      <div class="post-excerpt"></div>
-    </div>
-    <div class="post__foot">
-      <div class="post-tags">
-  
-
-</div>
-    </div>
-  </div>
-
 
     
     
