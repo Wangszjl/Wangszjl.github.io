@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     <title>
       
-        有限元理论推导（一） | 芥川龙之介的幽灵
+        03-有限元理论推导（一） | 芥川龙之介的幽灵
       
     </title>
     <meta name="description" content="" />
@@ -150,7 +150,7 @@
   <article class="post-content">
     <div class="post-inner">
       <div class="post-content__head">
-        <div class="post-title">有限元理论推导（一）</div>
+        <div class="post-title">03-有限元理论推导（一）</div>
         <div class="post-info">
           
   
@@ -178,7 +178,91 @@ class="math display">\[-K\frac{d^2T}{dx^2}=Q，0&lt;x&lt;L\tag{1.1}\]</span>
 class="math inline">\(K\)</span>是材料的热传导率（假定为常数） <br><span
 class="math inline">\(Q\)</span>是单位体积产生的热量
 与这一问题相应的边界条件是 <span
-class="math display">\[-K\frac{dT}{dx}=q，x=0\tag{1.2}\]</span></p>
+class="math display">\[-K\frac{dT}{dx}=q，x=0\tag{1.2}\]</span> <span
+class="math display">\[T=T_L，x=L\tag{1.3}\]</span> 当<span
+class="math inline">\(q&gt;0\)</span>时，热量流向<span
+class="math inline">\(x=0\)</span>处的棒体，这就是公式(1.2)中负号的原因。</p>
+<p>假定<span
+class="math inline">\(Q\)</span>是可积的，那么方程(1.1)的解与边界条件(1.2)和(1.3)可以通过直接积分求得：
+<span
+class="math display">\[T(x)=T_L+\frac{q}{K}(L-x)+\frac{1}{K}\int^L_x(\int^x_0Q(z)dz)dy\tag{1.4}\]</span>
+如果Q为常数，公式(2.4)简化为： <span
+class="math display">\[T(x)=T_L+\frac{q}{K}(L-x)+\frac{Q}{2K}(L^2-x^2)\tag{1.5}\]</span></p>
+<h2 id="弱形式描述">1.2 弱形式描述</h2>
+<p>通常有两种方法可以用有限元来计算和求解方程(1.1)的形式,这两种方法分别称为<strong><em>Rayleigh-Ritz法</em></strong>和<strong><em>Galerkin法</em></strong>。其他较少使用的方法是基于配位、常数加权和最小平方技术。所有这些程序都是加权残差法的子集。
+<br>无论我们使用哪种方法，第一步都是在<span class="math inline">\(0\le x
+\le
+L\)</span>的区间内划分出网格，网格由一定数量的非重叠子区间组成，覆盖整个域，每个子区间称为一个
+"单元"。我们用<span
+class="math inline">\(e_k\)</span>表示每个单元，即<span
+class="math inline">\(e_k=\{x:x_k\le x\le
+x_{k+1}\}\)</span>。每个子区间的端点<span
+class="math inline">\(x_k\)</span>称为节点。
+温度分布由每个子区间的预设函数（用<span
+class="math inline">\(\phi_j(x)\)</span>表示）和相应的未知参数<span
+class="math inline">\(a_j\)</span>计算得到。
+<br>因此，我们将一个单元定义为一个子区间<span
+class="math inline">\(e_k\)</span>，以及一组预先确定的函数<span
+class="math inline">\(\varphi_j\)</span>和相同数量的参数<span
+class="math inline">\(a_j\)</span>。这样如果参数<span
+class="math inline">\(a_j\)</span>已知，则温度长边的近似值<span
+class="math inline">\(T(x)\)</span>也是已知的。在整个域<span
+class="math inline">\(0 \le x \le L\)</span>上，我们可以写出 <span
+class="math display">\[T(x)\cong
+a_1\phi_1(x)+a_2\phi_2(x)+\cdots+a_{n+1}\phi_{n+1}(x)\tag{1.6}
+\]</span> 函数<span
+class="math inline">\(\phi(x)\)</span>称作形状函数，我们将式（1.6）写成求和的形式，即
+<span class="math display">\[T(x)=\sum^{n+1}_{i=1}a_i\phi_i(x)\tag{1.7}
+\]</span> 当使用 (1.7)
+形式的表达式近似求解问题时,一般来说，我们无法得到这个偏微分方程的真实解。因此，如果我们将近似解替换为方程（1.1）的左侧，我们得到的将不是同一值，而是与误差相关的某个
+"残差 "函数。我们将这个残余误差定义为 <span
+class="math display">\[R(T,x)\equiv-K\frac{d^2T}{dx^2}-Q\tag{1.8}\]</span>
+这里，<span class="math inline">\(T\)</span>是真实解<span
+class="math inline">\(T^*\)</span>的近似解，即<span
+class="math inline">\(R(T^*,x)\equiv 0\)</span>。然而，对任意的<span
+class="math inline">\(T\neq T^*\)</span>，我们不能令残差在每个<span
+class="math inline">\(x\)</span>点都消失。加权残差法的原理是，我们可以将残差乘以加权函数，令加权残差的积分在每一点<span
+class="math inline">\(x\)</span>上变为0，即 <span
+class="math display">\[\int^L_0W(x)R(T,x)dx=0\tag{1.9}\]</span>
+式中<span
+class="math inline">\(W(x)\)</span>为权重函数。通过选择不同的权重函数并将其替换到弱形式（1.9）中，我们可以生成一个关于未知参数<span
+class="math inline">\(a_j\)</span>线性方程组，该方程组用于确定偏微分方程近似解<span
+class="math inline">\(T\)</span>的形式，该近似解类似于方程（1.7）给出的有限级数。这种方法满足偏微分方程的“平均”或“积分”意义上的解。所选加权函数的类型取决于所选加权残差函数的类型。在Galerkin方法中，权重与形状函数<span
+class="math inline">\(\phi(x)\)</span>相等，即<span
+class="math inline">\(W_i(x)=\phi_i(x)\)</span>。 <br>由于未知参数<span
+class="math inline">\(a_j\)</span>的数量等于形状函数<span
+class="math inline">\(\phi_j\)</span>的数量，将生成一个方程数量与未知数数量相同的线性代数方程组。如果与偏微分方程相关的边界条件被正确设定和施加，那么这样的方程组的存在性和唯一性是保证的。这种方法在处理高维不规则几何和非线性问题中特别有优势，并且会自动生成一个方程数量与未知数数量相同的方程组。形状函数<span
+class="math inline">\(\phi(x)\)</span>的定义是有限元方法的关键所在。我们将几乎完全局限于使用简单（线性、二次和三次）插值；可以使用更高阶（和超越）近似，但这会带来额外的复杂性、计算时间和存储要求。使用基本线性、二次函数将证实有限元概念既优雅又极其强大。
+<br>我们现在希望使用我们提出的形状函数<span
+class="math inline">\(\phi(x)\)</span>作为权重函数<span
+class="math inline">\(W(x)\)</span>来评估方程（1.9）的左端积分。因此，根据伽辽金方法得到：
+<span class="math display">\[\int^L_0\phi(x)\Big
+[-K\frac{d^2T}{dx^2}-Q\Big ]dx=0\tag{1.10}\]</span>
+我们需要找到方程（1.7）中函数<span
+class="math inline">\(\phi(x)\)</span>的适当形式。由于温度分布必须是<span
+class="math inline">\(x\)</span>的连续函数，最简单的方法是在每个单元上使用分段多项式插值来近似它；特别是，分段线性近似提供了最简单的连续函数近似。不幸的是，这样的函数的一阶导数在单元节点处不连续，因此，在这些地方不存在二阶导数；此外，<span
+class="math inline">\(T\)</span>的二阶导数在每个单元内部将消失。然而，要求二阶导数在所有地方都存在是过于严格的。这将阻止我们处理许多非常有兴趣的物理情况，例如在杆中存在一个单位强度的热源。在这种情况下，方程（1.1）变为
+<span
+class="math display">\[-K\frac{d^2T}{dx^2}=\delta(x-x_s)\tag{1.11}\]</span>
+式中<span class="math inline">\(\delta\)</span>为Delta函数，在<span
+class="math inline">\(x=x_s\)</span>外的各点为0，且在这一点处的值不确定。显然，在<span
+class="math inline">\(x=x_s\)</span>处<span
+class="math inline">\(T\)</span>的二阶导数不存在；方程（1.11）的解为：
+<span class="math display">\[T(x)=
+\begin{cases}
+-\frac{1}{K}[q(x-L)+(x_s-L)]+T_L&amp;0\le x\le x_s\\
+-\frac{1}{K}q(x-L)(x-L)+T_L&amp;x_s\le x\le L
+\end{cases}\tag{1.12}
+\]</span> 对方程（1.10）应用分布积分，得到 <span
+class="math display">\[\int^L_0\phi(x)[-K\frac{d^2
+T}{dx^2}]dx=\int^L_0K\frac{d\phi}{dx}\frac{dT}{dx}dx-K\phi\frac{dT}{dx}\Big
+|^L_0\tag{1.13}
+\]</span> 于是方程（1.10）可重写为 <span
+class="math display">\[\int^L_0K\frac{d\phi}{dx}\frac{dT}{dx}dx-\int^L_0\phi
+Qdx-K\phi\frac{dT}{dx}\Big |^L_0=0\tag{1.14}
+\]</span> 这仅仅是一个“弱”形式的问题，因为它只包含解<span
+class="math inline">\(T(x)\)</span>的一阶导数，而方程（1.10）包含二阶导数。对函数<span
+class="math inline">\(T(x)\)</span>的微分要求已经减弱，因此得名“弱形式”。请注意，到目前为止还没有进行任何近似，也就是说，在表述中没有丢失任何东西，另一方面，简单的分段线性近似现在变得合理。</p>
 
       </div>
     </div>
@@ -238,7 +322,7 @@ class="math display">\[-K\frac{dT}{dx}=q，x=0\tag{1.2}\]</span></p>
           <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596" />
         </svg>
       </div>
-      有限元初步（二）（翻译）
+      02-有限元初步（二）（翻译）
     </a>
   
 </div>
@@ -251,7 +335,7 @@ class="math display">\[-K\frac{dT}{dx}=q，x=0\tag{1.2}\]</span></p>
 </div>
   <div class="realated__body">
     
-      <div class="null"><div class="null-item"><div class="null-title"><a href="\2024\07\30\有限元初步（一）\" title="有限元初步（一）（翻译）" rel="bookmark">有限元初步（一）（翻译）</a></div></div><div class="null-item"><div class="null-title"><a href="\2024\08\31\有限元初步（二）\" title="有限元初步（二）（翻译）" rel="bookmark">有限元初步（二）（翻译）</a></div></div></div>
+      <div class="null"><div class="null-item"><div class="null-title"><a href="\2024\07\30\有限元初步（一）\" title="01-有限元初步（一）（翻译）" rel="bookmark">01-有限元初步（一）（翻译）</a></div></div><div class="null-item"><div class="null-title"><a href="\2024\08\31\有限元初步（二）\" title="02-有限元初步（二）（翻译）" rel="bookmark">02-有限元初步（二）（翻译）</a></div></div></div>
     
   </div>
 </div>
