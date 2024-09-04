@@ -278,6 +278,28 @@ Qdx+\phi(L)h(T_L-T_\infty)=0\tag{1.15}\]</span>
 &gt;即加权残差公式。稍后，我们将进一步要求加权函数在边界点处等于1。在这种情况下，<span
 class="math inline">\(\phi(L) =
 1\)</span>，因此加权函数永远不会明确出现在边界项中。</p>
+<p>对每个权重函数<span
+class="math inline">\(\phi(x)\)</span>使用公式（1.7），可将方程（1.14）改写为
+<span class="math display">\[\sum^{n+1}_{j=1}K\Big
+[\int^L_0\frac{d\phi_i}{dx}\frac{d\phi_j}{dx}dx\Big
+]a_j-\int^L_0\phi_iQdx+\phi_i\Big[-K\frac{dT}{dx}\Big]\Big
+|^{x=L}_{x=0}=0\\
+i=1,2,\cdots,n+1\tag{1.16}
+\]</span> 一旦形状函数<span
+class="math inline">\(\phi_i\)</span>选择好后，可以计算上式的积分。弱形式的伽辽金描述的优势在于，只有有限数量的参数<span
+class="math inline">\(a_i\)</span>需要确定，<span
+class="math inline">\(i = 1, \cdots, n +
+1\)</span>，这与方程(1.1)或(1.9)中需要确定<span class="math inline">\(0
+\le x &lt; L\)</span>区间内每个点的<span
+class="math inline">\(T(x)\)</span>值不同。在这种情况下，考虑精确解被兼容的近似所取代。
+<br>为了说明上述过程，我们将区间<span class="math inline">\([0,
+1]\)</span>分为两个等长的段，并在每个段的两个端点放置一个节点。因此，三个节点定义了整个杆的温度场，即节点<span
+class="math inline">\(1\)</span>位于<span class="math inline">\(x = x_1
+= 0\)</span>，节点<span class="math inline">\(2\)</span>位于<span
+class="math inline">\(x = x_2 = L/2\)</span>，节点<span
+class="math inline">\(3\)</span>位于<span class="math inline">\(x = x_3
+= L\)</span>，如图1<img src="1.png" alt="区间离散化" />所示。
+如果我们假设在节点之间的φ(x)的变异性在每个元素ei上线性，我们可以方便地表示依赖变量T的形式为</p>
 
       </div>
     </div>
@@ -350,7 +372,7 @@ class="math inline">\(\phi(L) =
 </div>
   <div class="realated__body">
     
-      <div class="null"><div class="null-item"><div class="null-title"><a href="\2024\07\30\有限元初步（一）\" title="01-有限元初步（一）（翻译）" rel="bookmark">01-有限元初步（一）（翻译）</a></div></div><div class="null-item"><div class="null-title"><a href="\2024\08\31\有限元初步（二）\" title="02-有限元初步（二）（翻译）" rel="bookmark">02-有限元初步（二）（翻译）</a></div></div></div>
+      <div class="null"><div class="null-item"><div class="null-title"><a href="\2024\08\31\有限元初步（二）\" title="02-有限元初步（二）（翻译）" rel="bookmark">02-有限元初步（二）（翻译）</a></div></div><div class="null-item"><div class="null-title"><a href="\2024\07\30\有限元初步（一）\" title="01-有限元初步（一）（翻译）" rel="bookmark">01-有限元初步（一）（翻译）</a></div></div></div>
     
   </div>
 </div>
