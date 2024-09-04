@@ -304,7 +304,7 @@ class="math inline">\(3\)</span>位于<span class="math inline">\(x = x_3
 <img src="1.png" alt="区间离散化" />
 <figcaption aria-hidden="true">区间离散化</figcaption>
 </figure>
-<center>
+</center>
 <center>
 <p>
 图1 区间离散化
@@ -315,7 +315,70 @@ class="math inline">\(\phi(x)\)</span>在每个单元节点<span
 class="math inline">\(e_i\)</span>之间的变化为线性，我们可以使用下述形式表示<span
 class="math inline">\(T(x)\)</span>: <span
 class="math display">\[T(x)=\phi_{i}(x)a_i+\phi_{i+1}a_{i+1},x_i\le x\le
-x_{i+1}\tag{1.17}\]</span></p>
+x_{i+1}\tag{1.17}\]</span> 如确定形状函数<span
+class="math inline">\(\phi_i\)</span>，使得<span
+class="math inline">\(\phi(x_i)=0\)</span>且<span
+class="math inline">\(\phi(x_{i+1})=0\)</span>，相反地<span
+class="math inline">\(\phi_{i+1}(x_i)=0\)</span>，<span
+class="math inline">\(\phi_{i+1}(x_{i+1})=1\)</span>，函数<span
+class="math inline">\(\phi_i\)</span>由下式给出： <span
+class="math display">\[\phi_i(x)=\frac{x_{i+1}-x}{x_{i+1}-x_i}\tag{1.18a}\]</span>
+<span
+class="math display">\[\phi_{i+1}(x)=\frac{x-x_i}{x_{i+1}-x_i}\tag{1.18b}\]</span>
+参数<span class="math inline">\(a_i\)</span>为节点温度，即<span
+class="math inline">\(a_i=T(x_i)=T_i\)</span>，形状函数的导数为 <span
+class="math display">\[\frac{d\phi_i}{dx}=-\frac{1}{x_{i+1}-x_i}\tag{1.19a}\]</span>
+<span
+class="math display">\[\frac{d\phi_{i+1}}{dx}=\frac{1}{x_{i+1}-x_i}\tag{1.19b}\]</span></p>
+<br>
+<center>
+<figure>
+<img src="2.png" alt="一个单元上的形状函数" />
+<figcaption aria-hidden="true">一个单元上的形状函数</figcaption>
+</figure>
+</center>
+<center>
+<p>
+图2 一个单元上的形状函数
+</p>
+</center>
+<p>方程（1.17）~（1.19）可以使用矩阵形式表述为 <span
+class="math display">\[T(x)=\phi \boldsymbol{a}\tag{1.20}\]</span> 式中
+<span class="math display">\[\phi=\begin{matrix}
+[\phi_i &amp;\phi_{i+1}]
+\end{matrix}\tag{1.21}\]</span> 由此得到 <span
+class="math display">\[\frac{dT}{dx}=\frac{d}{dx}\phi\boldsymbol{a}=
+\begin{matrix}
+\Big[\frac{d\phi_i}{dx}&amp;\frac{d\phi_{i+1}}{dx}\Big]
+\end{matrix}
+\Big[
+\begin{matrix}
+a_i\\a_{i+1}
+\end{matrix}
+\Big]\tag{1.22}\]</span> 其中 <span
+class="math display">\[\frac{d}{dx}\phi=\Big[
+\begin{matrix}
+-\frac{1}{x_{i+1}-x_i}&amp;\frac{1}{x_{i+1}-x_i}
+\end{matrix}
+\Big]\tag{1.23}\]</span> 现在可将以上方程带入到方程（1.16）中，得到
+<span
+class="math display">\[\sum^2_{j=1}K\Big[\int^{L/2}_0\frac{d\phi_1}{dx}\frac{d\phi_j}{dx}dx\Big]a_j-\int^{L/2}_0\phi_1(x)Qdx-K\phi_1(x)\frac{dT}{dx}\Big|^{x=L/2}_{x=0}=0\\
+\tag{1.24a}\]</span> 和 <span
+class="math display">\[\sum^2_{j=1}K\Big[\int^{L/2}_0\frac{d\phi_2}{dx}\frac{d\phi_j}{dx}dx\Big]a_j-\int^{L/2}_0\phi_2(x)Qdx-K\phi_2(x)\frac{dT}{dx}\Big|^{x=L/2}_{x=0}=0\\
+\tag{1.24b}\]</span> 上式使用方程（1.20）~（1.23）表述为 <span
+class="math display">\[K\Bigg[\int^{L/2}_0\Big[\frac{d}{dx}\phi\Big]^T\Big[\frac{d}{dx}\phi\Big]dx\Bigg]\boldsymbol{a}-Q\int^{L/2}_0\phi^Tdx-\Bigg[
+\begin{matrix}
+q\\0
+\end{matrix}
+\Bigg]=0\tag{1.25}\]</span> 代入 <span class="math display">\[\phi=\Big[
+  \begin{matrix}
+  1-\frac{2x}{L}&amp;\frac{2x}{L}
+  \end{matrix}
+  \Big]\]</span> 和 <span class="math display">\[\frac{d}{dx}\phi=\Big[
+  \begin{matrix}
+  -\frac{2}{L}&amp;\frac{2}{L}
+  \end{matrix}
+  \Big]\]</span> 并积分，得到</p>
 
       </div>
     </div>
