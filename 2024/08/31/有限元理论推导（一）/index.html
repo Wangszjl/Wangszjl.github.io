@@ -378,7 +378,104 @@ q\\0
   \begin{matrix}
   -\frac{2}{L}&amp;\frac{2}{L}
   \end{matrix}
-  \Big]\]</span> 并积分，得到</p>
+  \Big]\]</span> 并积分，得到 <span
+class="math display">\[\frac{2K}{L}\Big[
+  \begin{matrix}
+    1&amp;-1\\
+    -1&amp;1\\
+  \end{matrix}
+  \Big]
+  \Big[
+    \begin{matrix}
+      a_1\\
+      a_2
+    \end{matrix}
+  \Big]-\frac{QL}{4}
+  \Big[
+  \begin{matrix}
+    1\\1
+  \end{matrix}  
+  \Big]-
+  \Big[\begin{matrix}
+    q\\0
+  \end{matrix}
+  \Big]=\Big[\begin{matrix}
+    0\\0
+  \end{matrix}
+  \Big]\tag{1.26}\]</span> 单元<span
+class="math inline">\(2\)</span>使用相似的方法计算得到 <span
+class="math display">\[\frac{2K}{L}\Big[
+  \begin{matrix}
+    1&amp;-1\\
+    -1&amp;1\\
+  \end{matrix}
+  \Big]
+  \Big[
+    \begin{matrix}
+      a_2\\
+      a_3
+    \end{matrix}
+  \Big]-\frac{QL}{4}
+  \Big[
+  \begin{matrix}
+    1\\1
+  \end{matrix}  
+  \Big]-
+  \Big[\begin{matrix}
+    q\\0
+  \end{matrix}
+  \Big]=\Big[\begin{matrix}
+    0\\0
+  \end{matrix}
+  \Big]\tag{1.27}\]</span>
+表达式（1.26）和（1.27）通过“组装”，即将方程（1.26）中的第二个方程和方程（1.27）中的第一个方程相加，因为它们都对应于相同的权重函数<span
+class="math inline">\(\phi_2(x)\)</span>，于是得到 <span
+class="math display">\[\frac{2K}{L}\Bigg[
+    \begin{matrix}
+      1&amp;-1&amp;0\\
+      -1&amp;2&amp;-1\\
+      0&amp;-1&amp;1
+    \end{matrix}
+    \Bigg]
+    \Bigg[
+    \begin{matrix}
+      a_1\\
+      a_2\\
+      a_3
+    \end{matrix}
+    \Bigg]=
+    \Bigg[
+    \begin{matrix}
+      q\\
+      0\\
+      0
+    \end{matrix}
+    \Bigg]+\frac{QL}{4}
+    \Bigg[
+    \begin{matrix}
+      1\\
+      2\\
+      1
+    \end{matrix}
+    \Bigg]\tag{1.28}
+  \]</span> 由于已知<span
+class="math inline">\(a_3=T_L\)</span>，上述公式简化为关于未知数<span
+class="math inline">\(a_1\)</span>和<span
+class="math inline">\(a_2\)</span>，即 <span
+class="math display">\[a_1-a_2=\frac{ql}{2K}+\frac{QL^2}{8K}\tag{1.29a}\]</span>
+<span
+class="math display">\[-a_1+2a_2=\frac{QL^2}{4K}+T_L\tag{1.29b}\]</span>
+解为 <span
+class="math display">\[a_1=\frac{qL}{K}+\frac{QL^2}{2K}+T_L,\\
+a_2=\frac{qL}{2K}+\frac{3QL^2}{8K}+T_L,\\
+a_3=T_L\tag{1.30}\]</span></p>
+<h2 id="小结">1.3 小结</h2>
+<p>有限元方法的基本原理在于加权残差法。最常用的两种程序是<strong><em>Rayleigh-Ritz方法</em></strong>和<strong><em>伽辽金方法</em></strong>。Rayleigh-Ritz方法基于变分计算；然而，这种方法不能用于一些更复杂的方程。伽辽金方法简单易用，即使Rayleigh-Ritz方法无法应用，也能保证得到与主导微分方程兼容的近似解。
+在这两种方法中，依赖变量通过一个有限系列近似表示，其中假设解的“形状”已知，并且取决于有限数量需要确定的参数。将伽辽金近似代入主导微分方程，产生的残差函数与权重函数相乘，要求在积分意义上与权重函数正交，即
+<span class="math display">\[\int W(x)R(T,x)dx=0\]</span> 其中<span
+class="math inline">\(R(T, x)\)</span>是残差函数（当将近似精确解<span
+class="math inline">\(T^*\)</span>代入微分方程时得到的函数），<span
+class="math inline">\(W(x)\)</span>是权重函数。从这些表达式中生成的一组线性代数方程允许我们确定未知参数，从而得到解的近似值。通过使用积分换元法降低二阶导数项，我们得到了“弱形式”公式。应用弱形式公式产生了一个通用的算法，可扩展到广泛的问题类别。</p>
 
       </div>
     </div>
