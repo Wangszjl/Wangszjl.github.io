@@ -650,18 +650,102 @@ class="math inline">\(T_2\)</span>。一旦求解完成后，第三个等式可�
 <br>
 <center>
 <figure>
-<img src="/有限元理论推导（二）/7.png" alt="图7 二元系统方程组装" />
+<img src="7.png" alt="图7 二元系统方程组装" />
 <figcaption aria-hidden="true">图7 二元系统方程组装</figcaption>
 </figure>
 </center>
 <p>现在使用二次单元离散化区域，来近似方程（2.26）至（2.28）。我们现在使用相同数量的节点，但是是更高阶的近似。伽辽金描述与之前相似。由于局部和全局坐标系对于一个单元都是相同的，我们可以写成
 <span
-class="math display">\[\int^L_0\Bigg[K\frac{dN_i}{dx}\Bigg(\sum^3_{j=1}\frac{dN_j}{dx}T_j\Bigg)-N_iQ\Bigg]dx+\Bigg[N_i\Bigg[\Bigg]-K\frac{dT}{dx}\Bigg]\]</span>
-其中<span class="math inline">\(x\)</span>是长度坐标，<span
-class="math inline">\(K\)</span>是材料的热导率（假设为常数），<span
-class="math inline">\(Q\)</span>是单位体积的内部热生成。</p>
-<h3 id="可变传导和边界对流">2.3.2 可变传导和边界对流</h3>
-<p>我们现在将有限元算法扩展到解决薄杆上的稳态温度分布问题，该杆的左端受到对流热负荷，<span
+class="math display">\[\int^L_0\Bigg[K\frac{dN_i}{dx}\Bigg(\sum^3_{j=1}\frac{dN_j}{dx}T_j\Bigg)-N_iQ\Bigg]dx+\Bigg[N_i\Bigg(-K\frac{dT}{dx}\Bigg)\Bigg]^L_0=0\tag{2.39}\]</span>
+根据方程（3.18）、（3.21）和（3.23），得到矩阵形式： <span
+class="math display">\[
+\int^L_0\Bigg\{K\Bigg(\Bigg[
+    \begin{matrix}
+    \frac{1}{L}(\frac{4x}{L}-3)\\
+    \frac{4}{L}(1-\frac{2x}{L})\\
+    \frac{1}{L}(\frac{4x}{L}-1)
+    \end{matrix}
+    \Bigg]
+    \Bigg[
+    \begin{matrix}
+    \frac{1}{L}(\frac{4x}{L}-3)&amp;
+    \frac{4}{L}(1-\frac{2x}{L})&amp;
+    \frac{1}{L}(\frac{4x}{L}-1)
+    \end{matrix}
+    \Bigg]
+    \Bigg)
+    \Bigg[
+    \begin{matrix}
+    T_1\\T_2\\T3
+    \end{matrix}
+    \Bigg]\\
+    -\Bigg[
+    \begin{matrix}
+    1-\frac{3x}{L}+2(\frac{x}{L})^2\\
+    \frac{4x}{L}(1-\frac{x}{L})\\
+    \frac{x}{L}(\frac{2x}{L}-1)
+    \end{matrix}
+    \Bigg]Q
+    \Bigg\}dx=
+    \Bigg[
+    \begin{matrix}
+    q\\0\\
+    -(-K\frac{dT}{dx})_{x=L}
+    \end{matrix}
+    \Bigg]\tag{2.40}
+\]</span> 积分后得到 <span class="math display">\[
+\frac{K}{6L}\Bigg[
+\begin{matrix}
+14&amp;-16&amp;2\\
+-16&amp;32&amp;-16\\
+2&amp;-16&amp;14
+\end{matrix}    
+\Bigg]
+\Bigg[
+\begin{matrix}
+T_1\\T_2\\T_3
+\end{matrix}
+\Bigg]=\frac{QL}{6}
+\Bigg[
+\begin{matrix}
+1\\4\\1
+\end{matrix}
+\Bigg]+
+\Bigg[
+\begin{matrix}
+q\\0\\-(-K\frac{dT}{dx})_{x=L}
+\end{matrix}
+\Bigg]\tag{2.41}\]</span> 最后一个方程考虑<span
+class="math inline">\(T_3=T_L\)</span>后消掉，最后的系统变为 <span
+class="math display">\[
+\frac{K}{6L}\Bigg[
+\begin{matrix}
+14&amp;-16\\
+-16&amp;32\\
+\end{matrix}    
+\Bigg]
+\Bigg[
+\begin{matrix}
+T_1\\T_2
+\end{matrix}
+\Bigg]=\frac{QL}{6}
+\Bigg[
+\begin{matrix}
+1\\4
+\end{matrix}
+\Bigg]+
+\Bigg[
+\begin{matrix}
+q\\0
+\end{matrix}
+\Bigg]+\frac{K}{6L}T_L\Bigg[
+    \begin{matrix}
+    -2\\16    
+    \end{matrix}\Bigg]\tag{2.42}\]</span> 右侧边界的热通量由下式给出
+<span class="math display">\[
+\Bigg(-K\frac{dT}{dx}\Bigg)_{x=L}=\frac{K}{6L}(16T_2-2T_1-14T_L)+\frac{QL}{6}\tag{2.43}\]</span>
+### 2.3.2 可变传导和边界对流
+我们现在将有限元算法扩展到解决薄杆上的稳态温度分布问题，该杆的左端受到对流热负荷，<span
 class="math inline">\(x = 0\)</span>，右端保持固定温度<span
 class="math inline">\(T_L\)</span>，<span class="math inline">\(x =
 L\)</span>。我们还假设没有内部热源（即<span class="math inline">\(Q =
@@ -669,29 +753,331 @@ L\)</span>。我们还假设没有内部热源（即<span class="math inline">\(
 class="math inline">\(x\)</span>变化（由于材料组成的变化或杆的横截面变化），即<span
 class="math inline">\(K = K(x)\)</span>。描述这个问题的微分方程是：</p>
 <p><span class="math display">\[
-\frac{d}{dx}\left(K(x) \frac{dT}{dx}\right) = 0
-\]</span></p>
-<h2 id="轴对称热传导">2.4 轴对称热传导</h2>
-<p>许多涉及流体在管道中流动的稳态热传导问题都涉及到轴对称形式。为了开发相应的有限元算法，方程3.59至3.61的轴对称形式是：</p>
+\frac{d}{dx}\left(K(x) \frac{dT}{dx}\right) = 0\tag{2.44}
+\]</span> 其中 <span
+class="math display">\[-K\frac{dT}{dx}+h(T-T_\infty)=0,x=0\\
+T=T_L,x=L\tag{2.45}\]</span> 式中，<span
+class="math inline">\(T_\infty\)</span>为外部参考温度，<span
+class="math inline">\(h\)</span>为热传递参数 加权残差形式为 <span
+class="math display">\[
+\int^L_0K(x)\frac{dW}{dx}\frac{dT}{dx}dx-\Bigg[W\Bigg(-K(x)\frac{dT}{dx}\Bigg)\Bigg]_{x=L}=0\tag{2.47}
+\]</span>
+从现在开始，我们将省略对应于规定温度的边界上的通量项，在这种情况下是<span
+class="math inline">\(x =
+L\)</span>，这是有限元建模中的惯例。如果我们还用方程（2.45）替换左端边界的通量，我们有
+<span class="math display">\[
+\int^L_0K(x)\frac{dW}{dx}\frac{dT}{dx}dx+Wh(T-T_\infty)|_{x=0}=0\tag{2.48}\]</span>
+请注意，从方程（2.44）到（2.48）的过程中并没有丢失任何信息；然而，我们不是寻求方程（2.48）的解析解，而是寻求利用我们定义的形状函数和网格离散化的可计算有限元近似。
+与之前一样，我们在<span class="math inline">\(0\le x\le
+L\)</span>上定义一个网格，并通过以下方式近似<span
+class="math inline">\(T(x)\)</span>： <span class="math display">\[
+T(x)=\sum^{n+1}_{i=1}N_i(x)T_i\tag{2.49}\]</span> 式中<span
+class="math inline">\(n\)</span>为网格中的单元个数。如果<span
+class="math inline">\(N_i,i=1,\cdots,n+1\)</span>为线性形状函数，则方程（2.48）的伽辽金形式为
+<span class="math display">\[
+\int^L_0K(x)\frac{dN_i}{dx}\Bigg(\sum^{n+1}_{j=1}\frac{dN_j}{dx}T_j\Bigg)dx+N_ih(T-T_\infty)|_{x=0}=0\tag{2.50}\]</span>
+不代入<span
+class="math inline">\(K(x)\)</span>的特定形式，我们将使用与<span
+class="math inline">\(T(x)\)</span>选择的相同形状函数（在这种情况下是线性的）来插值<span
+class="math inline">\(K(x)\)</span>的节点值，即在每个单元上<span
+class="math inline">\(K^{(e)}(x) = N^{(e)}_1(x)K^{(e)}_1
++N^{(e)}_2(x)K^{(e)}_2\)</span>。第一个单元（包括对流边界条件）的方程为：
+<span class="math display">\[
+\int^{x_2}_{x_1}\Bigg[
+    \begin{matrix}
+    N^{(e_1)}_1&amp;N^{(e_2)}_2
+    \end{matrix}
+    \Bigg]
+    \Bigg[
+    \begin{matrix}
+    K^{(e_1)}_1\\ K^{(e_2)}_2
+    \end{matrix}
+    \Bigg]
+    \Bigg(
+    \Bigg[
+     \begin{matrix}
+    \frac{dN^{(e_1)}_1}{dx}\\
+    \frac{dN^{(e_2)}_2}{dx}
+     \end{matrix}   
+    \Bigg]
+    \Bigg[
+    \begin{matrix}
+    \frac{dN^{(e_1)}_1}{dx}&amp;
+    \frac{dN^{(e_2)}_2}{dx}
+    \end{matrix}
+    \Bigg]
+    \Bigg)dx
+    \Bigg[
+    \begin{matrix}
+    T^{(e_1)}_1\\
+    T^{(e_2)}_2
+    \end{matrix}    
+    \Bigg]\\
+    +\Bigg[\begin{matrix}
+    h&amp;0\\
+    0&amp;0
+    \end{matrix}
+    \Bigg]\Bigg[
+    \begin{matrix}
+    T^{(e_1)}_1\\
+    T^{(e_2)}_2
+    \end{matrix}    
+    \Bigg]=hT_\infty\Bigg[
+    \begin{matrix}
+    1\\0    
+    \end{matrix}
+    \Bigg]
+\]</span> 考虑到在守恒边界项有<span
+class="math inline">\(N^{(e_1)}_1(0)=1\)</span>和<span
+class="math inline">\(N^{(e_1)}_2(0)=1\)</span>，即 <span
+class="math display">\[
+N_ih(T-T_\infty)|_{x=0}=\Bigg[
+    \begin{matrix}
+    N_1\\N_2
+    \end{matrix}
+    \Bigg]h\Bigg[
+    \begin{matrix}
+    N_1&amp;N_2   
+    \end{matrix}
+    \Bigg]
+    \Bigg[
+    \begin{matrix}
+    T_1-T_\infty\\
+    T_2-T_\infty
+    \end{matrix}
+    \Bigg]\Bigg|_{x=0}\\
+    =\Bigg(
+    \Bigg[
+    \begin{matrix}
+    N_1\\N_2
+    \end{matrix}
+    \Bigg]
+    \Bigg[
+    \begin{matrix}
+    N_1&amp;N_2    
+    \end{matrix}
+    \Bigg]
+    \Bigg[
+    \begin{matrix}
+    T_1\\T_2
+    \end{matrix}
+    \Bigg]-
+    \Bigg[
+    \begin{matrix}
+    N_1\\N_2    
+    \end{matrix}
+    \Bigg]hT_\infty
+    \Bigg)\Bigg|_{x=0}\\
+    =h\Bigg[
+    \begin{matrix}
+    1&amp;0\\
+    0&amp;0    
+    \end{matrix}    
+    \Bigg]
+    \Bigg[
+    \begin{matrix}
+    T_1\\T_2    
+    \end{matrix}
+    \Bigg]-hT_\infty\Bigg[
+    \begin{matrix}
+    1\\0
+    \end{matrix}    
+    \Bigg]
+\]</span> 积分后得到 <span class="math display">\[
+\frac{1}{2h^{(e_1)}}(K^{(e_1)}_1+K^{(e_1)}_2)\Bigg[
+\begin{matrix}
+1&amp;-1\\
+-1&amp;1    
+\end{matrix}    
+\Bigg]
+\Bigg[
+\begin{matrix}
+T^{(e_1)}_1\\
+T^{(e_1)}_2
+\end{matrix}
+\Bigg]+
+\Bigg[
+\begin{matrix}
+h&amp;0\\
+0&amp;0    
+\end{matrix}
+\Bigg]
+\Bigg[
+\begin{matrix}
+T^{(e_1)}_1\\
+T^{(e_1)}_2    
+\end{matrix}
+\Bigg]=hT_\infty\Bigg[
+\begin{matrix}
+1\\0    
+\end{matrix}    
+\Bigg]\tag{2.51}
+\]</span> 对所有单元，<span class="math inline">\(e_i\neq
+e_1\)</span>，方程为 <span class="math display">\[
+\frac{1}{2h^{(e_1)}}(K^{(e_1)}_1+K^{(e_1)}_2)=\Bigg[
+\begin{matrix}
+1&amp;-1\\
+-1&amp;1    
+\end{matrix}    
+\Bigg]
+\Bigg[
+\begin{matrix}
+T^{(e_1)}_1\\T^{(e_1)}_2
+\end{matrix}
+\Bigg]=\Bigg[
+\begin{matrix}
+0\\0
+\end{matrix}    
+\Bigg]\tag{2.52}
+\]</span> 如果区间<span class="math inline">\(0\le x\le
+L\)</span>被离散为2个相等长度的单元，组装后的方程为 <span
+class="math display">\[
+\frac{1}{L}\Bigg[
+\begin{matrix}
+K_1+K_2+Lh&amp;-(K_1+K_2)&amp;0\\
+-(K_1+K_2)&amp;K_1+2K_2+K_3&amp;-(K_2+K_3)\\
+0&amp;-(K_2+K_3)&amp;K_2+K_3
+\end{matrix}    
+\Bigg]
+\Bigg[
+\begin{matrix}
+T_1\\T_2\\T_3
+\end{matrix}    
+\Bigg]=\Bigg[
+\begin{matrix}
+hT_\infty\\
+0\\0
+\end{matrix}    
+\Bigg]\tag{2.53}\]</span> 如果在<span class="math inline">\(x =
+L\)</span>处给出了形式如方程（2.45）的对流边界条件，那么最后一个单元的方程可以从加权残差形式（2.47）得出。然后，忽略第二个单元中的第一个边界项，并在第二个项中替换对流条件，得到单元方程为
+<span class="math display">\[
+\frac{1}{2h^{(e_n)}}(K^{(e_n)}_1+K^{(e_n)}_2)\Bigg[
+\begin{matrix}
+1&amp;-1\\
+-1&amp;1    
+\end{matrix}    
+\Bigg]
+\Bigg[
+\begin{matrix}
+T^{(e_n)}_1\\T^{(e_n)}_2
+\end{matrix}
+\Bigg]+
+\Bigg[
+\begin{matrix}
+0&amp;0\\
+0&amp;-h    
+\end{matrix}    
+\Bigg]
+\Bigg[
+\begin{matrix}
+T^{(e_n)}_1\\T^{(e_n)}_2
+\end{matrix}
+\Bigg]
+=\Bigg[
+\begin{matrix}
+0\\0
+\end{matrix}    
+\Bigg]\tag{2.54}
+\]</span>
+对流边界条件可以应用于网格的任一或两个边界；方程（2.51）、（2.52）和（2.54）对于任何网格（均匀或非均匀）、变导热性和任一或两个边界处的对流都是有效的。在定义网格的节点坐标和各种问题数据
+<span class="math inline">\(h\)</span>、<span
+class="math inline">\(T_\infty\)</span> 和 <span
+class="math inline">\(K(x)\)</span> 后，可以获得特定解。 ## 2.4
+轴对称热传导
+许多涉及流体在管道中流动的稳态热传导问题都涉及到轴对称形式。为了开发相应的有限元算法，方程（2.44）至（2.46）的轴对称形式是：</p>
 <p><span class="math display">\[
-\frac{1}{r}\frac{d}{dr}\left(r\frac{dT}{dr}\right) = Q
+\frac{1}{r}\frac{d}{dr}\left(r\frac{dT}{dr}\right) =
+Q,r_1&lt;r&lt;r_2\tag{2.58}
 \]</span></p>
 <p>加上边界条件：</p>
 <p><span class="math display">\[
--\frac{dT}{dr} + h(T - T_{\infty}) = 0 \quad \text{at } r = r_1
+-\frac{dT}{dr} + h(T - T_{\infty}) = 0 \quad \text{at } r =
+r_1\tag{2.59}
 \]</span></p>
 <p>和</p>
 <p><span class="math display">\[
-T = T_L \quad \text{at } r = r_2
+T = T_L \quad \text{at } r = r_2\tag{2.60}
 \]</span></p>
-<p>其中 <span class="math inline">\(r_1\)</span> 和 <span
+其中 <span class="math inline">\(r_1\)</span> 和 <span
 class="math inline">\(r_2\)</span> 分别是内半径和外半径，<span
 class="math inline">\(T_{\infty}\)</span> 是外部参考温度，<span
-class="math inline">\(h\)</span> 是对流换热系数。</p>
-<h2 id="自然坐标系统">2.5 自然坐标系统</h2>
-<p>我们现在引入一个自然坐标系统来指定单元上的局部操作。我们将单元定义在区间
+class="math inline">\(h\)</span> 是对流换热系数。
+方程（2.58）的加权残差形式为 <span class="math display">\[
+\int^{2\pi}_0\int^{r_2}_{r_1}W\Bigg[
+    -\frac{d}{dr}\Bigg(rK\frac{dT}{dr}\Bigg)\Bigg]drd\theta=0\tag{2.61}\]</span>
+分别对<span class="math inline">\(r\)</span>和<span
+class="math inline">\(\theta\)</span>积分，我们得到 <span
+class="math display">\[
+2\pi\int^{r_2}_{r_1}rK\frac{dW}{dr}\frac{dT}{dr}dr+(2\pi
+rWh(T-T_\infty))_{r=r_1}=0\tag{2.62}\]</span>
+比较方程（2.62）与方程（2.47），轴对称情况下的显著区别在于<span
+class="math inline">\(K(x)\)</span>被替换为<span
+class="math inline">\(rK\)</span>。物理上，平滑变化的热导率并不是特别重要，而突然变化（恒定）的热导率则很重要，例如，材料的变化或包裹在管道上的热绝缘可能会产生显著的变化。因此，可以通过将<span
+class="math inline">\(K\)</span>移到积分之外来简化方程(2.62)，假设积分将根据<span
+class="math inline">\(K\)</span>的阶跃变化分段计算。单元<span
+class="math inline">\(e_1=\{r|r^{(e_1)}_1\le r\le
+r^{(e_1)}_2\}\)</span>轴对称的伽辽金积分可以写成 <span
+class="math display">\[
+\Bigg\{
+\frac{K^{(e_i)}}{2h^{(e_i)}}    (r^{(e_1)}_1+r^{(e_1)}_2)
+\Bigg[
+\begin{matrix}
+1&amp;-1\\
+-1&amp;1
+\end{matrix}
+\Bigg]
++r_1h\Bigg[
+\begin{matrix}
+1&amp;0\\
+0&amp;0
+\end{matrix}    
+\Bigg]\delta_{e_1}
+-r_2h\Bigg[
+\begin{matrix}
+0&amp;0\\
+0&amp;1
+\end{matrix}    
+\Bigg]\delta_{e_n}
+\Bigg[
+\begin{matrix}
+T^{(e_i)}_1\\
+T^{(e_i)}_2
+\end{matrix}
+\Bigg]
+\Bigg\}\\
+=\Bigg\{
+r_1hT_\infty\Bigg[
+\begin{matrix}
+1\\0
+\end{matrix}
+\Bigg]\delta_{e_1}-
+r_2hT_\infty\Bigg[
+\begin{matrix}
+0\\1
+\end{matrix}
+\Bigg]\delta_{e_n}
+\Bigg\}\tag{2.63}
+\]</span> 式中，<span
+class="math inline">\(\delta_{e_i}\)</span>为Kronecker
+delata函数，即在单元<span class="math inline">\(e_i\)</span>处<span
+class="math inline">\(\delta_{e_i}=1\)</span>，而对所有<span
+class="math inline">\(j\neq i\)</span>的单元<span
+class="math inline">\(e_j\)</span>处为0； <span
+class="math inline">\(n\)</span>表示单元编号，所以<span
+class="math inline">\(e_n\)</span>为右侧边界的单元。 ## 2.5 自然坐标系统
+我们现在引入一个自然坐标系统来指定单元上的局部操作。我们将单元定义在区间
 <span class="math inline">\(-1 \leq \xi \leq
-1\)</span>，并与变换形式相结合：</p>
+1\)</span>，并与变换形式相结合： <span class="math display">\[
+x=\frac{1}{2}(1-\xi)x_i+\frac{1}{2}(1+\xi)x_{i+1}\tag{2.64}
+\]</span> 这个形式将区间<span class="math inline">\(-1\le\xi\le
+1\)</span>映射到了单元的区间<span class="math inline">\(x_i\le x\le
+x_{i+1}\)</span>上。 <br>
+<center>
+<figure>
+<img src="8.png" alt="图8 二元系统方程组装" />
+<figcaption aria-hidden="true">图8 二元系统方程组装</figcaption>
+</figure>
+</center>
 <p><span class="math display">\[
 x = x_i + h(\xi + 1) + \frac{1}{2}h(\xi^2 - 1)
 \]</span></p>
