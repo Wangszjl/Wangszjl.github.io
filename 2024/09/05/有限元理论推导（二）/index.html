@@ -178,7 +178,7 @@ L\)</span>的范围内，单元不一定是等大小的。然后我们在每个�
 <br>
 <center>
 <figure>
-<img src="/有限元理论推导（二）/1.png"
+<img src="_posts/有限元理论推导（二）/1.png"
 alt="图1 分段线性单元的形状函数" />
 <figcaption aria-hidden="true">图1 分段线性单元的形状函数</figcaption>
 </figure>
@@ -264,7 +264,7 @@ class="math display">\[N^{(e)}_2(x)=\frac{x}{h^{(e)}\tag{2.14}}\]</span>
     \]</span> <br>
 <center>
 <figure>
-<img src="/有限元理论推导（二）/2.png"
+<img src="_posts/有限元理论推导（二）/2.png"
 alt="图2 局部节点编号，温度表示，局部形状函数" />
 <figcaption aria-hidden="true">图2
 局部节点编号，温度表示，局部形状函数</figcaption>
@@ -274,7 +274,7 @@ alt="图2 局部节点编号，温度表示，局部形状函数" />
 <br>
 <center>
 <figure>
-<img src="/有限元理论推导（二）/3.png"
+<img src="_posts/有限元理论推导（二）/3.png"
 alt="图3 局部节点与全局节点间的映射关系" />
 <figcaption aria-hidden="true">图3
 局部节点与全局节点间的映射关系</figcaption>
@@ -296,7 +296,7 @@ h^{(e)}+\alpha_3(h^{(e)})^2=T^{(e)}_3\tag{2.17c}\]</span></p>
 <br>
 <center>
 <figure>
-<img src="/有限元理论推导（二）/4.png"
+<img src="_posts/有限元理论推导（二）/4.png"
 alt="图4 分段线性插值与分段二次插值" />
 <figcaption aria-hidden="true">图4
 分段线性插值与分段二次插值</figcaption>
@@ -305,7 +305,7 @@ alt="图4 分段线性插值与分段二次插值" />
 <br>
 <center>
 <figure>
-<img src="/有限元理论推导（二）/5.png"
+<img src="_posts/有限元理论推导（二）/5.png"
 alt="图5 局部坐标系下的二次单元和形状函数" />
 <figcaption aria-hidden="true">图5
 局部坐标系下的二次单元和形状函数</figcaption>
@@ -333,7 +333,7 @@ class="math display">\[e_i=\{x|x_{2i-1}\le x\le
 x_{2i+1}\}\tag{2.19}\]</span> <br>
 <center>
 <figure>
-<img src="/有限元理论推导（二）/6.png"
+<img src="_posts/有限元理论推导（二）/6.png"
 alt="图6 二次单元局部和全局坐标系之间的关系，三角形表示每个单元的内部节点" />
 <figcaption aria-hidden="true">图6
 二次单元局部和全局坐标系之间的关系，三角形表示每个单元的内部节点</figcaption>
@@ -401,7 +401,7 @@ class="math inline">\(\delta_{ij}\)</span> 是克罗内克 delta 函数，即，
    \delta_{ij} = \begin{cases}
      1, &amp; \text{if } i = j \\
      0, &amp; \text{if } i \neq j
-   \end{cases}\tag{3.25}
+   \end{cases}\tag{2.25}
    \]</span></p>
 <p>并且 <span class="math inline">\(x_j\)</span> 是节点坐标。 4.
 所选择的插值类型定义了依赖变量在元素内可以采取的“形状”，即线性的、二次等。因此，使用“形状函数”这个名称来表示定义元素的函数
@@ -650,7 +650,8 @@ class="math inline">\(T_2\)</span>。一旦求解完成后，第三个等式可�
 <br>
 <center>
 <figure>
-<img src="7.png" alt="图7 二元系统方程组装" />
+<img src="_posts/有限元理论推导（二）/7.png"
+alt="图7 二元系统方程组装" />
 <figcaption aria-hidden="true">图7 二元系统方程组装</figcaption>
 </figure>
 </center>
@@ -1078,7 +1079,8 @@ N_2(\xi)=\frac{1}{2}(1+\xi) \tag{2.65}
 \]</span> <br>
 <center>
 <figure>
-<img src="8.png" alt="图8 自然局部坐标系下线性形状函数" />
+<img src="_posts/有限元理论推导（二）/8.png"
+alt="图8 自然局部坐标系下线性形状函数" />
 <figcaption aria-hidden="true">图8
 自然局部坐标系下线性形状函数</figcaption>
 </figure>
@@ -1492,7 +1494,7 @@ class="math inline">\(\ell\)</span>的上三角部分。总的存储需求是<sp
 class="math inline">\(\ell[n-(\ell - 1)/2]\)</span>。 <br>
 <center>
 <figure>
-<img src="9.png"
+<img src="_posts/有限元理论推导（二）/9.png"
 alt="图9 带状n \times n矩阵\boldsymbol{A}，半带宽\ell和带宽2\ell - 1，指示\boldsymbol{A}中存储需求的对称" />
 <figcaption aria-hidden="true">图9 带状<span class="math inline">\(n
 \times n\)</span>矩阵<span
@@ -1514,8 +1516,9 @@ class="math display">\[l_{ij} = \frac{1}{u_{jj}} (a_{ij} -
 \sum_{k=1}^{j-1} l_{ik} u_{jk}), j &lt; i \tag{2.139}\]</span>
 前提是矩阵A是正定的。这个过程显著加快了LU分解步骤。然后可以执行前向和后向替代以得到解向量。在这种方法中，不需要进行枢轴操作以避免除以零。矩阵A的正定性保证了对于所有<span
 class="math inline">\(i\)</span>值，<span class="math inline">\(u_{ii}
-&gt; 0\)</span>。 ## 2.9 小结
-本章的目的是阐述并确立将有限元方法应用于线性偏微分方程。从标量量的简单稳态扩散方程开始，有限元方法被应用于越来越复杂的方程，最终导致在工程和科学问题中常见的1-D时变扩散传输方程。在几个示例问题中推导和使用各种程度的形函数后，可以看到一个通用的有限元过程的演变，该过程可以应用于广泛的范围问题。在整个元素集或网格上的组装过程被展示出来，产生了一组全局矩阵。将全局矩阵系统简化为形式为<span
+&gt; 0\)</span>。</p>
+<h2 id="小结">2.9 小结</h2>
+<p>本章的目的是阐述并确立将有限元方法应用于线性偏微分方程。从标量量的简单稳态扩散方程开始，有限元方法被应用于越来越复杂的方程，最终导致在工程和科学问题中常见的1-D时变扩散传输方程。在几个示例问题中推导和使用各种程度的形函数后，可以看到一个通用的有限元过程的演变，该过程可以应用于广泛的范围问题。在整个元素集或网格上的组装过程被展示出来，产生了一组全局矩阵。将全局矩阵系统简化为形式为<span
 class="math inline">\(\boldsymbol{A}\phi
 =\boldsymbol{B}\)</span>的简单线性（矩阵）方程，其中<span
 class="math inline">\(\phi\)</span>是包含未知变量的列向量，允许使用标准矩阵求解程序来求解<span
