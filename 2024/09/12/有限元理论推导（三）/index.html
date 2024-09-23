@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <title>
+      
+        05-有限元理论推导（三） | 芥川龙之介的幽灵
+      
+    </title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="/images/apple-touch-icon.png" />
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/images/favicon-32x32.png" />
+    
+    
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/images/favicon-16x16.png" />
+    
+    
+      <link rel="mask-icon"
+            href="/images/logo.svg"
+            color="" />
+    
+    
+    
+      
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/normal.ttf);
+        font-weight: normal;
+    }
+  </style>
+
+  <style>
+    @font-face {
+        font-family:sourceHanSerif;
+        src: url(/font/bold.ttf);
+        font-weight: bold;
+    }
+  </style>
+
+
+    
+    <link rel="stylesheet"
+          type="text/css"
+          href='/css/layout.css' />
+    
+    
+  <link rel="stylesheet" type="text/css" href="/css/post.css"/>
+  
+
+  <meta name="generator" content="Hexo 7.3.0"></head>
+  <body>
+    
+      <div id="search-mask" style="display:none">
+  <div class="search-main" id="search-main">
+    <div class="search__head">
+      <div class="search-form">
+        <svg t="1706347533072"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             p-id="7828"
+             width="20"
+             height="20">
+          <path d="M685.6 660.336l155.152 155.168a16 16 0 0 1 0 22.624l-11.312 11.328a16 16 0 0 1-22.624 0l-158.528-158.544a289.792 289.792 0 0 1-165.152 51.36C322.336 742.256 192 611.904 192 451.12 192 290.336 322.336 160 483.136 160c160.784 0 291.12 130.336 291.12 291.136 0 82.112-33.984 156.272-88.672 209.2z m-202.464 33.92c134.272 0 243.12-108.848 243.12-243.12C726.256 316.848 617.408 208 483.136 208 348.848 208 240 316.848 240 451.136c0 134.272 108.848 243.12 243.136 243.12z" fill="#000000" p-id="7829">
+          </path>
+        </svg>
+        <input id="search-input" placeholder="搜索文章">
+        <svg t="1706361500528"
+             id="search-clear"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             version="1.1"
+             xmlns="http://www.w3.org/2000/svg"
+             p-id="4351"
+             width="20"
+             height="20">
+          <path d="M512 562.688l-264.2944 264.2944-50.688-50.688L461.312 512 197.0176 247.7056l50.688-50.688L512 461.312l264.2944-264.2944 50.688 50.688L562.688 512l264.2944 264.2944-50.688 50.688L512 562.688z" fill="#00" p-id="4352">
+          </path>
+        </svg>
+      </div>
+    </div>
+    <div class="search__body" id="search-result"></div>
+    <div class="search__foot"></div>
+  </div>
+</div>
+
+    
+    <div class="head">
+      <div class="nav">
+        <a href='/' class="nav-logo">
+          <img alt="logo" height="60px" width="60px" src="/images/logo.svg" />
+        </a>
+        <input id="navBtn" type="checkbox" />
+        <div class="nav-right">
+          
+            <div class="search-outer">
+  <div class="search" id="search-btn">
+    <svg t="1706347533072"
+         class="icon"
+         viewBox="0 0 1024 1024"
+         version="1.1"
+         xmlns="http://www.w3.org/2000/svg"
+         p-id="7828"
+         width="20"
+         height="20">
+      <path d="M685.6 660.336l155.152 155.168a16 16 0 0 1 0 22.624l-11.312 11.328a16 16 0 0 1-22.624 0l-158.528-158.544a289.792 289.792 0 0 1-165.152 51.36C322.336 742.256 192 611.904 192 451.12 192 290.336 322.336 160 483.136 160c160.784 0 291.12 130.336 291.12 291.136 0 82.112-33.984 156.272-88.672 209.2z m-202.464 33.92c134.272 0 243.12-108.848 243.12-243.12C726.256 316.848 617.408 208 483.136 208 348.848 208 240 316.848 240 451.136c0 134.272 108.848 243.12 243.136 243.12z" fill="#000000" p-id="7829">
+      </path>
+    </svg>
+    <span>搜索</span>
+    <span class="search-shortcut-key">Ctrl K</span>
+  </div>
+</div>
+
+          
+          <div class="nav-menu">
+            
+              
+                <a class="nav-menu-item" href="/Numerical">数学迷思</a>
+              
+                <a class="nav-menu-item" href="/Physics">物理揭秘</a>
+              
+                <a class="nav-menu-item" href="/FEM">探寻有限元</a>
+              
+                <a class="nav-menu-item" href="/Program">代码精进之路</a>
+              
+            
+            <a class="nav-menu-item" href='/cv/'>简历</a>
+          </div>
+        </div>
+        <label class="nav-btn" for="navBtn"></label>
+      </div>
+    </div>
+    <div class="body">
+      
+  <article class="post-content">
+    <div class="post-inner">
+      <div class="post-content__head">
+        <div class="post-title">05-有限元理论推导（三）</div>
+        <div class="post-info">
+          
+  
+
+
+          <span class="post-date">2024-09-12</span>
+        </div>
+      </div>
+      
+      <div class="post-content__body">
+        
+          <div class="post-gallery">
+            
+          </div>
+        
+        <h1 id="二维三角形单元">3 二维三角形单元</h1>
+<h2 id="背景">3.1 背景</h2>
+<p>在工程领域，人们很快发现大多数问题不适合使用一维（1-D）分析来解决。另一方面，许多问题可以使用二维（2-D）概念进行“分析”并获得现实可行的解决方案。正是在二维（和三维）问题领域，有限元方法的优势变得显而易见。网格的概念以及单元离散化的选择在2-D问题中变得比第3章讨论的1-D示例中更为重要。
+<br>仔细检查前一篇文章描述的1-D有限元概念将表明，对1-D解决方案过程的唯一限制在于基函数。否则，该方法具有通用性，也适用于多维问题。这一点至关重要——我们可以使用上一篇文章中所介绍的基本公式，并且只需要扩展基函数到二维。
+<br>在2-D问题中，物理（或问题）域被细分为子区域，或单元。可以使用许多多边形形状来定义单元。例如，当问题域本身是矩形时（这是简单有限差分方法的要求），通常使用矩形。然而，当域不规则时，矩形不容易很好地适应（对此的一个例外是一般四边形，将在后续讨论）。最简单的几何结构，能够轻松适应不规则表面，是三角形，它是当今使用最广泛的单元形状之一。
+<br>在处理2-D问题时，现在出现了两个额外的限制。第一个限制是将涉及更多的节点参与解决过程。回想一下一般的矩阵方程
+<span class="math display">\[\boldsymbol{A}\phi=\boldsymbol{B}\]</span>
+人们可以很快看出，全局矩阵<span
+class="math inline">\(\boldsymbol{A}\)</span>变得更大（<span
+class="math inline">\(n\times
+n\)</span>个节点）并且更稀疏；因此，直接解通常仅限于相对较小的问题。第二，通常需要在变量变化迅速或存在不连续性的区域进行本地网格细化。很快就能明显看出使用高效的矩阵求解器的重要性。在本章及后续章节中，我们的方法将使用某种形式的高斯-赛德尔迭代法，或者是一种在许多有限元程序中常用的高斯消元法的改进形式——乔利斯基分解。
+<br>在本章中，我们介绍了用于离散化2-D域的两种通用单元形式中的第一个——三角形，基于一般四边形几何的第二种单元将在后续讨论。历史上，有限元方法首先采用三角形单元来模拟结构问题。今天，许多商业上可用的结构分析有限元代码使用三角形和四边形的混合。</p>
+<h2 id="网格">4.2 网格</h2>
+选择的单元是包含三个顶点节点的三角形。知道在哪里最佳地放置和调整单元的大小更多是一种艺术而不是科学。一般来说，在物理域中函数预期变化更快的区域，会放置更多的单元。正如人们可以很快猜到的，网格生成可能需要几次“尝试”才能得到一个好的网格。求解扩散型方程的解决方案相当宽容——即使在最粗糙的网格上，通常也能获得解决方案（尽管不是最高精度的）。另一方面，非线性方程的解决方案，特别是那些以对流为主的，几乎可以保证需要几次重新网格化才能获得合适的解决方案。大多数分析师，即使是那些在使用有限元方法方面有相当专长的分析师，通常也会在审查问题时询问同事关于他们的网格的意见。
+<br>在创建三角单元网格时，建议在梯度最大的方向上更紧密地放置单元。等边形状的单元比长而窄的三角形单元更准确，并且在处理曲线不规则边界时，单元的边应紧密近似边界。使用线性三节点单元（直线边）可能需要许多单元才能减少解决方案中的误差；另一方面，使用二次曲线边三角形单元可以提高准确性，并能自然适应曲线边界，但需要更多的计算工作。网格生成可以使用计算机程序更容易地执行。网格生成计算机代码MESH-2D允许生成2-D线性或二次三角形单元。由COMSOL创建的示例文件是使用COMSOL
+5.2中包含的网格生成预处理器模块创建的。Persson和Strang（2004）描述了一个简单的2-D网格生成器，可以在MATLAB中使用。
+<br>开发网格的首要任务是将问题域细分为规则的几何形状，即由矩形、圆形等组成的宏区域。几乎所有不规则形状都可以简化为简单的几何原语。通过处理原始简单形状，相对容易地对大域进行网格划分，并在边界处交错单元。请注意，我们可以利用一般四边形原语来生成三角形——一个四边形至少包含两个三角形单元。图1显示了一个使用线性三角形单元离散化的不规则形状，嵌入到两个宏1观四边形单元中，其中一个四边形进一步细分为三角形单元。使用二次（曲线边）单元将更准确地近似曲线边界——这一概念在MESH-2D中被利用，以更准确地模拟不规则形状。
+<br>
+<center>
+<figure>
+<img src="/有限元理论推导（三）/1.png"
+alt="图1 划分为线性三角形单元的非规则区域" />
+<figcaption aria-hidden="true">图1
+划分为线性三角形单元的非规则区域</figcaption>
+</figure>
+</center>
+<br>由于有限元方法基于非结构化网格的使用，即计算是在单元对单元的基础上进行的，我们可以自由地放置我们想要的单元，并将它们连接到其他单元，而不考虑“正交性”或顺序节点编号（如1-D单元中那样）。事实上，我们可以创建一个通用的或通用的单元，然后将作为问题域中所有单元的模型。
+<br>遵循大多数有限元方案中通常采用的程序，与一个三角形单元相关的本地节点编号将以逆时针顺序指定为
+1、2 和 3。一个典型的包含三个角节点的线性三角形单元如图2所示。 <br>
+<center>
+<figure>
+<img src="/有限元理论推导（三）/1.png"
+alt="图1 划分为线性三角形单元的非规则区域" />
+<figcaption aria-hidden="true">图1
+划分为线性三角形单元的非规则区域</figcaption>
+</figure>
+</center>
+<p>使用线性三角形单元生成简单网格相对容易，对于简单几何体来说，在某些情况下可能不需要复杂的网格生成技术。在本书中，我们故意保持了问题几何体的简单性，使其适用于粗网格解决方案。然而，很快就会到来，手工生成单元变得不可行——就像大多数实际工程问题一样——并且需要详细的网格。当处理
+2- 和 3-D
+几何体时，将充分认识到通过计算机代码自动化此过程的必要性。在有限差分方法中，创建线行和列以生成网格相对容易——只要这些线是正交的，也就是说，问题域允许生成一个简单的、结构化的网格。多年来，边界贴合坐标作为无结构网格的替代方案发展起来，它允许有限差分和有限体积方法使用预处理器代码处理不规则几何体；这些代码通常比有限元网格生成器更复杂、更苛刻。由
+Thompson (1987) 开发的 EAGLE 代码和由 Sorenson (1989) 编写的 3DGRAPE
+是基于边界贴合坐标变换的有限差分网格生成器。GRIDGEN，一个从 EAGLE
+代码派生的商业网格生成器，是另一个例子，它是一个用于 PC
+市场的便宜的边界贴合坐标网格生成器。 <br>PATRAN (2015)
+是一个著名的商业有限元网格生成器，许多年前就开发出来了。更近期的网格生成器包括
+TrueGrid (2015)、GMSH (2015) 和 CUBIT
+(2015)。如今几乎所有的商业有限元代码都包含一个网格生成的预处理器模块；这些网格生成器可以在
+COMSOL (2015)、ANSYS (2015)、ADINA (2015)
+以及网络上的其他许多软件中访问。
+<br>从这一章开始，一些示例问题将需要使用计算机代码来解决问题。这些问题必须首先使用网格生成器进行预处理，该网格生成器生成由线性或二次
+2-D 三角形组成的网格。然后，按照与 1-D
+有限元过程完全相同的方式，在所有单元上实现结果的单元算法。 <br>MESH-1D
+是一个简单的 1-D 网格生成器，用作 FEM-1D（如第 3
+章讨论的）的前处理器。MESH-2D 生成一个由三角形或四边形组成的 2-D
+网格，并作为求解器 FEM-2D 的前处理器。MESH-2D
+在用户输入所需边界数据后，自动生成节点编号、单元编号和 x、y
+坐标。这个预处理器并不太复杂，它是为了展示一个基本的能力，即允许不规则域进行离散化。最近的一组
+1-D 代码用于生成单元网格在 Pepper 等人 (2014) 中进行了讨论，这些代码使用
+FORTRAN、MATLAB、MATHCAD 和 MAPLE 编写。</p>
+<h2 id="形状函数">3.3 形状函数</h2>
+<p>有限单元通常可以根据其多项式阶数分为三组：简单形、复杂形和多重形（Oden,
+1972）。在简单形单元中，多项式中的系数数量等于问题的空间维度加一。多项式由一个常数项加上线性项组成。2-D三角形简单形单元由多项式表示。
+<span class="math display">\[ \phi = \alpha_1 + \alpha_2 x + \alpha_3
+y\tag{3.1} \]</span> 多项式在<span
+class="math inline">\(x\)</span>和<span
+class="math inline">\(y\)</span>上是线性的，包含三个系数，因为三角形有三个节点，即顶点。
+<br>复杂单元使用一个包含常数项和线性项以及更高阶项的多项式。虽然形状可能与简单形单元相同，但复杂单元具有额外的边界节点，并且可能有内部节点。二次复杂单元的插值多项式是
+<span class="math display">\[ \phi = \alpha_1 + \alpha_2 x + \alpha_3 y
++ \alpha_4 x^2 + \alpha_5 xy + \alpha_6 y^2\tag{3.2} \]</span>
+六个系数表明单元必须有六个节点。
+<br>多重单元也使用包含更高阶项的多项式；然而，单元的边界必须与坐标轴平行。一个多重单元的例子是矩形或四边形单元。</p>
+<h3 id="线性形状函数">3.3.1 线性形状函数</h3>
+<p>在线性三角形单元中的插值多项式由方程（3.1）定义，其中<span
+class="math inline">\(\phi\)</span>用来表示任何未知变量。在每个顶点节点，
+<span class="math display">\[
+\phi=\phi_1,x=x_1,y=y_1\\
+\phi=\phi_2,x=x_2,y=y_2\\
+\phi=\phi_3,x=x_3,y=y_3\tag{3.4}
+\]</span> 由此得到 <span class="math display">\[
+\phi_1=\alpha_1+\alpha_2x_1+\alpha_3y_1\\
+\phi_2=\alpha_1+\alpha_2x_2+\alpha_3y_2\\
+\phi_3=\alpha_1+\alpha_2x_3+\alpha_3y_3\tag{3.4}
+\]</span> 现在求解关于<span
+class="math inline">\(\phi_1,i=1,2,3\)</span>的函数<span
+class="math inline">\(\alpha_1,\alpha_2\)</span>及<span
+class="math inline">\(\alpha_3\)</span>，得到： <span
+class="math display">\[
+\alpha_1=\frac{1}{2A^{(e)}}[(x_2y_3-x_3y_2)\phi_1+(x_3y_1-x_1y_3)\phi_2+(x_1y_2-x_2y_1)\phi_3]\\
+\alpha_2=\frac{1}{2A^{(e)}}[(y_2-y_3)\phi_1+(y_3-y_1)\phi_2+(y_1-y_2)\phi_3]\\
+\alpha_3=\frac{1}{2A^{(e)}}[(x_3-x_2)\phi_1+(x_1-x_3)\phi_2+(x_2-x_1)\phi_3]\tag{3.5}\]</span></p>
+<p>其中面积<span class="math inline">\(A^{(e)}\)</span>为 <span
+class="math display">\[ 2A^{(e)} = (x_1y_2 - x_2y_1) + (x_3y_1 - x_1y_3)
++ (x_2y_3 - x_3y_2)\tag{3.6} \]</span>
+注意单元的面积是用节点坐标来定义的。为了获得形状函数，我们将<span
+class="math inline">\(\phi\)</span>表达为三个节点值的函数，以便 <span
+class="math display">\[ \phi = N_1(x, y) \phi_1 + N_2(x, y) \phi_2 +
+N_3(x, y) \phi_3\tag{3.7} \]</span>
+就像在1-D单元中一样。然后从方程（3.1）、（3.5）和（3.7）中，形状函数是
+<span class="math display">\[ N_1^{(e)}(x, y) =
+\frac{1}{2A^{(e)}}[(x_2y_3-x_3y_2)+(y_2-y_3)x+(x_3-x_2)y]\tag{3.8}
+\]</span> <span class="math display">\[ N_2^{(e)}(x, y) =
+\frac{1}{2A^{(e)}}[(x_3y_1-x_1y_3)+(y_3-y_1)x+(x_1-x_3)y]\tag{3.9}
+\]</span> <span class="math display">\[ N_3^{(e)}(x, y) =
+\frac{1}{2A^{(e)}}[(x_1y_2-x_3y_1)+(y_1-y_2)x+(x_2-x_1)y]\tag{3.10}
+\]</span> 这些符合方程（3.1）表达的一般关系。例如，<span
+class="math inline">\(N_1\)</span>在节点1的值可以通过将<span
+class="math inline">\(x = x_1\)</span>和<span class="math inline">\(y =
+y_1\)</span>代入方程（3.8）（假设理解了函数关系<span
+class="math inline">\((x, y)\)</span>和上标<span
+class="math inline">\((e)\)</span>）来获得，即 <span
+class="math display">\[ N_1(x_1, y_1) =
+\frac{1}{2A}(x_2y_3-x_3y_2+y_2x_1-y_3x_1+x_3y_1-x_2y_1)\tag{3.11}
+\]</span> <span
+class="math inline">\(N_1\)</span>在节点2和3以及通过这些节点的线上的所有点上都是零。我们还注意到方程（3.11）中的括号内的值也等于2A；因此，
+<span class="math display">\[
+N_1=\frac{2A}{2A}=1,x=x_1,y=y_1\\
+N_1=0,x=x_2,y=y_2,且x=x_3,y=y_3
+\]</span> 梯度变量<span class="math inline">\(\phi\)</span>由下式给出
+<span class="math display">\[ \frac{\partial \phi}{\partial x} =
+\frac{\partial N_1}{\partial x}\phi_1 + \frac{\partial N_2}{\partial
+x}\phi_2 + \frac{\partial N_3}{\partial x}\phi_3 \]</span> <span
+class="math display">\[ \frac{\partial \phi}{\partial y} =
+\frac{\partial N_1}{\partial y}\phi_1 + \frac{\partial N_2}{\partial
+y}\phi_2 + \frac{\partial N_3}{\partial y}\phi_3\tag{3.12} \]</span>
+其中<span class="math inline">\(\partial N_1/\partial
+x\)</span>的值可以从方程（3.8）容易确定： <span class="math display">\[
+\frac{\partial N_1}{\partial x} = \frac{y_2-y_3}{2A}\tag{3.13} \]</span>
+形状函数的其余导数以直接的方式获得。变量<span
+class="math inline">\(\partial\phi/\partial x\)</span>的值为 <span
+class="math display">\[ \frac{\partial \phi}{\partial x} =
+\frac{1}{2A}[(y_2-y_3)\phi_1+(y_3-y_1)\phi_2+(y_1-y_2)\phi_3]\tag{3.14}\]</span></p>
+<h2 id="二次形状函数">3.3.2 二次形状函数</h2>
+与1-D单元一样，我们也可以在线性三角形单元上写出二次近似。二次三角形单元有六个节点，如图3所示。采用这种特定的节点编号系统的原因将在我们考虑三角形的自然面积坐标时变得明显。
+<br>
+<center>
+<figure>
+<img src="/有限元理论推导（三）/3.png" alt="图3 二阶三角形单元" />
+<figcaption aria-hidden="true">图3 二阶三角形单元</figcaption>
+</figure>
+</center>
+<p><br>插值多项式由以下六项组成： <span class="math display">\[ \phi =
+\alpha_1 + \alpha_2 x + \alpha_3 y + \alpha_4 x^2 + \alpha_5 xy +
+\alpha_6 y^2\tag{3.15} \]</span> <span
+class="math inline">\(\alpha_s\)</span>的确定与线性单元完全相同。在每个节点位置处<span
+class="math inline">\(\phi\)</span>的定义为： <span
+class="math display">\[ \phi_1 = \alpha_1 + \alpha_2 x_1 + \alpha_3 y_1
++ \alpha_4 x_1^2 + \alpha_5 x_1y_1 + \alpha_6 y_1^2\\
+\phi_2 = \alpha_1 + \alpha_2 x_2 + \alpha_3 y_2 + \alpha_4 x_2^2 +
+\alpha_5 x_2y_2 + \alpha_6 y_2^2\\
+\vdots\\
+\phi_6 = \alpha_1 + \alpha_2 x_6 + \alpha_3 y_6 + \alpha_4 x_6^2 +
+\alpha_5 x_6y_6 + \alpha_6 y_6^2\tag{3.16}
+\]</span></p>
+<p><span
+class="math inline">\(\alpha_is\)</span>可以从方程（3.16）中解出，以<span
+class="math inline">\(\phi_i\)</span>的值表示。然而，获得<span
+class="math inline">\(a_is\)</span>以及随后的形状函数<span
+class="math inline">\(N_1, N_2, N_3, N_4, N_5\)</span>, 和<span
+class="math inline">\(N_6\)</span>所需的努力相当繁琐。方程（3.16）代表了与六个<span
+class="math inline">\(\phi_i\)</span>方程相关的<span
+class="math inline">\(6 \times
+6\)</span>平方系数矩阵。手工解决方程（3.16）是乏味且不必要的——建立形状函数的一个更简单的方法存在，它基于面积坐标系统。如果一个人希望使用立方三角形单元，则需要10个节点来定义单元——三角形的每条边上有4个，1个在中心。因此，方程（3.16）将包含10个方程，方程（3.15）变为
+<span class="math display">\[ \phi = \alpha_1 + \alpha_2 x + \alpha_3 y
++ \alpha_4 x^2 + \alpha_5 xy + \alpha_6 y^2 + \alpha_7 x^3 + \alpha_8
+x^2y + \alpha_9 xy^2 + \alpha_{10} y^3\tag{3.17} \]</span>
+此时，确定<span
+class="math inline">\(\alpha_is\)</span>以及形状函数<span
+class="math inline">\(N_1\)</span>到<span
+class="math inline">\(N_10\)</span>时需要考虑代数式。</p>
+<h2 id="面积坐标">3.4 面积坐标</h2>
+<p>为了简化使用三角形单元时的解决方案过程，引入了一个面积或自然坐标系统，类似于为1-D单元设计的自然坐标系统。这个2-D坐标系统允许使用方程（2.71）表示的表达式轻松评估积分关系。
+我们通过下式定义三个坐标变量<span class="math inline">\(L_1\)</span>,
+<span class="math inline">\(L_2\)</span>, 和<span
+class="math inline">\(L_3\)</span>， <span class="math display">\[ L_i =
+\frac{A_i}{A} \tag{3.18}\]</span></p>
+其中<span class="math inline">\(A_1\)</span>, <span
+class="math inline">\(A_2\)</span>, 和 <span
+class="math inline">\(A_3\)</span>是由连接三角形内某点<span
+class="math inline">\(P\)</span>与角节点（如图4所示）定义的局部面积，使得<span
+class="math inline">\(A_i\)</span>是与节点<span
+class="math inline">\(i\)</span>相对的面积。 <br>恒定<span
+class="math inline">\(L_i\)</span>的线将平行于相对节点<span
+class="math inline">\(i\)</span>的三角形边。注意在三角形内的任何点<span
+class="math inline">\(L_1 + L_2 + L_3 =
+1\)</span>。图5显示了每个坐标的增加方向。很明显，每个<span
+class="math inline">\(L_i\)</span>在与节点<span
+class="math inline">\(i\)</span>相对的边上变化在0到1之间，位于节点<span
+class="math inline">\(i\)</span>处。 <br>
+<center>
+<figure>
+<img src="/有限元理论推导（三）/4.png" alt="图4 面坐标系" />
+<figcaption aria-hidden="true">图4 面坐标系</figcaption>
+</figure>
+</center>
+<br>
+<center>
+<figure>
+<img src="/有限元理论推导（三）/5.png" alt="图5 线性三角形单元的面积" />
+<figcaption aria-hidden="true">图5 线性三角形单元的面积</figcaption>
+</figure>
+</center>
+<p>对于线性三角形，我们可以将形状函数定义为坐标变量 <span
+class="math display">\[ N_i = L_i\tag{3.19} \]</span> 因此，坐标<span
+class="math inline">\((x, y)\)</span>与坐标<span
+class="math inline">\((L_1, L_2, L_3)\)</span>之间的关系为： <span
+class="math display">\[ x = L_1 x_1 + L_2 x_2 + L_3 x_3 \]</span> <span
+class="math display">\[ y = L_1 y_1 + L_2 y_2 + L_3 y_3 \]</span> <span
+class="math display">\[ 1= L_1+L_2+L_3\tag{3.20}\]</span>
+感兴趣的读者可以在Segerlind (1984), Zienkiewicz和Taylor (1989), 和
+Huebner和Thornton (1982)中找到关于面积坐标系统的更广泛描述。</p>
+<h2 id="数值积分">3.5 数值积分</h2>
+<p>使用面积坐标的优势在于能够评估积分方程，如一维情况下的积分公式。对于具有两个坐标<span
+class="math inline">\((L_1, L_2)\)</span>的二维单元，方程(2.71)变为
+<span
+class="math display">\[\int^L_0L^a_1L^b_2dx=\frac{a!b!}{(1+a+b)!}\cdot
+L\tag{3.21}\]</span> 这一方程适用于在两个节点之间定义的长度<span
+class="math inline">\(L\)</span>的线积分，以及非负整数<span
+class="math inline">\(a,
+b\)</span>。当定义仅是单元边长函数的积分时，这种关系也将有效。对于我们的具有<span
+class="math inline">\(L_1, L_2\)</span>, 和<span
+class="math inline">\(L_3\)</span>的二维单元 <span
+class="math display">\[ \int_AL^aL^bL^cdA
+=\frac{a!b!c!}{(2+a+b+c)!}2A\tag{3.22} \]</span> 其中<span
+class="math inline">\(A\)</span>表示面积。例如，在线性三角形中，<span
+class="math inline">\(N_1N_2\)</span>的面积积为 <span
+class="math display">\[ \int_A N_1 N_2dA =
+\int_AL^1_1L^1_2L^0_3dA=\frac{1!1!0!}{(2+1+1+0)!}2A=\frac{A}{12}\tag{3.23}\]</span>
+面积积分通常采取一般形式 <span class="math display">\[ \int^1_0
+\int^{1-L_2}_0 f(L_1, L_2,
+L_3)|\boldsymbol{J}|dL_1dL_2\tag{3.24}\]</span></p>
+<p>当更高阶的插值函数（二次、三次等）用面积坐标表示时，必须数值评估矩阵积分——这是由于雅可比矩阵的逆，它是面积坐标本身的有理函数。然而，对于复杂的积分，最好让计算机执行积分以避免人为错误。
+<br>在三角单元中数值评估积分的最常用方法之一是由 Hammer
+等人（1956）开发的，可以在许多计算方法的入门文本中找到。在有限元方法中，我们假设
+<span class="math display">\[ \int^1_0
+\int^{1-L_2}_0|\boldsymbol{J}|dL_1dL_2 = \frac{1}{2}\sum^M_{m=1}
+w_mg[(L_1)_m, (L_2)_m, (L_3)_m]\tag{3.25}\]</span> 其中 <span
+class="math inline">\(g(\cdot)\)</span> 包括，1/2
+因子考虑了局部坐标系统中的面积 <span
+class="math inline">\((L_i)_m\)</span> 表示三角形中特定点，<span
+class="math inline">\(w_m\)</span> 是与程序相关联的权重。</p>
+<p>数值积分公式的阶数必须至少比坐标<span
+class="math inline">\(L_1\)</span>, <span
+class="math inline">\(L_2\)</span>, 和<span
+class="math inline">\(L_3\)</span>的幂次和大一整数。例如，要积分<span
+class="math inline">\(L_1L_2L_3\)</span>的乘积，指数和为3，将使用四次积分方案。</p>
+<h2 id="三角形单元中的传导函数">3.6 三角形单元中的传导函数</h2>
+考虑确定由于在各向同性 2-D
+域内传导而产生的稳态温度分布的问题，该域由边界<span
+class="math inline">\(\Gamma\)</span>描述，如图6所示。<span
+class="math inline">\(T(x, y)\)</span>的控制方程写为 <span
+class="math display">\[ -K\Bigg(\frac{\partial^2 T}{\partial x^2} +
+\frac{\partial^2 T}{\partial y^2}\Bigg) = Q\tag{3.26}\]</span> 式中<span
+class="math inline">\(K\)</span>是假定为常数的热导率，<span
+class="math inline">\(Q\)</span>是源/汇项。 <br>
+<center>
+<figure>
+<img src="/有限元理论推导（三）/6.png" alt="图6 热传导的二维域" />
+<figcaption aria-hidden="true">图6 热传导的二维域</figcaption>
+</figure>
+</center>
+我们希望制定一套独特的有限元表达式，用于线性三角形单元。与方程（3.26）相关的边界条件写为
+<span class="math display">\[-K\frac{\partial T}{\partial
+n}=q(along\Gamma_B)\tag{3.27}\]</span> <span
+class="math display">\[T=T_A(along\Gamma_A)\tag{3.28}\]</span> 其中<span
+class="math inline">\(\Gamma_A\)</span>和<span
+class="math inline">\(\Gamma_B\)</span>是如图6所示的边界<span
+class="math inline">\(\Gamma\)</span>的部分，法向导数定义为 <span
+class="math display">\[\frac{\partial T}{\partial n} \equiv n_x
+\frac{\partial T}{\partial x} + n_y \frac{\partial T}{\partial
+y}\tag{3.29}\]</span> 其中<span
+class="math inline">\(n_x\)</span>和<span
+class="math inline">\(n_y\)</span>是单位外法向量<span
+class="math inline">\(\Gamma\)</span>的方向余弦分量。
+<br>使用加权残差法得到， <span class="math display">\[\int_\Omega
+WRd\Omega=0\tag{3.30}\]</span> 其中 <span class="math display">\[R =
+-K\Bigg(
+  \frac{\partial^2 T}{\partial x^2}+\frac{\partial^2 T}{\partial
+y^2}\Bigg)- Q\tag{3.31}
+  \]</span> 其中<span
+class="math inline">\(W\)</span>是权重函数。采用（通用）微分公式 <span
+class="math display">\[\frac{\partial}{\partial\alpha}\Bigg(F\frac{\partial
+G}{\partial\alpha}\Bigg)=\frac{\partial F}{\partial\alpha}\frac{\partial
+G}{\partial\alpha}+F\frac{\partial^2G}{\partial\alpha^2}\tag{3.32}\]</span>
+和平面的格林定理， <span
+class="math display">\[\int_\Omega\Bigg(\frac{\partial F}{\partial x}
++\frac{\partial G}{\partial y}\Bigg)dxdy=\int_\Gamma
+Fdy-Gdx\tag{3.33}\]</span> 方程（3.30）可以写成形式 <span
+class="math display">\[\int_\Omega\Bigg[K\Bigg(\frac{\partial
+W}{\partial x}\frac{\partial T}{\partial x}+\frac{\partial W}{\partial
+y}\frac{\partial T}{\partial y}\Bigg)-WQ\Bigg]d\Omega + \int_\Gamma
+W\Bigg(-K\frac{\partial T}{\partial n}\Bigg)d\Gamma =
+0\tag{3.34}\]</span> 我们现在使用形状函数近似温度场 <span
+class="math display">\[T(x, y) = \sum_{i=1}^{M} N_i(x, y)
+T_i\tag{3.35}\]</span> 正如之前对 1-D 单元所做的那样，其中<span
+class="math inline">\(M\)</span>是域<span
+class="math inline">\(\Omega\)</span>中的节点数。在线积分项中使用方程（3.27），并且在一维中使用类似的论点在<span
+class="math inline">\(\Gamma_A\)</span>将边界通量项设置为0，我们在
+Galerkin 公式中设置<span class="math inline">\(W_i =
+N_i\)</span>。方程（3.34）变为 <span
+class="math display">\[\sum^M_{j=1}\Bigg[\int_\Omega
+K\Bigg(\frac{\partial N_i}{\partial x} \frac{\partial N_j}{\partial
+x}+\frac{\partial N_i}{\partial y} \frac{\partial N_j}{\partial
+y}\Bigg)d\Omega\Bigg]T_j=\int_\Omega
+N_iQd\Omega-\int_{\Gamma_B}N_iqd\Gamma\tag{3.36}\]</span> 其中<span
+class="math inline">\(i = 1, \cdots,
+M\)</span>。方程（3.36）对任何区域<span
+class="math inline">\(\Omega\)</span>和我们可能想要使用的任何类型的单元都是有效的，只要它们在几何上是兼容的，无论是线性或二次三角形单元，还是四边形单元，或两者的组合。很明显，方程（3.36）可以写成
+<span class="math display">\[\boldsymbol{KT}=
+\boldsymbol{F}\tag{3.37}\]</span> 其中 <span
+class="math display">\[\boldsymbol{K} =[k_{ij}]=\Bigg[\int_{\Omega}
+K\Bigg( \frac{\partial N_i}{\partial x} \frac{\partial N_j}{\partial x}
++ \frac{\partial N_i}{\partial y} \frac{\partial N_j}{\partial y}\Bigg)
+d\Omega\Bigg]\tag{3.38}\]</span> 和 <span
+class="math display">\[\boldsymbol{F}=[f_i]=\Bigg\{\int_\Omega N_iQ
+d\Omega-\int_{\Gamma_B}N_iqd\Gamma\Bigg\}\tag{3.39}\]</span> 如第 3
+章所述，<span
+class="math inline">\(\boldsymbol{K}\)</span>称为“传导”或“刚度”矩阵，<span
+class="math inline">\(\boldsymbol{F}\)</span>是“载荷向量”。为了简化建立矩阵方程所涉及的代数，我们将重写形状函数的更一般形式。对于线性三角形单元中的节点点
+1、2 和 3。 <span class="math display">\[N_1^{(e)} =
+\frac{1}{2A}(a_1+b_1x+c_1y)\\
+N_2^{(e)} = \frac{1}{2A}(a_2+b_2x+c_2y)\\
+N_3^{(e)} = \frac{1}{2A}(a_3+b_3x+c_3y)\tag{3.40}
+\]</span> 式中<span
+class="math inline">\(a_i,b_i,c_i,i=1,2,3\)</span>由表1给出。
+<br>注意到<span
+class="math inline">\(\boldsymbol{K}^{(e)}\)</span>是对称的，并且积分下的所有项都是常数：
+<span class="math display">\[\boldsymbol{K}^{(e)}
+=\int_{\boldsymbol{A}^{(e)}}\frac{K}{4(A^{(E)})^2} (b_i b_j + c_i c_j)
+dA\\
+=\frac{K}{4(A^{(E)})^2}\Bigg[
+\begin{matrix}
+b_1b_1+c_1c_1&amp;b_1b_2+c_1c_2&amp;b_1b_3+c_1c_3\\
+b_2b_1+c_2c_1&amp;b_2b_2+c_2c_2&amp;b_2b_3+c_2c_3\\
+b_3b_1+c_3c_1&amp;b_3b_2+c_3c_2&amp;b_3b_3+c_3c_3
+\end{matrix}
+\Bigg],\\
+i=1,2,3;j=1,2,3\tag{3.41}\]</span> <br>
+<center>
+表1 线性三角形单元形状函数的系数值 |<span
+class="math inline">\(i\)</span>|<span
+class="math inline">\(a_i\)</span>|<span
+class="math inline">\(b_i\)</span>|<span
+class="math inline">\(c_i\)</span>| |--|--|--|--| |1|<span
+class="math inline">\(x_2y_3-x_3y_2\)</span>|<span
+class="math inline">\(y_2-y_3\)</span>|<span
+class="math inline">\(x_3-x_2\)</span>| |2|<span
+class="math inline">\(x_3y_1-x_1y_3\)</span>|<span
+class="math inline">\(y_3-y_1\)</span>|<span
+class="math inline">\(x_1-x_3\)</span>| |3|<span
+class="math inline">\(x_1y_2-x_2y_1\)</span>|<span
+class="math inline">\(y_1-y_2\)</span>|<span
+class="math inline">\(x_2-x_1\)</span>|
+</center>
+<p><br>载荷向量<span
+class="math inline">\(\boldsymbol{F}\)</span>的分量由两个积分组成。由于<span
+class="math inline">\(N_i =
+L_i\)</span>，第一个积分对于热源可以明确地写成 <span
+class="math display">\[\boldsymbol{F}_Q^{(e)}=Q\int_{A^{(e)}}
+\Bigg[
+\begin{matrix}
+N^{(e)}_1\\
+N^{(e)}_2\\
+N^{(e)}_3
+\end{matrix}  
+\Bigg]dA=Q\int_A
+\Bigg[
+\begin{matrix}
+L^1_1&amp;L^0_2&amp;L^0_3\\
+L^0_1&amp;L^1_2&amp;L^0_3\\
+L^0_1&amp;L^0_2&amp;L^1_3
+\end{matrix}  
+\Bigg]\\
+=\frac{QA^{(e)}}{3}
+\Bigg[
+\begin{matrix}
+1\\1\\1
+\end{matrix}
+\Bigg]\tag{3.42}
+\]</span> 第二个积分项考虑了在表面<span
+class="math inline">\(\Gamma_B\)</span>上的边界条件，这由单元边组成。结果取决于哪一边的单元受到热通量<span
+class="math inline">\(q\)</span>的影响。如果我们假设热通量在表面上是恒定的，
+<span
+class="math display">\[F_{q_{1-2}}^{(e)}=-q\int_{\Gamma_B^{(e)}}\Bigg[
+\begin{matrix}
+N^{(e)}_1\\
+N^{(e)}_2\\
+N^{(e)}_3
+\end{matrix}  
+\Bigg]dS=-q\int_{\Gamma_B^{(e)}}\Bigg[
+\begin{matrix}
+L^1_1L^0_2\\L^0_1L^1_2\\0
+\end{matrix}  
+\Bigg]dS=-\frac{q\ell^{(e)}_{1-2}}{2}\Bigg[
+\begin{matrix}
+1\\1\\1
+\end{matrix}
+\Bigg]\\
+F_{q_{2-3}}^{(e)}=-\frac{q\ell^{(e)}_{2-3}}{2}\Bigg[
+\begin{matrix}
+0\\1\\1
+\end{matrix}
+\Bigg]\\
+F_{q_{3-1}}^{(e)}=-\frac{q\ell^{(e)}_{3-1}}{2}\Bigg[
+\begin{matrix}
+1\\0\\1
+\end{matrix}
+\Bigg]\tag{3.43}\]</span> 其中<span
+class="math inline">\(\ell^{(e)}_{1-2},\ell^{(e)}_{2-3},\ell^{(e)}_{3-1}\)</span>是三角形单元中边1–2,
+2–3,和3–1的长度。因此， <span
+class="math display">\[\boldsymbol{F}^{(e)} =
+\boldsymbol{F}^{(e)}_Q+\boldsymbol{F}^{(e)}_{q1-2}+\boldsymbol{F}^{(e)}_{q2-3}+\boldsymbol{F}^{(e)}_{q3-1}\tag{3.44}\]</span>
+其中最后三项中的通量边界值取决于指定的单元边。方程（3.41）到（3.43）作为三角形单元的一般有限元关系。我们只需要输入实际值就可以得到由单元网格指定的节点温度值。在下一节中，我们将应用一般关系来解决一个具有边界对流的单元问题。</p>
+<h2 id="具有边界对流的稳态传导">3.7 具有边界对流的稳态传导</h2>
+假设我们有一个如图7所示的离散化，其中一个面上指定了对流条件，该面连接节点2和3。我们希望解决在<span
+class="math inline">\(\ell ^{(e)}_{2-3}\)</span>上具有边界条件 <span
+class="math display">\[-K\frac{\partial T}{\partial n} = h(T -
+T_{\infty})\tag{3.45}\]</span> 的方程（3.26）的稳态传导问题。 <br>
+<center>
+<figure>
+<img src="/有限元理论推导（三）/7.png"
+alt="图7 单面有对流的元件中的热传导" />
+<figcaption aria-hidden="true">图7
+单面有对流的元件中的热传导</figcaption>
+</figure>
+</center>
+<p>传导矩阵由 <span
+class="math display">\[\boldsymbol{K}^{(e)}=[k^{(e)}_{ij}]=
+\Bigg[\int_{A^{(e)}} K\Bigg(\frac{\partial N_i^{(e)}}{\partial x}
+\frac{\partial N_j^{(e)}}{\partial x}\\+\frac{\partial
+N_i^{(e)}}{\partial y} \frac{\partial N_j^{(e)}}{\partial y}\Bigg) dA +
+h \int_{\ell_{2-3}} N_i^{(e)} N_j^{(e)} d\Gamma\Bigg]\tag{3.46}\]</span>
+其中附加项来自对流边界条件，方程（3.45），它包括<span
+class="math inline">\(hT\)</span>。计算方程（3.45），我们得到 <span
+class="math display">\[\boldsymbol{K}^{(e)} = \frac{K}{4A^{(e)}}\Bigg[
+\begin{matrix}
+b_1b_1+c_1c_1&amp;b_1b_2+c_1c_2&amp;b_1b_3+c_1c_3\\
+b_2b_1+c_2c_1&amp;b_2b_2+c_2c_2&amp;b_2b_3+c_2c_3\\
+b_3b_1+c_3c_1&amp;b_3b_2+c_3c_2&amp;b_3b_3+c_3c_3
+\end{matrix}
+\Bigg]+\\
+\frac{h\ell^{(e)}_{2-3}}{6}\Bigg[
+\begin{matrix}
+0&amp;0&amp;0\\
+0&amp;2&amp;1\\
+0&amp;1&amp;2
+\end{matrix}  
+\Bigg]\tag{3.47}
+\]</span> 其中 <span
+class="math display">\[\int_{\ell^{(e)}_{2-3}}hN^{(e)}_iN^{(e)}_jdS =
+h\int_{\ell^{(e)}_{2-3}}
+\Bigg[
+\begin{matrix}
+0&amp;0&amp;0\\
+0&amp;L_2L_2&amp;L_2L_3\\
+0&amp;L_2L_3&amp;L_3L_3
+\end{matrix}  
+\Bigg]
+dS\tag{3.48}\]</span> 并且 <span
+class="math display">\[\int_{\ell^{(e)}_{2-3}}L^2_2dS =
+\int_{\ell^{(e)}_{2-3}}L^2_2L^0_3dS=\frac{2!0!}{(2+2+0)!}\ell^{(e)}_{2-3}=\frac{\ell^{(e)}_{2-3}}{12}\tag{3.49}\]</span>
+积分 <span class="math display">\[
+\int_{\ell^{(e)}_{2-3}}L^2_2dS=\int_{\ell^{(e)}_{2-3}}L^2_3dS
+\]</span> 相似地， <span class="math display">\[
+\int_{\ell^{(e)}_{2-3}}L_2L_3dS=\frac{\ell^{(e)}_{2-3}}{6}
+\]</span> <span class="math inline">\(b_i\)</span>和<span
+class="math inline">\(c_i\)</span>的值是 <span
+class="math display">\[b_1 = y_2 - y_3=-3,c_1 = x_3 - x_2=-1\\
+  b_2 = y_3 - y_1=2, c_2 = x_1 - x_3=-2\\
+  b_3 = y_1 - y_2=1, c_3 = x_2 - x_1=3\tag{3.50}\]</span> 单元的面积是
+<span class="math display">\[A^{(e)}= \frac{1}{2}
+\Bigg|
+\begin{matrix}
+1&amp;x_1&amp;y_1\\
+1&amp;x_2&amp;y_2\\
+1&amp;x_3&amp;y_3
+\end{matrix}
+\Bigg|=\frac{1}{2}\Bigg|
+\begin{matrix}
+1&amp;1&amp;1\\
+1&amp;4&amp;0\\
+1&amp;3&amp;3
+\end{matrix}
+\Bigg|=\frac{8}{2}=4\tag{3.51}\]</span> 这是使用方程（3.6）写的。边<span
+class="math inline">\(\ell^{(e)}_{2-3}\)</span>的长度由下式计算： <span
+class="math display">\[\ell_{23} = \sqrt{(x_2 - x_3)^2 + (y_2 -
+y_3)^2}=\sqrt{(4-3)^2+(0-3)^2}=\sqrt{10}m\]</span> 载荷向量<span
+class="math inline">\(\boldsymbol{F}^{(e)}\)</span>从方程（3.43）评估，只是<span
+class="math inline">\(q\)</span>被<span
+class="math inline">\(-hT_\infty\)</span>替换。因此， <span
+class="math display">\[F^{(e)} =
+\Big\{f^{(e)}_i\Big\}=\int_{\ell^{(e)}_{2-3}} hT_{\infty}
+N_i^{(e)}d\Gamma=hT_{\infty}\int_{\ell^{(e)}_{2-3}}\Bigg[
+\begin{matrix}
+0\\L^1_2L^0_3\\L^0_2L^1_3
+\end{matrix}  
+\Bigg]d\Gamma=\frac{hT_{\infty}\ell^{(e)}_{2-3}}{2}
+\Bigg[
+\begin{matrix}
+0\\1\\1
+\end{matrix}  
+\Bigg]\tag{3.52}
+\]</span>
+取代方程（3.42,（3.47）和（3.52）和问题数据到方程（3.37)，我们得到 <span
+class="math display">\[\begin{bmatrix}
+6.25&amp;-2.5&amp;-3.75\\
+-2.5&amp;10.27&amp;0.135\\
+-3.75&amp;0.135&amp;11.52
+\end{bmatrix}
+\begin{bmatrix} T_1^{(e)} \\ T_2^{(e)} \\ T_3^{(e)} \end{bmatrix} =
+\begin{bmatrix} 2.667\\793.24\\793.24\tag{3.53}
+\end{bmatrix}\]</span>
+由于在节点处没有规定温度，方程（3.53）代表具有绝热边<span
+class="math inline">\(\ell^{(e)}_{1-2}\)</span>和<span
+class="math inline">\(\ell^{(e)}_{3-1}\)</span>；通过不在这些边上施加任何条件，我们相当于具有形式为（3.27）的通量，其中<span
+class="math inline">\(q = 0\)</span>。这是我们在 1-D
+情况下之前遇到的情况。请注意，通过在这些边界上施加任何条件，有限元方法自动引入了绝热边界的条件。
+<br>通过求解方程(3.53)，可以方便地获得内部在三角形内产生的热量与通过边<span
+class="math inline">\(\ell^{(e)}_{2-3}\)</span>的热通量之间的平衡状态下的节点温度。
+<br>让我们回顾一下获得单元扩散矩阵和载荷向量所必需的主要步骤： 1.
+使用方程（3.40）定义线性三角形单元的形状函数，并使用表 1中给定的系数。
+2. 使用形状函数近似温度，形式为方程（3.35），对于线性三角形<span
+class="math inline">\(M = 3\)</span>。 3. 确定<span
+class="math inline">\(T\)</span>的梯度，使用方程（3.40）。这产生 <span
+class="math display">\[\Bigg[
+\begin{matrix}
+\frac{\partial T}{\partial x}\\
+\frac{\partial T}{\partial y}
+\end{matrix}  
+\Bigg]=\frac{1}{2A}
+\begin{bmatrix}
+b_1&amp;b_2&amp;b_3\\
+c_1&amp;c_2&amp;c_3
+\end{bmatrix}
+\begin{bmatrix}
+T^{(e)}_1\\T^{(e)}_2\\T^{(e)}_3
+\end{bmatrix}\tag{3.54}\]</span> 4. 使用方程(3.41)评估单元传导矩阵。 5.
+如果边界上发生对流，评估对流积分，如方程（3.47）所做的。一般来说，这是
+<span class="math display">\[\boldsymbol{H}^{(e)} = h\int_{\Gamma_B}
+\begin{bmatrix}
+N^{(e)}_1N^{(e)}_1&amp;N^{(e)}_1N^{(e)}_2&amp;N^{(e)}_1N^{(e)}_3\\
+N^{(e)}_2N^{(e)}_1&amp;N^{(e)}_2N^{(e)}_2&amp;N^{(e)}_2N^{(e)}_3\\
+N^{(e)}_3N^{(e)}_1&amp;N^{(e)}_3N^{(e)}_2&amp;N^{(e)}_3N^{(e)}_3
+\end{bmatrix}d\Gamma\tag{3.55}\]</span> 由于<span
+class="math inline">\(L_1 = N_1\)</span>，通常只有一边（例如，连接节点 1
+和 2 的边受到对流），<span
+class="math inline">\(\boldsymbol{H}^{(e)}\)</span>变为 <span
+class="math display">\[\boldsymbol{H}^{(e)} = h\int_{\ell^{(e)}_{1-2}}
+\begin{bmatrix}
+L_1L_1&amp;L_1L_2&amp;0\\
+L_2L_1&amp;L_2L_2&amp;0\\
+0&amp;0&amp;0
+\end{bmatrix}d\Gamma=\frac{h\ell^{(e)}_{1-2}}{6}\begin{bmatrix}
+2&amp;1&amp;0\\
+1&amp;2&amp;0\\
+0&amp;0&amp;0
+\end{bmatrix}\tag{3.55}\]</span> 6. 评估源/汇项。对于常数源<span
+class="math inline">\(Q\)</span>，这是由方程（3.42）给出的。 7.
+如果任何三角形边的侧面规定了热通量，使用方程（3.43）评估它。对流项<span
+class="math inline">\(hT_\infty\)</span>也由方程（3.43）给出，其中<span
+class="math inline">\(q\)</span>被 <span
+class="math inline">\(-hT_\infty\)</span>替换。</p>
+<p><br>在前一个例子中，我们假设区域只包含一个三角形单元。我们可以很容易地将区域离散化为任意数量的单元，然后对每个单元执行单独的计算。得到的答案将被组装成整体全局矩阵方程，通过某种形式的消除程序来求解。到目前为止，应该很明显，手工进行局部单元计算可能变得相当繁琐，即使是简单的线性近似。</p>
+<h2 id="轴对称传导方程">3.8 轴对称传导方程</h2>
+<p>轴对称热传导方程对于稳态条件和恒定导热性由下式表示 <span
+class="math display">\[-K\Bigg[\frac{1}{r}\frac{\partial}{\partial
+r}\Bigg(
+  r\frac{\partial T}{\partial r}\Bigg)+\frac{\partial^2T}{\partial
+z^2}\Bigg]=Q\tag{3.56}\]</span> 其中<span class="math inline">\(T =
+T_A\)</span>在边界<span
+class="math inline">\(\Gamma_A\)</span>的部分上，并且 <span
+class="math display">\[\frac{\partial T}{\partial r } n_r+
+\frac{\partial T}{\partial z}n_z = q\tag{3.57}\]</span> 在边界<span
+class="math inline">\(\Gamma_B\)</span>的部分上，其中<span
+class="math inline">\(n_r\)</span>和<span
+class="math inline">\(n_z\)</span>是外法向单位向量<span
+class="math inline">\(\Gamma\)</span>的方向余弦分量。我们现在构造方程（3.56）和（3.57）的弱形式：
+<span class="math display">\[\int_{V}W\Bigg\{
+  -K\Bigg[
+    \frac{1}{r}\frac{\partial}{\partial r}\Bigg(r\frac{\partial
+T}{\partial r}\Bigg)+\frac{\partial^2T}{\partial z^2}
+    \Bigg]-Q
+  \Bigg\} dV = 0\tag{3.58}\]</span> 其中假定单元体积是轴对称的，即，
+<span class="math display">\[dV =rd\theta dA= 2\pi r dr dz
+\tag{3.59}\]</span> 得到的积分关系变为 <span class="math display">\[2\pi
+\int_{\Omega}\Bigg[K\Bigg(-\frac{\partial}{\partial
+r}\Bigg(r\frac{\partial T}{\partial r}\Bigg)-r\frac{\partial^2
+T}{\partial z^2}\Bigg)-Qr\Bigg]dr dz = 0\tag{3.60}\]</span>
+注意，如果我们希望解决笛卡尔问题，我们可以将<span
+class="math inline">\(K_r\)</span>和<span
+class="math inline">\(Q_r\)</span>替换为<span
+class="math inline">\(K&#39;\)</span>和<span
+class="math inline">\(Q&#39;\)</span>。因此，我们可以使用相同类型的方法来解决笛卡尔或轴对称情况；我们只需要在轴对称情况下评估径向分量<span
+class="math inline">\(r\)</span>。 <br>基本上有两种方法来考虑<span
+class="math inline">\(r\)</span>。一种方法是使用基于单元质心的平均径向距离。如果单元尺寸与径向距离相比很小，这种程序就足够了。更准确的方法是对<span
+class="math inline">\(r\)</span>表示为 <span class="math display">\[r =
+N_1^{(e)} r_1 + N_2^{(e)} r_2 + N_3^{(e)} r_3\tag{3.61}\]</span>
+其中<span class="math inline">\(r_i, i = 1, 2, 3\)</span> 是角点处<span
+class="math inline">\(r\)</span>的值。轴对称传导矩阵对于单个单元变为
+<span class="math display">\[\boldsymbol{K}^{(e)}=[k^{(e)}_{ij}]=\Bigg[
+  \frac{2\pi
+K}{4(A^{(e)})^2}(b_ib_j+c_ic_j)\int_{A^{(e)}}(L_1r_1+L_2r_2+L_3r_3)d\Omega\tag{3.62}\]</span>
+使用方程（3.22）进行积分得到 <span
+class="math display">\[[k^{(e)}_{ij}]= \frac{2\pi K}{12A^{(e)}}
+(r_1+r_2+r_3)[b_ib_j + c_i c_j]\tag{3.63}\]</span>
+载荷向量包含内部热生成项，对于常数<span
+class="math inline">\(Q\)</span>写为 <span
+class="math display">\[F^{(e)}_Q = 2\pi Q\int_{A^{(e)}}r
+\Bigg[
+\begin{matrix}
+N_1\\N_2\\N_3  
+\end{matrix}  
+\Bigg]dA =2\pi Q\int_{A^{(e)}}r
+\Bigg[
+\begin{matrix}
+L_1\\L_2\\L_3  
+\end{matrix}  
+\Bigg](L_1r_1+L_2r_2+L_3r_3)d\Omega\tag{3.64}\]</span> 整合为 <span
+class="math display">\[
+F^{(e)}_Q = \frac{2\pi Q{A^{(e)}}}{12}
+\Bigg[
+\begin{matrix}
+2r_1+r_2+r_3\\r_1+2r_2+r_3\\r_1+r_2+2r_3  
+\end{matrix}  
+\Bigg]
+\tag{3.65}
+\]</span> 与单元面热流边界条件相关的载荷为 <span
+class="math display">\[F^{(e)}_{q1-2} =-2\pi q
+\int_{\ell^{(e)}_{1-2}}r\Bigg[
+\begin{matrix}
+N_1\\N_2\\0   
+\end{matrix}
+\Bigg]d\Gamma=-2\pi\int_{\ell^{(e)}_{1-2}}r\Bigg[
+\begin{matrix}
+L_1\\L_2\\0   
+\end{matrix}
+\Bigg]d\Gamma\\
+=-\frac{2\pi q\ell^{(e)}_{1-2}}{6}\Bigg[
+\begin{matrix}
+2r_1+r_2\\r_1+2r_2\\0
+\end{matrix}
+\Bigg]
+\tag{3.66}\]</span> 同样， <span class="math display">\[F^{(e)}_{q2-3} =
+-\frac{2\pi q\ell^{(e)}_{1-2}}{6}\Bigg[
+\begin{matrix}
+0\\2r_2+r_3\\r_2+2r_3
+\end{matrix}
+\Bigg]\tag{3.67}\]</span> <span class="math display">\[F^{(e)}_{q3-1} =
+-\frac{2\pi q\ell^{(e)}_{3-1}}{6}\Bigg[
+\begin{matrix}
+2r_1+r_3\\0\\r_1+2r_3
+\end{matrix}
+\Bigg]\tag{3.68}\]</span>
+然后总力向量是方程（3.66）到（3.68）的总和，其中<span
+class="math inline">\(\ell^{(e)}_{1-2}\)</span>，<span
+class="math inline">\(\ell^{(e)}_{2-3}\)</span>和<span
+class="math inline">\(\ell^{(e)}_{3-1}\)</span> 是单元边的长度，即<span
+class="math inline">\(\ell^{(e)}_{i-j} = \sqrt{(r_i - r_j)^2 + (z_i -
+z_j)^2}\)</span>。</p>
+<h2 id="二次三角形单元">3.9 二次三角形单元</h2>
+<p>正如第 3.3.2
+节所讨论的，二次三角形单元由三个顶点节点和三个中节点组成。在某些情况下，二次单元的增加精度显著提高了解决方案的整体收敛性，超过了线性单元。尽管由于单元中节点数量的增加导致更大的带宽矩阵，但可以在许多非线性问题中实现计算节省；可能需要一个大的细尺寸线性单元网格，而一个更粗糙的二次单元网格就足够了。</p>
+<h2 id="依赖时间的扩散方程">3.10 依赖时间的扩散方程</h2>
+<p>由于扩散而传输的标量变量<span class="math inline">\(\phi(x, y,
+t)\)</span>的时间依赖方程，其二维形式写为 <span class="math display">\[
+\frac{\partial\phi}{\partial t}=\frac{\partial}{\partial
+x}\Bigg(\alpha\frac{\partial\phi}{\partial
+x}\Bigg)+\frac{\partial}{\partial
+y}\Bigg(\alpha\frac{\partial\phi}{\partial y}\Bigg)+S\tag{3.67}
+\]</span> 对于Ω，边界条件为 <span class="math display">\[
+\phi=\phi_A ,\Gamma_A\tag{3.68}
+\]</span> <span class="math display">\[
+-\alpha\frac{\partial\phi}{\partial n}=a\phi+b,in\Gamma_B\tag{3.69}
+\]</span> 和初始条件 <span class="math display">\[
+\phi(x,y,0)=\phi_0(x,y)\tag{3.70}
+\]</span>
+方程（3.67）至（3.69）是描述一维热传输的方程的二维扩展。变量<span
+class="math inline">\(\phi\)</span>现在代表任何未知的标量量；<span
+class="math inline">\(\alpha\)</span>是扩散系数，例如，可以是空间依赖的热扩散率；<span
+class="math inline">\(S = Q/\rho
+c_p\)</span>是源/汇项。（3.68）中的<span
+class="math inline">\(a\)</span>和<span
+class="math inline">\(b\)</span>的值是为每个问题预设的。方程(3.67)的加权残差形式是
+<span class="math display">\[
+\int_\Omega W\Bigg[\frac{\partial\phi}{\partial
+t}-\frac{\partial}{\partial x}\Bigg(\alpha\frac{\partial\phi}{\partial
+x}\Bigg)-\frac{\partial}{\partial
+y}\Bigg(\alpha\frac{\partial\phi}{\partial
+y}\Bigg)-S\Bigg]d\Omega=0\tag{3.70}
+\]</span> 在应用了格林定理之后得到 <span class="math display">\[
+\int_\Omega\Bigg\{W\frac{\partial\phi}{\partial
+t}+\alpha\Bigg(\frac{\partial W}{\partial x}\frac{\partial\phi}{\partial
+x}+\frac{\partial W}{\partial y}\frac{\partial\phi}{\partial
+y}\Bigg)-WS\Bigg\}d\Omega+\int_{\Gamma_B}W\Bigg(-\alpha\frac{\partial\phi}{\partial
+n}\Bigg)d\Gamma=0\tag{3.71}
+\]</span> 其中<span class="math inline">\(d\Gamma\)</span>表示在<span
+class="math inline">\(\Gamma_B\)</span>上应用的正常梯度（通量）的表面单元。我们像以前一样用形状函数来近似变量：
+<span class="math display">\[
+\phi(x,y,t)\approxeq\sum^N_{i=1}N_i(x,y)\phi_i(t)\\
+\alpha(x,y)\approxeq\sum^N_{i=1}N_i(x,y)\alpha_i\\
+\S(x,y,t)\approxeq\sum^N_{i=1}N_i(x,y)S_i(t)\tag{3.72}
+\]</span> 将方程（3.72）代入方程（3.71），并设置Wi =
+Ni，我们得到半离散Galerkin近似为 <span class="math display">\[
+\Bigg[\int_\Omega
+N_iN_jd\Omega\Bigg]\dot{\phi}_j+\Bigg[\int_\Omega\alpha\Bigg(\frac{\partial
+N_i}{\partial x}\frac{\partial N_j}{\partial x}+\frac{\partial
+N_i}{\partial y}\frac{\partial N_j}{\partial y}\Bigg)dA\Bigg]\phi_j\\
++\Bigg[\int_B aN_iN_jd\Gamma\Bigg]\phi_j=\int_\Omega
+N_iSd\Omega-\int_{\Gamma_B}N_ibd\Gamma\tag{3.73}
+\]</span></p>
+<p>其中<span
+class="math inline">\(\Gamma_B\)</span>沿线的法导数项已用方程（3.69）替换，并且暗示了左手边的指数<span
+class="math inline">\(j\)</span>的求和。正如前面的文章提到的，一维单元的有限元算法的开发也适用于多维问题几何。对于线性三角形单元，单元质量矩阵被评估为
+<span class="math display">\[
+\boldsymbol{M}^{(e)}=\int_{A^{(e)}}N_iN_jdA=\int_{A^{(e)}}\begin{bmatrix}
+L_1\\L_2\\L_3
+\end{bmatrix}
+\begin{bmatrix}
+L_1&amp;L_2&amp;L_3
+\end{bmatrix}dA\\
+=\begin{bmatrix}
+L_1L_1&amp;L_2L_2&amp;L_1L_3\\
+L_2L_1&amp;L_2L_2&amp;L_2L_3\\
+L_3L_1&amp;L_3L_2&amp;L_3L_3
+\end{bmatrix}dA=\frac{A^{(e)}}{12}
+\begin{bmatrix}
+2&amp;1&amp;1\\
+1&amp;2&amp;1\\
+1&amp;1&amp;2
+\end{bmatrix}\tag{3.74}
+\]</span></p>
+<p>扩散（刚度）矩阵由方程（3.41）给出，当扩散系数是常数时，<span
+class="math inline">\(K\)</span>被<span
+class="math inline">\(\alpha\)</span>替换。如果<span
+class="math inline">\(\alpha = \alpha(x,
+y)\)</span>，我们有一个与方程（3.62）类似的表达式，即 <span
+class="math display">\[\boldsymbol{K}^{(e)}=[k^{(e)}_{ij}]=\Bigg[
+  \frac{b_ib_j+c_ic_j}{4(A^{(e)})^2}\int_{A^{(e)}}(L_1\alpha_1+L_2\alpha_2+L_3\alpha_3)dxdy\Bigg]\tag{3.75}\]</span>
+源项产生一个类似于质量矩阵的表达式，即 <span class="math display">\[
+\boldsymbol{F}^{(e)}_S=[(f_S)_i]=\frac{A^{(e)}}{12}
+\begin{bmatrix}
+  2&amp;1&amp;1\\
+  1&amp;2&amp;1\\
+  1&amp;1&amp;2
+\end{bmatrix}
+\begin{bmatrix}
+S_1\\S_2\\S_3
+\end{bmatrix}=\boldsymbol{MS}\tag{3.76}
+\]</span> 其中<span class="math inline">\(\boldsymbol{S}\)</span>是<span
+class="math inline">\(S(x, y, t)\)</span>的节点值向量。如果<span
+class="math inline">\(S\)</span>是一个常数函数，我们得到向量 <span
+class="math display">\[
+\boldsymbol{F}^{(e)}_S=\frac{SA^{(e)}}{3}\begin{bmatrix}
+  1\\1\\1
+\end{bmatrix}\tag{3.77}
+\]</span> 这是我们在稳态热传导中得到的向量。 <br>由<span
+class="math inline">\(a\phi\)</span>产生的对流项产生一个与方程(3.55)相同的矩阵，<span
+class="math inline">\(h\)</span>被<span
+class="math inline">\(a\)</span>替换，所以如果对流发生在边1-2，我们得到
+<span class="math display">\[
+\boldsymbol{H}^{(e)}_{1-2}=\frac{a\ell^{(e)}_{1-2}}{6}
+\begin{bmatrix}
+  2&amp;1&amp;0\\
+  1&amp;2&amp;0\\
+  0&amp;0&amp;0
+\end{bmatrix}\tag{3.78}
+\]</span> 其他两边的情况也类似。最后，通量<span
+class="math inline">\(b\)</span>作为应用于单元侧面（表面）的边界条件。假设通量在侧面上是恒定的，我们使用符号
+<span class="math display">\[
+\boldsymbol{F}^{(e)}_{b1-2}=-\frac{b\ell^{(e)}_{1-2}}{2}\begin{bmatrix}
+  1\\1\\0
+\end{bmatrix}\tag{3.79}
+\]</span> 其他两边的情况也类似。
+<br>评估所有矩阵后，我们得到了一般单元矩阵方程，就像我们之前对一维单元所做的那样。
+<span class="math display">\[
+\boldsymbol{M}^{(e)}\dot{\phi}+\boldsymbol{K}^{(e)}\phi=\boldsymbol{F}^{(e)}\tag{3.80}
+\]</span> 其中 <span class="math display">\[
+\boldsymbol{K}^{(e)}\equiv\boldsymbol{K}^{(e)}+\boldsymbol{H}^{(e)}\tag{3.81}
+\]</span> 并且 <span class="math display">\[
+\boldsymbol{F^{(e)}}=\boldsymbol{F}^{(e)}_Q+\boldsymbol{F}^{(e)}_b\tag{3.81}
+\]</span> 矩阵<span
+class="math inline">\(\boldsymbol{H}^{(e)}\)</span>和向量<span
+class="math inline">\(\boldsymbol{F^{(e)}}\)</span>包含了沿单元的一个或多个侧面的混合边界条件（3.69）的贡献。在这种情况下，矩阵系数项是从线性三角形二维单元中获得的。请记住，有限元程序和得到的矩阵方程适用于任何类型的单元和任何数量的空间维度。</p>
+<h2 id="带宽">3.11 带宽</h2>
+当处理二维和三维单元时，带宽的概念变得重要。正如上一篇文章简要讨论的，矩阵的带宽由节点编号序列决定，如图8所示。在一维问题中，单元和节点编号是顺序的。
+<br>
+<center>
+<figure>
+<img src="/有限元理论推导（三）/8.png"
+alt="图8 1-D域的节点编号和单元连接性" />
+<figcaption aria-hidden="true">图8
+1-D域的节点编号和单元连接性</figcaption>
+</figure>
+</center>
+<p><br>与单元相关的“全局”节点编号称为“单元连通性”。在一维线性单元中，与单元相关联的两个“局部”节点，即每个单元的两端都有一个节点。</p>
+<br>
+<center>
+表2 一维单元连接性 |单元序号|局部节点1|局部节点2| |--|--|--| |1|1|2
+|2|2|3 |3|3|4 |4|4|5 |5|5|6
+</center>
+<p><br>当从弱表述公式派生的单元矩阵方程被“组装”在整个问题域上时，即所有单元都被纳入，得到的全局线性方程组<span
+class="math inline">\(\boldsymbol{A}\phi=\boldsymbol{F}\)</span>涉及一个<span
+class="math inline">\(n \times n\)</span>的方阵，其中<span
+class="math inline">\(n\)</span>是节点的总数（表2）。在图8中，全局矩阵<span
+class="math inline">\(\boldsymbol{A}\)</span>是一个<span
+class="math inline">\(6 \times
+6\)</span>的方阵。正如图3.7所示，两个相邻的一维线性单元的组装产生一个在整个网格上通用的三对角矩阵。因此，<span
+class="math inline">\(6 \times
+6\)</span>实际上是一个只有主对角线和上一个及下一个相邻对角线的稀疏矩阵，如方程（3.82）所示。
+<span class="math display">\[
+A=\begin{bmatrix}
+a_{11}&amp;a_{12}&amp;0&amp;0&amp;0&amp;0\\
+a_{21}&amp;a_{22}&amp;a_{23}&amp;0&amp;0&amp;0\\
+0&amp;a_{32}&amp;a_{33}&amp;a_{34}&amp;0&amp;0\\
+0&amp;0&amp;a_{43}&amp;a_{44}&amp;a_{45}&amp;0\\
+0&amp;0&amp;0&amp;a_{54}&amp;a_{55}&amp;a_{56}\\
+0&amp;0&amp;0&amp;0&amp;a_{65}&amp;a_{66}
+\end{bmatrix}\tag{3.82}\]</span> <br><span
+class="math inline">\(a_{ij}\)</span>项代表组成<span
+class="math inline">\(6 \times
+6\)</span>数组的各个系数。注意方程（3.82）方阵的稀疏性。一行中非零系数的最大数量是<span
+class="math inline">\(3\)</span>。这也是矩阵的带宽。从主对角线（包括主对角线）到最远非零系数的距离（列数）是半带宽（或半带宽），在这种情况下是<span
+class="math inline">\(2\)</span>。可以从简单的关系计算矩阵的半带宽 <span
+class="math display">\[
+HBW=NOF\times (N_{max}-N_{diag}+1)Ndiag\tag{3.83}\]</span> 其中<span
+class="math inline">\(NOF\)</span>是每个节点的自由度数量，即节点未知数的数量，如温度、速度、浓度等。<span
+class="math inline">\(N_{max}\)</span>和<span
+class="math inline">\(N_{diag}\)</span>分别是分配给任何非零单元行中最大节点编号的数量和行号。</p>
+<p>对于由六个单元组成的一维域，并且只解决一个未知数<span
+class="math inline">\(（NOF = 1）\)</span>，半带宽是 <span
+class="math display">\[
+HBW =1(1+1)=2\tag{3.84}\]</span> 其中<span
+class="math inline">\(N_{max}−N_{diag}=1\)</span>对于任何行。带宽外的系数是零；这些系数不需要存储。高效的计算机编程（矩阵求解算法）只处理带宽内的系数；这在使用高斯消元方法时尤其重要。应尽可能减少带宽，因为带宽的减少直接导致计算机存储和计算时间的减少。对于一维单元，带宽已经最小化了。</p>
+<br>
+<center>
+<figure>
+<img src="/有限元理论推导（三）/9.png"
+alt="图9 2-D域中的节点编号（a）较差的节点标记和（b）改进的节点标记" />
+<figcaption aria-hidden="true">图9
+2-D域中的节点编号（a）较差的节点标记和（b）改进的节点标记</figcaption>
+</figure>
+</center>
+<p>在二维网格中，节点编号对于带宽变得重要。图9显示了一个二维域，使用线性三角形单元，有两种不同的节点编号。每个单元由三个局部节点<span
+class="math inline">\(（1,2,3）\)</span>组成，分配了全局编号。</p>
+<p>用户可以直接控制半带宽；对于简单的问题，可以通过视觉检查来最小化节点编号使用线性单元。然而，对于高阶单元或大型3-D问题，通过检查最小化带宽是非常困难的。有商业软件包可以执行网格生成和重新排序节点编号以最小化半带宽，适用于PC。MESH-2D使用一个简单的节点重编号方案来产生更小的带宽。COMSOL和其他商业有限元代码在重新排序节点编号方面做得更好；许多这些早期优化方案基于多年前引入的Cuthill和McGee（1969）算法。读者可以参考Carey（1997）的网格生成文本，以及Heinrich和Pepper（1999）有关网格优化的更多细节。</p>
+<h2 id="质量凝聚">3.12 质量凝聚</h2>
+<p>为了获得一个完全显式方案，我们对质量矩阵<span
+class="math inline">\(\boldsymbol{M}\)</span>进行对角化，或“凝聚”质量。对于所考虑的单元类型，这可以通过将<span
+class="math inline">\(\boldsymbol{M}\)</span>的每行中的所有单元相加并将总和放在对角线上来简单地实现。然后，质量矩阵M被凝聚质量矩阵<span
+class="math inline">\(\boldsymbol{M}^{\ell}\)</span>替换，定义为 <span
+class="math display">\[
+\boldsymbol{M}^{\ell}=[m^{\ell}_{ij}]\tag{3.85}
+\]</span> 其中 <span class="math display">\[
+m^{\ell}_{ij}=\begin{cases}
+  0,i\neq j\\
+  \sum^n_{j=1},i=j
+\end{cases}\tag{3.86}
+\]</span></p>
+<p>这是一个对角矩阵。
+<br>现在出现的问题是我们在使用一致质量矩阵还是凝聚质量时应该使用哪种形式来解决时间依赖问题。这个问题没有明确的答案，必须根据问题本身来检查。作为一般规则，如果我们对需要准确跟踪时间演化的瞬态解感兴趣，则最好使用一致质量公式。然而，如果我们希望通过时间积分方案（而不是迭代）快速达到稳态条件，那么凝聚质量是首选。然而，当我们决定使用哪种公式时，还会出现其他需要考虑的因素。一致质量公式需要组装和存储质量矩阵；在<span
+class="math inline">\(\theta=0\)</span>的情况下，必须在每个时间步解决一个全局矩阵是质量矩阵的方程组。因此，存储和CPU时间的增加是会发生的，这可能是显著的。当我们解决解决方案的准确性和时间步长选择的问题时，会出现额外的考虑。在这种情况下，必须评估稳定性限制和正确表示所涉及物理的必要性。回答这些问题所需的分析并不简单，需要计算所涉及矩阵的特征值。这些研究表明，当使用一致公式时，时间步长的限制比使用凝聚质量时更为严格。对于有关凝聚质量的更详细讨论，请参阅Segerlind（1984）。对于动态和场问题中的时间依赖问题的高级处理，读者应参考Zienkiewicz和Taylor（1989）和Hughes（1987）的书籍。</p>
+<h2 id="结束语">3.13 结束语</h2>
+<p>我们已经将有限元过程扩展到二维，基于最初为一维单元导出的基本概念。很明显，一维概念可以直接应用，但在建立二维网格和制定矩阵时需要更多的细节。我们在本章集中讨论了二维三角形单元，即线性三节点单元和六节点二次单元。大多数早期的有限元方法的发展工作都围绕着三角形单元展开；在1960年代和1970年代初，三角形单元在结构问题上的应用非常广泛。三角形单元今天仍然被广泛使用；它们易于构建，易于使用，并且可以近似不规则边界，因为它们可以根据需要进行定向。鼓励读者熟悉商业有限元代码或附带的代码，了解网格生成和边界条件输入的过程。</p>
+
+      </div>
+    </div>
+    
+      <script src='https://unpkg.com/mermaid@latest/dist/mermaid.min.js'></script>
+      <script>
+        if (window.mermaid) {
+          mermaid.initialize({"startOnload":true});
+        }
+      </script>
+    
+  </article>
+  <div class="post__foot">
+    
+      <div class="like-author">
+  <input type="checkbox" id="likeCode" />
+  <div class="author-face">
+    <img height="100px"
+         width="100px"
+         id="front-face"
+         alt="author face"
+         src="/" />
+    <img height="100px"
+         width="100px"
+         id="back-face"
+         alt="like code"
+         src="/" />
+  </div>
+  <div class="like-text">“给作者倒杯卡布奇诺”</div>
+  <label for="likeCode" class="like-btn">
+    <svg viewBox="0 0 1024 1024"
+         width="20px"
+         style="margin-right: 10px"
+         height="20px">
+      <path d="M466.88 908.96L113.824 563.296a270.08 270.08 0 0 1 0-387.392c108.8-106.56 284.896-106.56 393.696 0 1.504 1.472 2.976 2.944 4.448 4.48 1.472-1.536 2.944-3.008 4.448-4.48 108.8-106.56 284.896-106.56 393.696 0a269.952 269.952 0 0 1 34.016 347.072l-387.392 385.6a64 64 0 0 1-89.92 0.384z" p-id="13650" fill="#ee4242" />
+    </svg>
+    喜欢作者
+  </label>
+</div>
+
+    
+    <div class="post-nav">
+  
+    <a class="post-nav-item-left" href="/2024/09/13/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E5%9B%9B%EF%BC%89/">
+      <div class="text-align">
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596" />
+        </svg>
+        <span class="text-small">上一篇</span>
+      </div>
+      <div>06-有限元理论推导（四）</div>
+    </a>
+  
+  <div class="vhr"></div>
+  
+    <a class="post-nav-item-right" href="/2024/09/05/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E4%BA%8C%EF%BC%89/">
+      <div class="text-align">
+        <span class="text-small">下一篇</span>
+        <svg t="1670570876164"
+             class="icon"
+             viewBox="0 0 1024 1024"
+             transform="scale(-1,-1)"
+             width="16"
+             height="16">
+          <path d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z" p-id="14596" />
+        </svg>
+      </div>
+      04-有限元理论推导（二）
+    </a>
+  
+</div>
+
+    
+      <div class="related-post">
+  <div class="related__head">
+  
+
+</div>
+  <div class="realated__body">
+    
+      <div class="null"><div class="null-item"><div class="null-title"><a href="\2024\09\05\有限元理论推导（二）\" title="04-有限元理论推导（二）" rel="bookmark">04-有限元理论推导（二）</a></div></div><div class="null-item"><div class="null-title"><a href="\2024\07\30\有限元初步（一）\" title="01-有限元初步（一）（翻译）" rel="bookmark">01-有限元初步（一）（翻译）</a></div></div></div>
+    
+  </div>
+</div>
+
+    
+    
+  </div>
+
+    </div>
+    <div class="foot">
+      <div class="foot-inner">
+        <div class="foot__head">
+          
+            <div class="foot-line">
+              <div class="matts">海</div><div class="matts">内</div><div class="matts">存</div><div class="matts">知</div><div class="matts">己</div>
+            </div>
+          
+            <div class="foot-line">
+              <div class="matts">天</div><div class="matts">涯</div><div class="matts">若</div><div class="matts">比</div><div class="matts">邻</div>
+            </div>
+          
+        </div>
+        <div class="foot__body">
+          
+          
+            <div class="foot-item">
+              <div class="foot-item__head">账号</div>
+              <div class="foot-item__body">
+                
+                  <div class="text">
+                    <img alt="link" height="20px" width="20px" src="/images/logo-github.svg" />
+                    <a class="foot-link" target="_blank" rel="noopener" href="https://github.com/Wangszjl">芥川龙之介的幽灵</a>
+                  </div>
+                
+              </div>
+            </div>
+          
+          <div class="foot-item">
+            <div class="foot-item__head">联系</div>
+            <div class="foot-item__body">
+              <div class="text">
+                <img alt="link" height="20px" width="20px" src="/images/icon/icon-email.svg" />
+                <a class="foot-link" href="mailto:wangsizhan1994@163.com">wangsizhan1994@163.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <a href="http://example.com">芥川龙之介的幽灵</a> &nbsp;|&nbsp;由&nbsp;<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>&nbsp;及&nbsp;
+          <svg width="20" height="20" viewBox="0 0 725 725">
+            <path fill-rule="evenodd" fill="rgb(221, 221, 221)" d="M145.870,236.632 L396.955,103.578 L431.292,419.44 L156.600,522.53 L145.870,236.632 Z" />
+            <path fill-rule="evenodd" fill="rgb(159, 159, 159)" d="M396.955,103.578 L564.345,234.486 L611.558,513.469 L431.292,419.44 L396.955,103.578 Z" />
+            <path fill-rule="evenodd" fill="rgb(0, 0, 0)" d="M431.292,419.44 L611.558,513.469 L358.327,595.18 L156.600,522.53 L431.292,419.44 Z" />
+          </svg>
+          <a target="_blank" rel="noopener" href="https://github.com/hooozen/hexo-theme-tranquility">致远</a>&nbsp;驱动
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://unpkg.com/js-polyfills@0.1.43/es6.js"></script>
+      <script id="MathJax-script"
+              async
+              src="https://www.unpkg.com/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+    
+    
+      <script src="/js/search.js"></script>
+      <script>searchInitialize("/search.json")</script>
+    
+    
+  
+
+  </body>
+</html>

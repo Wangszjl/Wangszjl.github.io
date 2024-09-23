@@ -213,7 +213,9 @@ a_1\phi_1(x)+a_2\phi_2(x)+\cdots+a_{n+1}\phi_{n+1}(x)\tag{1.6}
 \]</span> 函数<span
 class="math inline">\(\phi(x)\)</span>称作形状函数，我们将式（1.6）写成求和的形式，即
 <span class="math display">\[T(x)=\sum^{n+1}_{i=1}a_i\phi_i(x)\tag{1.7}
-\]</span> 当使用 (1.7)
+\]</span>
+<br>Ritz方法从数学的角度更满足预期，可以让我们形成更近似和收敛的数理论，但是在解决流体和热传导问题时，显得捉襟见肘。
+当使用 (1.7)
 形式的表达式近似求解问题时,一般来说，我们无法得到这个偏微分方程的真实解。因此，如果我们将近似解替换为方程（1.1）的左侧，我们得到的将不是同一值，而是与误差相关的某个
 "残差 "函数。我们将这个残余误差定义为 <span
 class="math display">\[R(T,x)\equiv-K\frac{d^2T}{dx^2}-Q\tag{1.8}\]</span>
@@ -253,9 +255,9 @@ class="math inline">\(T\)</span>的二阶导数不存在；方程（1.11）的�
 -\frac{1}{K}[q(x-L)+(x_s-L)]+T_L&amp;0\le x\le x_s\\
 -\frac{1}{K}q(x-L)(x-L)+T_L&amp;x_s\le x\le L
 \end{cases}\tag{1.12}
-\]</span> 对方程（1.10）应用分布积分，得到 <span
-class="math display">\[\int^L_0\phi(x)[-K\frac{d^2
-T}{dx^2}]dx=\int^L_0K\frac{d\phi}{dx}\frac{dT}{dx}dx-K\phi\frac{dT}{dx}\Big
+\]</span> 对方程（1.10）应用分部积分，得到 <span
+class="math display">\[\int^L_0\phi(x)\left[-K\frac{d^2
+T}{dx^2}\right]dx=\int^L_0K\frac{d\phi}{dx}\frac{dT}{dx}dx-K\phi\frac{dT}{dx}\Big
 |^L_0\tag{1.13}
 \]</span> 于是方程（1.10）可重写为 <span
 class="math display">\[\int^L_0K\frac{d\phi}{dx}\frac{dT}{dx}dx-\int^L_0\phi
