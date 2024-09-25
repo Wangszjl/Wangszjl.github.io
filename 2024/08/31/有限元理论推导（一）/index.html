@@ -255,49 +255,50 @@ x_{i+1}\tag{1.17}\]</span> 如确定形状函数<span class="math inline">\(\phi
 <span class="math display">\[\phi=\begin{matrix}
 [\phi_i &amp;\phi_{i+1}]
 \end{matrix}\tag{1.21}\]</span> 由此得到 <span class="math display">\[\frac{dT}{dx}=\frac{d}{dx}\phi\boldsymbol{a}=
-\begin{matrix}
-\Big[\frac{d\phi_i}{dx}&amp;\frac{d\phi_{i+1}}{dx}\Big]
+\left[\begin{matrix}
+\dfrac{d\phi_i}{dx}&amp;\dfrac{d\phi_{i+1}}{dx}
 \end{matrix}
+\right]
 \Big[
 \begin{matrix}
 a_i\\a_{i+1}
 \end{matrix}
-\Big]\tag{1.22}\]</span> 其中 <span class="math display">\[\frac{d}{dx}\phi=\Big[
+\Big]\tag{1.22}\]</span> 其中 <span class="math display">\[\frac{d}{dx}\phi=\left[
 \begin{matrix}
--\frac{1}{x_{i+1}-x_i}&amp;\frac{1}{x_{i+1}-x_i}
+-\dfrac{1}{x_{i+1}-x_i}&amp;\dfrac{1}{x_{i+1}-x_i}
 \end{matrix}
-\Big]\tag{1.23}\]</span> 现在可将以上方程带入到方程（1.16）中，得到
-<span class="math display">\[\sum^2_{j=1}K\Big[\int^{L/2}_0\frac{d\phi_1}{dx}\frac{d\phi_j}{dx}dx\Big]a_j-\int^{L/2}_0\phi_1(x)Qdx-K\phi_1(x)\frac{dT}{dx}\Big|^{x=L/2}_{x=0}=0\\
-\tag{1.24a}\]</span> 和 <span class="math display">\[\sum^2_{j=1}K\Big[\int^{L/2}_0\frac{d\phi_2}{dx}\frac{d\phi_j}{dx}dx\Big]a_j-\int^{L/2}_0\phi_2(x)Qdx-K\phi_2(x)\frac{dT}{dx}\Big|^{x=L/2}_{x=0}=0\\
-\tag{1.24b}\]</span> 上式使用方程（1.20）~（1.23）表述为 <span class="math display">\[K\Bigg[\int^{L/2}_0\Big[\frac{d}{dx}\phi\Big]^T\Big[\frac{d}{dx}\phi\Big]dx\Bigg]\boldsymbol{a}-Q\int^{L/2}_0\phi^Tdx-\Bigg[
+\right]\tag{1.23}\]</span> 现在可将以上方程带入到方程（1.16）中，得到
+<span class="math display">\[\sum^2_{j=1}K\left[\int^{L/2}_0\frac{d\phi_1}{dx}\frac{d\phi_j}{dx}dx\right]a_j-\int^{L/2}_0\phi_1(x)Qdx-K\phi_1(x)\frac{dT}{dx}\Big|^{x=L/2}_{x=0}=0\\
+\tag{1.24a}\]</span> 和 <span class="math display">\[\sum^2_{j=1}K\left[\int^{L/2}_0\frac{d\phi_2}{dx}\frac{d\phi_j}{dx}dx\right]a_j-\int^{L/2}_0\phi_2(x)Qdx-K\phi_2(x)\frac{dT}{dx}\Big|^{x=L/2}_{x=0}=0\\
+\tag{1.24b}\]</span> 上式使用方程（1.20）~（1.23）表述为 <span class="math display">\[K\left[\int^{L/2}_0\left[\frac{d}{dx}\phi\right]^T\left[\frac{d}{dx}\phi\right]dx\right]\boldsymbol{a}-Q\int^{L/2}_0\phi^Tdx-\left[
 \begin{matrix}
 q\\0
 \end{matrix}
-\Bigg]=0\tag{1.25}\]</span> 代入 <span class="math display">\[\phi=\Big[
+\right]=0\tag{1.25}\]</span> 代入 <span class="math display">\[\phi=\left[
   \begin{matrix}
-  1-\frac{2x}{L}&amp;\frac{2x}{L}
+  1-\dfrac{2x}{L}&amp;\dfrac{2x}{L}
   \end{matrix}
-  \Big]\]</span> 和 <span class="math display">\[\frac{d}{dx}\phi=\Big[
+  \right]\]</span> 和 <span class="math display">\[\frac{d}{dx}\phi=\Big[
   \begin{matrix}
-  -\frac{2}{L}&amp;\frac{2}{L}
+  -\dfrac{2}{L}&amp;\dfrac{2}{L}
   \end{matrix}
-  \Big]\]</span> 并积分，得到 <span class="math display">\[\frac{2K}{L}\Big[
+  \Big]\]</span> 并积分，得到 <span class="math display">\[\frac{2K}{L}\left[
   \begin{matrix}
     1&amp;-1\\
     -1&amp;1\\
   \end{matrix}
-  \Big]
-  \Big[
+  \right]
+  \left[
     \begin{matrix}
       a_1\\
       a_2
     \end{matrix}
-  \Big]-\frac{QL}{4}
-  \Big[
+  \right]-\frac{QL}{4}
+  \left[
   \begin{matrix}
     1\\1
   \end{matrix}  
-  \Big]-
+  \right]-
   \Big[\begin{matrix}
     q\\0
   \end{matrix}
@@ -328,34 +329,34 @@ q\\0
     0\\0
   \end{matrix}
   \Big]\tag{1.27}\]</span>
-表达式（1.26）和（1.27）通过“组装”，即将方程（1.26）中的第二个方程和方程（1.27）中的第一个方程相加，因为它们都对应于相同的权重函数<span class="math inline">\(\phi_2(x)\)</span>，于是得到 <span class="math display">\[\frac{2K}{L}\Bigg[
+表达式（1.26）和（1.27）通过“组装”，即将方程（1.26）中的第二个方程和方程（1.27）中的第一个方程相加，因为它们都对应于相同的权重函数<span class="math inline">\(\phi_2(x)\)</span>，于是得到 <span class="math display">\[\frac{2K}{L}\left[
     \begin{matrix}
       1&amp;-1&amp;0\\
       -1&amp;2&amp;-1\\
       0&amp;-1&amp;1
     \end{matrix}
-    \Bigg]
-    \Bigg[
+    \right]
+    \left[
     \begin{matrix}
       a_1\\
       a_2\\
       a_3
     \end{matrix}
-    \Bigg]=
-    \Bigg[
+    \right]=
+    \left[
     \begin{matrix}
       q\\
       0\\
       0
     \end{matrix}
-    \Bigg]+\frac{QL}{4}
-    \Bigg[
+    \right]+\frac{QL}{4}
+    \left[
     \begin{matrix}
       1\\
       2\\
       1
     \end{matrix}
-    \Bigg]\tag{1.28}
+    \right]\tag{1.28}
   \]</span> 由于已知<span class="math inline">\(a_3=T_L\)</span>，上述公式简化为关于未知数<span class="math inline">\(a_1\)</span>和<span class="math inline">\(a_2\)</span>，即 <span class="math display">\[a_1-a_2=\frac{ql}{2K}+\frac{QL^2}{8K}\tag{1.29a}\]</span>
 <span class="math display">\[-a_1+2a_2=\frac{QL^2}{4K}+T_L\tag{1.29b}\]</span>
 解为 <span class="math display">\[a_1=\frac{qL}{K}+\frac{QL^2}{2K}+T_L,\\
