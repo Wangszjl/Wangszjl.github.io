@@ -166,119 +166,46 @@
             
           </div>
         
-        <h1
-id="摘译-使用有限元方法求解泊松方程一">摘译-使用有限元方法求解泊松方程（一）</h1>
+        <h1 id="摘译-使用有限元方法求解泊松方程一">摘译-使用有限元方法求解泊松方程（一）</h1>
 <p>本内容翻译自《Plasma Simulations by Example》(Lubos
 Brieda，2019），用于在三维空间内求解泊松方程。</p>
 <h2 id="强形式">1 强形式</h2>
-<p>泊松方程可以写为 <span
-class="math display">\[\nabla^2u\equiv\frac{\partial^2u}{\partial
+<p>泊松方程可以写为 <span class="math display">\[\nabla^2u\equiv\frac{\partial^2u}{\partial
 x^2}+\frac{\partial^2u}{\partial y^2}+\frac{\partial^2u}{\partial
 z^2}\equiv u_{,ii}=f\tag{1.1}\]</span></p>
-<p>在强形式中，我们通常将方程和边界条件写成积分形式，其中下标跟在逗号后面的表示导数，重复的下标意味着求和。这种记号方法被称为指标记号或爱因斯坦记号。我们感兴趣的是在某个空间域<span
-class="math inline">\(\Omega\)</span>上求解这个方程。为了获得唯一解，我们还需要指定边界条件。我们假设我们知道在边界的一个子集<span
-class="math inline">\(\Gamma_g\)</span>上的解。即满足<strong>狄利克雷边界条件</strong>。我们还假设在另一个子集<span
-class="math inline">\(\Gamma_h\)</span>上我们知道解的导数,即满足<strong>纽曼边界条件</strong>。因此，按照爱因斯坦标记法，上述强形式表述为：
-<br>给定<span class="math inline">\(f\)</span>：<span
-class="math inline">\(\Omega\rightarrow R\)</span>，<span
-class="math inline">\(g:\Gamma_g\rightarrow R\)</span>，且<span
-class="math inline">\(h:\Gamma_h\rightarrow R\)</span>，寻找<span
-class="math inline">\(u:\Omega\rightarrow R\)</span>使得<span
-class="math inline">\(-ku_{,ii}=f(\Omega)\)</span>,<span
-class="math inline">\(u=g(\Gamma_g)\)</span></p>
-<p><br>针对泊松方程求解问题，<span
-class="math inline">\(u=\phi，k=1\)</span>且<span
-class="math inline">\(f=\rho/\epsilon_0\)</span>。需要注意的是，<span
-class="math inline">\(\Gamma_g\notin\emptyset\)</span>，但是<span
-class="math inline">\(\Gamma_h\)</span>可以是一个空集。狄利克雷边界条件是获得唯一解所必须的边界条件，但是纽曼边界条件可选。两类边界条件不需要连续，我们可以拥有多个非连续的<span
-class="math inline">\(\Gamma_g\)</span>和<span
-class="math inline">\(\Gamma_h\)</span>区域。</p>
+<p>在强形式中，我们通常将方程和边界条件写成积分形式，其中下标跟在逗号后面的表示导数，重复的下标意味着求和。这种记号方法被称为指标记号或爱因斯坦记号。我们感兴趣的是在某个空间域<span class="math inline">\(\Omega\)</span>上求解这个方程。为了获得唯一解，我们还需要指定边界条件。我们假设我们知道在边界的一个子集<span class="math inline">\(\Gamma_g\)</span>上的解。即满足<strong>狄利克雷边界条件</strong>。我们还假设在另一个子集<span class="math inline">\(\Gamma_h\)</span>上我们知道解的导数,即满足<strong>纽曼边界条件</strong>。因此，按照爱因斯坦标记法，上述强形式表述为：
+<br>给定<span class="math inline">\(f\)</span>：<span class="math inline">\(\Omega\rightarrow R\)</span>，<span class="math inline">\(g:\Gamma_g\rightarrow R\)</span>，且<span class="math inline">\(h:\Gamma_h\rightarrow R\)</span>，寻找<span class="math inline">\(u:\Omega\rightarrow R\)</span>使得<span class="math inline">\(-ku_{,ii}=f(\Omega)\)</span>,<span class="math inline">\(u=g(\Gamma_g)\)</span></p>
+<p><br>针对泊松方程求解问题，<span class="math inline">\(u=\phi，k=1\)</span>且<span class="math inline">\(f=\rho/\epsilon_0\)</span>。需要注意的是，<span class="math inline">\(\Gamma_g\notin\emptyset\)</span>，但是<span class="math inline">\(\Gamma_h\)</span>可以是一个空集。狄利克雷边界条件是获得唯一解所必须的边界条件，但是纽曼边界条件可选。两类边界条件不需要连续，我们可以拥有多个非连续的<span class="math inline">\(\Gamma_g\)</span>和<span class="math inline">\(\Gamma_h\)</span>区域。</p>
 <h2 id="弱形式">2 弱形式</h2>
 <p>弱形式使用两种函数定义解：</p>
 <ul>
 <li>试解</li>
-<li>权重函数（变量） <br>解需要满足边界条件，即在<span
-class="math inline">\(\Gamma_g\)</span>上<span
-class="math inline">\(u=g\)</span>。同时要求解的导数平方可积： <br><span
-class="math display">\[\int_\Omega(u_{,i})^2d\Omega&lt;\infty\tag{2.1}\]</span>
-<br>满足上述条件的函数称作<span
-class="math inline">\(H^1\)</span>函数，因此<span
-class="math inline">\(u\in H^1\)</span>。试解的集合由下式给出：<span
-class="math inline">\(S=\{u|u\in H^1,u=g | \Gamma_g\}\)</span>
-<br>权重函数与解相似，不同的是他们只满足<span
-class="math inline">\(g\)</span>边界条件的齐次形式： <span
-class="math inline">\(V=\{w|w\in H^1,w=0|\Gamma_g\}\)</span>
-<br>于是弱形式由下述形式给出： <br>给定<span
-class="math inline">\(f:\Omega\rightarrow R, g:\Gamma_g\rightarrow R,
+<li>权重函数（变量） <br>解需要满足边界条件，即在<span class="math inline">\(\Gamma_g\)</span>上<span class="math inline">\(u=g\)</span>。同时要求解的导数平方可积： <br><span class="math display">\[\int_\Omega(u_{,i})^2d\Omega&lt;\infty\tag{2.1}\]</span>
+<br>满足上述条件的函数称作<span class="math inline">\(H^1\)</span>函数，因此<span class="math inline">\(u\in H^1\)</span>。试解的集合由下式给出：<span class="math inline">\(S=\{u|u\in H^1,u=g | \Gamma_g\}\)</span>
+<br>权重函数与解相似，不同的是他们只满足<span class="math inline">\(g\)</span>边界条件的齐次形式： <span class="math inline">\(V=\{w|w\in H^1,w=0|\Gamma_g\}\)</span>
+<br>于是弱形式由下述形式给出： <br>给定<span class="math inline">\(f:\Omega\rightarrow R, g:\Gamma_g\rightarrow R,
 h:\Gamma_h\rightarrow R, 找到u\in S,使得对所有的w\in V,满足\int_\Omega
 w_{,i}(ku_{,i})d\Omega=\int_\Omega
 wfd\Omega+\int_{\Omega_h}whd\Gamma\)</span></li>
 </ul>
-<p><br>与强形式不同，弱形式通过<span
-class="math inline">\(u\)</span>的导数来定义解。这两个解是相同的，如果<span
-class="math inline">\(u\)</span>是<span
-class="math inline">\((S)\)</span>的解，那么它也是<span
-class="math inline">\((W)\)</span>的解，如果<span
-class="math inline">\(u\)</span>是<span
-class="math inline">\((W)\)</span>的解，那么它也是<span
-class="math inline">\((S)\)</span>的解。我们现在定义几个新的算子以简化记号:
+<p><br>与强形式不同，弱形式通过<span class="math inline">\(u\)</span>的导数来定义解。这两个解是相同的，如果<span class="math inline">\(u\)</span>是<span class="math inline">\((S)\)</span>的解，那么它也是<span class="math inline">\((W)\)</span>的解，如果<span class="math inline">\(u\)</span>是<span class="math inline">\((W)\)</span>的解，那么它也是<span class="math inline">\((S)\)</span>的解。我们现在定义几个新的算子以简化记号:
 <span class="math display">\[a(w,u)=\int_\Omega
-w_{,i}ku_{,i}d\Omega\tag{2.2}\]</span> <span
-class="math display">\[(w,f)=\int_\Omega wfd\Omega\tag{2.3}\]</span>
-<span
-class="math display">\[(w,f)=\int_{\Omega_h}wfd\Omega\tag{2.4}\]</span></p>
+w_{,i}ku_{,i}d\Omega\tag{2.2}\]</span> <span class="math display">\[(w,f)=\int_\Omega wfd\Omega\tag{2.3}\]</span>
+<span class="math display">\[(w,f)=\int_{\Omega_h}wfd\Omega\tag{2.4}\]</span></p>
 <h2 id="伽辽金形式">3 伽辽金形式</h2>
-<p>接下来在离散化域<span
-class="math inline">\(\Omega_h\)</span>上近似弱形式。第一步是构建<span
-class="math inline">\(S\)</span>和<span
-class="math inline">\(V\)</span>的有限维近似。代替连续函数，我们现在有了子集<span
-class="math inline">\(S^h\)</span>和<span
-class="math inline">\(V^h\)</span>，其中<span
-class="math inline">\(S^h\in S\)</span>，<span
-class="math inline">\(V^h\in V\)</span>。下标<span
-class="math inline">\(h\)</span>表示与网格相关联的属性。因此，如果<span
-class="math inline">\(u^h\in S^h\)</span>，则<span
-class="math inline">\(u^h\in S\)</span>。边界条件也成立，即<span
-class="math inline">\(u^h = g\)</span>在<span
-class="math inline">\(\Gamma_g\)</span>上成立。同样，<span
-class="math inline">\(V^h\)</span>的所有成员在<span
-class="math inline">\(\Gamma_g\)</span>上消失。然后，我们可以让<span
-class="math inline">\(S^h\)</span>的每个成员由下式表述： <span
-class="math display">\[u^h=v^h+g^h\tag{3.1}\]</span> 式中<span
-class="math inline">\(v^h\in V^h\)</span>，<span
-class="math inline">\(g^h\)</span>为在<span
-class="math inline">\(\Gamma_g\)</span>上满足<span
-class="math inline">\(u=g\)</span>的集合，于是有了伽辽金形式的描述。
-&gt;给定<span class="math inline">\(f\)</span>，<span
-class="math inline">\(g\)</span>和<span
-class="math inline">\(h\)</span>，寻找<span
-class="math inline">\(u^h=v^h+g^h\in S^h\)</span>，使得对于所有的<span
-class="math inline">\(w^h\in V^h\)</span>，<span
-class="math inline">\(a(w^h,v^h)=(w^h,f)+(w^h,h)_\Gamma-a(w^h,g^h)\)</span></p>
-<h2 id="形函数">4 形函数</h2>
+<p>接下来在离散化域<span class="math inline">\(\Omega_h\)</span>上近似弱形式。第一步是构建<span class="math inline">\(S\)</span>和<span class="math inline">\(V\)</span>的有限维近似。代替连续函数，我们现在有了子集<span class="math inline">\(S^h\)</span>和<span class="math inline">\(V^h\)</span>，其中<span class="math inline">\(S^h\in S\)</span>，<span class="math inline">\(V^h\in V\)</span>。下标<span class="math inline">\(h\)</span>表示与网格相关联的属性。因此，如果<span class="math inline">\(u^h\in S^h\)</span>，则<span class="math inline">\(u^h\in S\)</span>。边界条件也成立，即<span class="math inline">\(u^h = g\)</span>在<span class="math inline">\(\Gamma_g\)</span>上成立。同样，<span class="math inline">\(V^h\)</span>的所有成员在<span class="math inline">\(\Gamma_g\)</span>上消失。然后，我们可以让<span class="math inline">\(S^h\)</span>的每个成员由下式表述： <span class="math display">\[u^h=v^h+g^h\tag{3.1}\]</span> 式中<span class="math inline">\(v^h\in V^h\)</span>，<span class="math inline">\(g^h\)</span>为在<span class="math inline">\(\Gamma_g\)</span>上满足<span class="math inline">\(u=g\)</span>的集合，于是有了伽辽金形式的描述。
+&gt;给定<span class="math inline">\(f\)</span>，<span class="math inline">\(g\)</span>和<span class="math inline">\(h\)</span>，寻找<span class="math inline">\(u^h=v^h+g^h\in S^h\)</span>，使得对于所有的<span class="math inline">\(w^h\in V^h\)</span>，<span class="math inline">\(a(w^h,v^h)=(w^h,f)+(w^h,h)_\Gamma-a(w^h,g^h)\)</span></p>
+<h2 id="形状函数">4 形状函数</h2>
 <p>假设我们的域由<span class="math inline">\(\eta = \{0, 1, …,
-n_{np−1}\}\)</span>个节点组成。在这些节点中，狄利克雷<span
-class="math inline">\(g\)</span>边界条件被指定的节点由<span
-class="math inline">\(\eta_g\)</span>给出。那么，<span
-class="math inline">\(\eta - \eta_g\)</span>就是解<span
-class="math inline">\(u^h\)</span>需要被确定的节点子集。接下来，我们让<span
-class="math inline">\(V^h\)</span>的成员采取以下形式： <span
-class="math display">\[w^h(\vec{x})=\sum_{A\in\eta-\eta_g}N_A(\vec{x})c_A\tag{4.1}\]</span>
-<span
-class="math display">\[v^h(\vec{x})=\sum_{A\in\eta-\eta_g}N_A(\vec{x})d_A\tag{4.2}\]</span>
-式中<span class="math inline">\(d_A\)</span>为要求解的未知变量。<span
-class="math inline">\(g\)</span>的节点值使用形函数插值得到： <span
-class="math display">\[g^h(\vec{x})=\sum_{A\in\eta_g}N_A(\vec{x})g_A,g_A=g(\vec{x_A})\tag{4.3}\]</span>
-将这些插值函数代入到伽辽金表达式中，得到 <span
-class="math display">\[\sum_{B\in\eta-\eta_g}a(N_A,N_B)d_B=(N_A,f)+(N_A,h)_\Gamma-\sum_{B\in\eta_g}a(N_A,N_B)g_B,\]</span>
+n_{np−1}\}\)</span>个节点组成。在这些节点中，狄利克雷<span class="math inline">\(g\)</span>边界条件被指定的节点由<span class="math inline">\(\eta_g\)</span>给出。那么，<span class="math inline">\(\eta - \eta_g\)</span>就是解<span class="math inline">\(u^h\)</span>需要被确定的节点子集。接下来，我们让<span class="math inline">\(V^h\)</span>的成员采取以下形式： <span class="math display">\[w^h(\vec{x})=\sum_{A\in\eta-\eta_g}N_A(\vec{x})c_A\tag{4.1}\]</span>
+<span class="math display">\[v^h(\vec{x})=\sum_{A\in\eta-\eta_g}N_A(\vec{x})d_A\tag{4.2}\]</span>
+式中<span class="math inline">\(d_A\)</span>为要求解的未知变量。<span class="math inline">\(g\)</span>的节点值使用形函数插值得到： <span class="math display">\[g^h(\vec{x})=\sum_{A\in\eta_g}N_A(\vec{x})g_A,g_A=g(\vec{x_A})\tag{4.3}\]</span>
+将这些插值函数代入到伽辽金表达式中，得到 <span class="math display">\[\sum_{B\in\eta-\eta_g}a(N_A,N_B)d_B=(N_A,f)+(N_A,h)_\Gamma-\sum_{B\in\eta_g}a(N_A,N_B)g_B,\]</span>
 <span class="math display">\[A\in\eta-\eta_g\tag{4.4}\]</span></p>
 <h2 id="矩阵形式">5 矩阵形式</h2>
-<p>定义<span class="math inline">\(K_{AB}=a(N_A,N_B)\)</span>，<span
-class="math inline">\(F_A=(N_A,f)+(N_A,h)_\Gamma-\sum_{B\in\eta_g}a(N_A,N_B)g_B,A\in\eta-\eta_g\)</span>，则式（4.4）变为
-<span
-class="math display">\[\sum_{B\in\eta-\eta_g}K_{AB}d_B=F_A\tag{5.1}\]</span>
-进一步使用矩阵形式表述为 <span
-class="math display">\[\boldsymbol{K}=[K_{AB}]=
+<p>定义<span class="math inline">\(K_{AB}=a(N_A,N_B)\)</span>，<span class="math inline">\(F_A=(N_A,f)+(N_A,h)_\Gamma-\sum_{B\in\eta_g}a(N_A,N_B)g_B,A\in\eta-\eta_g\)</span>，则式（4.4）变为
+<span class="math display">\[\sum_{B\in\eta-\eta_g}K_{AB}d_B=F_A\tag{5.1}\]</span>
+进一步使用矩阵形式表述为 <span class="math display">\[\boldsymbol{K}=[K_{AB}]=
 \left[
   \begin{matrix}
   K_{0,0}&amp;K_{0,1}&amp;...&amp;K_{0,n-1}\\
@@ -286,8 +213,7 @@ class="math display">\[\boldsymbol{K}=[K_{AB}]=
   ...&amp;...&amp;...&amp;...\\
   K_{n-1,0}&amp;K_{n-1,1}&amp;...&amp;K_{n-1,n-1}
   \end{matrix}
-  \right]\tag{5.2}\]</span> <span
-class="math display">\[\vec{F}=\{F_A\}=
+  \right]\tag{5.2}\]</span> <span class="math display">\[\vec{F}=\{F_A\}=
 \left\{
   \begin{matrix}
   F_0\\
@@ -295,8 +221,7 @@ class="math display">\[\vec{F}=\{F_A\}=
   ...\\
   F_{n-1}
   \end{matrix}
-  \right\}\tag{5.3}\]</span> <span
-class="math display">\[\vec{d}=\{d_B\}=
+  \right\}\tag{5.3}\]</span> <span class="math display">\[\vec{d}=\{d_B\}=
 \left\{
   \begin{matrix}
   d_0\\
@@ -305,24 +230,11 @@ class="math display">\[\vec{d}=\{d_B\}=
   d_{n-1}
   \end{matrix}
   \right\}
-\]</span> 上述矩阵形式表述为 <span
-class="math display">\[\boldsymbol{K}\vec{d}=\vec{F}\tag{5.4}\]</span>
-式中<span
-class="math inline">\(K\)</span>为<strong><em>刚度矩阵</em></strong>，<span
-class="math inline">\(\vec{F}\)</span>为受力项，<span
-class="math inline">\(\vec{d}\)</span>为位移矢量。矩阵形式表述为
-<br>给定系数矩阵<span
-class="math inline">\(\boldsymbol{K}\)</span>和向量<span
-class="math inline">\(\vec{F}\)</span>，寻找<span
-class="math inline">\(\vec{d}\)</span>满足<span
-class="math inline">\(\boldsymbol{K}\vec{d}=\vec{F}\)</span>,其中<span
-class="math inline">\(\boldsymbol{K}=[K_{PQ}]\)</span>，<span
-class="math inline">\(\vec{d}=\{d_q\}\)</span>，<span
-class="math inline">\(\vec{F}=\{F_p\}\)</span>，<span
-class="math inline">\(0\le
+\]</span> 上述矩阵形式表述为 <span class="math display">\[\boldsymbol{K}\vec{d}=\vec{F}\tag{5.4}\]</span>
+式中<span class="math inline">\(K\)</span>为<strong><em>刚度矩阵</em></strong>，<span class="math inline">\(\vec{F}\)</span>为受力项，<span class="math inline">\(\vec{d}\)</span>为位移矢量。矩阵形式表述为
+<br>给定系数矩阵<span class="math inline">\(\boldsymbol{K}\)</span>和向量<span class="math inline">\(\vec{F}\)</span>，寻找<span class="math inline">\(\vec{d}\)</span>满足<span class="math inline">\(\boldsymbol{K}\vec{d}=\vec{F}\)</span>,其中<span class="math inline">\(\boldsymbol{K}=[K_{PQ}]\)</span>，<span class="math inline">\(\vec{d}=\{d_q\}\)</span>，<span class="math inline">\(\vec{F}=\{F_p\}\)</span>，<span class="math inline">\(0\le
 P,Q&lt;n_{eq}，K_{PQ}=a(N_A,N_B)，P=ID(A),Q=ID(B)，F_P=(N_A,f)+(N_A,h)_\Gamma-\sum_{B\in\eta_{eq}}a(N_A,N_B)G_B\)</span></p>
-<p>需要注意的是，我们只对未知节点<span
-class="math inline">\(n_{eq}=n_{np}-n_g\)</span>应用上述等式，我们需要找到节点标号与未知方程标号的对应关系，我们根据Hughes标记法将其称为ID：
+<p>需要注意的是，我们只对未知节点<span class="math inline">\(n_{eq}=n_{np}-n_g\)</span>应用上述等式，我们需要找到节点标号与未知方程标号的对应关系，我们根据Hughes标记法将其称为ID：
 <span class="math display">\[ID(A)=
 \begin{cases}
 P&amp;A\in\eta-\eta_g\\
@@ -330,70 +242,35 @@ P&amp;A\in\eta-\eta_g\\
 \end{cases}
 \tag{5.5}\]</span></p>
 <h2 id="单元视角">6 单元视角</h2>
-<p>上述表述使用了全局视角来表述矩阵问题。在这个视角中，空间位置和插值函数NA在物理<span
-class="math inline">\(\vec{x}\)</span>坐标中给出。这种表述方式并不实用，因此我们改为使用单元视角。我们让每个元素覆盖一些逻辑域，其坐标为<span
-class="math inline">\(\vec{\xi} =
-\{\xi,\eta,\zeta\}\)</span>。现在，插值函数<span
-class="math inline">\(N_{0,1},…\)</span>以这些逻辑或自然坐标表示。整个域的积分现在可以重写为对所有单元的求和。
-<span
-class="math display">\[\boldsymbol{K}=\sum^{n_{el}-1}_{e=0}\boldsymbol{K}^e,\boldsymbol{K}^e=[K^e_{AB}]\tag{6.1}\]</span>
-<span
-class="math display">\[\vec{F}=\sum^{n_{el}-1}_{e=0}\vec{F}_e,\vec{F}_e=\{F^e_A\}\tag{6.2}\]</span>
-其中 <span
-class="math display">\[K^e_{AB}=a(N_A,N_B)^b=\int_{\Omega^e}\nabla N_A
-k\nabla N_B d\Omega\tag{6.3}\]</span> <span
-class="math display">\[F^e_p=(N_A,f)^e+(N_A,h)^e_\Gamma-\sum_{B\in\eta_g}a(N_A,N_B)^eg_B\\
+<p>上述表述使用了全局视角来表述矩阵问题。在这个视角中，空间位置和插值函数NA在物理<span class="math inline">\(\vec{x}\)</span>坐标中给出。这种表述方式并不实用，因此我们改为使用单元视角。我们让每个元素覆盖一些逻辑域，其坐标为<span class="math inline">\(\vec{\xi} =
+\{\xi,\eta,\zeta\}\)</span>。现在，插值函数<span class="math inline">\(N_{0,1},…\)</span>以这些逻辑或自然坐标表示。整个域的积分现在可以重写为对所有单元的求和。
+<span class="math display">\[\boldsymbol{K}=\sum^{n_{el}-1}_{e=0}\boldsymbol{K}^e,\boldsymbol{K}^e=[K^e_{AB}]\tag{6.1}\]</span>
+<span class="math display">\[\vec{F}=\sum^{n_{el}-1}_{e=0}\vec{F}_e,\vec{F}_e=\{F^e_A\}\tag{6.2}\]</span>
+其中 <span class="math display">\[K^e_{AB}=a(N_A,N_B)^b=\int_{\Omega^e}\nabla N_A
+k\nabla N_B d\Omega\tag{6.3}\]</span> <span class="math display">\[F^e_p=(N_A,f)^e+(N_A,h)^e_\Gamma-\sum_{B\in\eta_g}a(N_A,N_B)^eg_B\\
 =\int_{\Omega^e}N_Afd\Omega+\int_{\Gamma^e_h}N_Ahd\Gamma-\sum_{B\in\eta_g}a(N_A,N_B)^eg_B\tag{6.4}\]</span>
-在有限元方法中，矩阵方程的单元表述涉及到刚度矩阵的各个元素。这些元素由<span
-class="math inline">\(a(N_A, N_B)^e\)</span>表示，其中<span
-class="math inline">\(N_A\)</span>和<span
-class="math inline">\(N_B\)</span>是插值函数，<span
-class="math inline">\(e\)</span>表示元素编号。刚度矩阵的这些元素代表了该元素内部及其与相邻元素连接处的力与位移的关系。<span
-class="math inline">\(\Gamma^e_h\)</span>是元素<span
-class="math inline">\(e\)</span>在边界<span
-class="math inline">\(\Gamma_h\)</span>上的部分，这个边界仅对于位于域边界的元素非空。此外，<span
-class="math inline">\(P\)</span>和<span
-class="math inline">\(Q\)</span>分别是刚度矩阵A和载荷向量B的单元编号映射，即<span
-class="math inline">\(P = ID(A)\)</span>和<span class="math inline">\(Q
+在有限元方法中，矩阵方程的单元表述涉及到刚度矩阵的各个元素。这些元素由<span class="math inline">\(a(N_A, N_B)^e\)</span>表示，其中<span class="math inline">\(N_A\)</span>和<span class="math inline">\(N_B\)</span>是插值函数，<span class="math inline">\(e\)</span>表示元素编号。刚度矩阵的这些元素代表了该元素内部及其与相邻元素连接处的力与位移的关系。<span class="math inline">\(\Gamma^e_h\)</span>是元素<span class="math inline">\(e\)</span>在边界<span class="math inline">\(\Gamma_h\)</span>上的部分，这个边界仅对于位于域边界的元素非空。此外，<span class="math inline">\(P\)</span>和<span class="math inline">\(Q\)</span>分别是刚度矩阵A和载荷向量B的单元编号映射，即<span class="math inline">\(P = ID(A)\)</span>和<span class="math inline">\(Q
 = ID(B)\)</span>。这里的ID表示节点编号与未知方程编号之间的映射表。
 <br>通过计算每个元素在刚度矩阵中的贡献，并将这些贡献加在一起，我们可以得到整个域的刚度矩阵。这个过程涉及到对每个元素内部及其与相邻元素的交界面进行积分。这种方法使得我们可以有效地处理复杂的几何形状和边界条件，同时确保解在指定的边界上满足给定的条件。
-<br>对单个单元重写上述公式为 <span
-class="math display">\[k^e=[k^e_{ab}],f^e=\{f^e_a\},0\le
-a,b&lt;n_{en}\tag{6.5} \]</span> <span
-class="math display">\[k^e_{ab}=a(N_a,N_b)^e=\int_{\Omega^e}N_afd\Omega+\int_{\Omega^e}N_ahd\Gamma-\sum^{n_{en}}_{b=1}k^e_{ab}q^e_b\tag{6.6}\]</span></p>
+<br>对单个单元重写上述公式为 <span class="math display">\[k^e=[k^e_{ab}],f^e=\{f^e_a\},0\le
+a,b&lt;n_{en}\tag{6.5} \]</span> <span class="math display">\[k^e_{ab}=a(N_a,N_b)^e=\int_{\Omega^e}N_afd\Omega+\int_{\Omega^e}N_ahd\Gamma-\sum^{n_{en}}_{b=1}k^e_{ab}q^e_b\tag{6.6}\]</span></p>
 <h2 id="正交">7 正交</h2>
-<p>假设存在一个从物理坐标到自然（或逻辑）坐标<span
-class="math inline">\(\vec{\eta}=(\xi,\eta,\zeta)\)</span>的映射，使得：
-<span
-class="math display">\[x(\vec{\eta})=\sum^4_{a=1}N_a(\vec{\xi})\vec{x}^e_a\tag{7.1}\]</span>
-式中<span class="math inline">\(\vec{x}^e_a\)</span>是组成单元<span
-class="math inline">\(e\)</span>的四个节点的位置，且<span
-class="math inline">\(\xi，\eta，\zeta\in[-1:1]\)</span>。这个公式描述了物理坐标可以作为逻辑坐标的函数，可用于对节点位置的插值计算。接下来将积分转换为<span
-class="math inline">\(\vec{\xi}\)</span>空间下的积分： <span
-class="math display">\[\int_{\Omega^e}f(\vec{x})dxdydz=\int^1_{-1}\int^1_{-1}\int^1_{-1}f(x(\vec{\xi}),y(\vec{\xi}),z(\vec{\xi}))j(\vec{\xi})d\xi
-d\eta d\zeta\tag{7.2}\]</span> 式中<span
-class="math inline">\(j(\vec{\xi})=\partial
+<p>假设存在一个从物理坐标到自然（或逻辑）坐标<span class="math inline">\(\vec{\eta}=(\xi,\eta,\zeta)\)</span>的映射，使得：
+<span class="math display">\[x(\vec{\eta})=\sum^4_{a=1}N_a(\vec{\xi})\vec{x}^e_a\tag{7.1}\]</span>
+式中<span class="math inline">\(\vec{x}^e_a\)</span>是组成单元<span class="math inline">\(e\)</span>的四个节点的位置，且<span class="math inline">\(\xi，\eta，\zeta\in[-1:1]\)</span>。这个公式描述了物理坐标可以作为逻辑坐标的函数，可用于对节点位置的插值计算。接下来将积分转换为<span class="math inline">\(\vec{\xi}\)</span>空间下的积分： <span class="math display">\[\int_{\Omega^e}f(\vec{x})dxdydz=\int^1_{-1}\int^1_{-1}\int^1_{-1}f(x(\vec{\xi}),y(\vec{\xi}),z(\vec{\xi}))j(\vec{\xi})d\xi
+d\eta d\zeta\tag{7.2}\]</span> 式中<span class="math inline">\(j(\vec{\xi})=\partial
 x_i/\partial\xi_i\)</span>称为<strong><em>雅可比矩阵</em></strong>。</p>
 <h2 id="形状函数及坐标转换">8 形状函数及坐标转换</h2>
-<p>下面求解 <span
-class="math display">\[k^e_{ab}=a(N_a,N_b)^e=\int_{\Omega^e}N_{a,i}kN_{b,i}d\Omega\tag{8.1}\]</span>
-我们可以在逻辑坐标空间<span
-class="math inline">\(\vec{\xi}\)</span>中计算。使用链式法则， <span
-class="math display">\[\frac{\partial N_a}{\partial x}=\frac{\partial
+<p>下面求解 <span class="math display">\[k^e_{ab}=a(N_a,N_b)^e=\int_{\Omega^e}N_{a,i}kN_{b,i}d\Omega\tag{8.1}\]</span>
+我们可以在逻辑坐标空间<span class="math inline">\(\vec{\xi}\)</span>中计算。使用链式法则， <span class="math display">\[\frac{\partial N_a}{\partial x}=\frac{\partial
 N_a}{\partial\xi}\frac{\partial\xi}{\partial x}+\frac{\partial
 N_a}{\partial\eta}\frac{\partial\eta}{\partial x}\tag{8.2}\]</span>
-或使用爱因斯坦标记法表示为 <span
-class="math display">\[N_{a,x}=N_{a,\xi}\xi_{,x}+N_{a,\eta}\eta_{,x}\tag{8.3}\]</span>
-相似地， <span
-class="math display">\[N_{a,y}=N_{a,\xi}\xi_{,y}+N_{a,\eta}\eta_{,y}\tag{8.4}\]</span>
-从上式可以得到，我们需要获得<span
-class="math inline">\(N_a\)</span>在逻辑空间中的形函数，<span
-class="math inline">\(N_a=N_a(\xi)\)</span>。我们也需要映射<span
-class="math inline">\(\vec{\xi}_{,\vec{x}}\)</span>的表达式，于是有
+或使用爱因斯坦标记法表示为 <span class="math display">\[N_{a,x}=N_{a,\xi}\xi_{,x}+N_{a,\eta}\eta_{,x}\tag{8.3}\]</span>
+相似地， <span class="math display">\[N_{a,y}=N_{a,\xi}\xi_{,y}+N_{a,\eta}\eta_{,y}\tag{8.4}\]</span>
+从上式可以得到，我们需要获得<span class="math inline">\(N_a\)</span>在逻辑空间中的形函数，<span class="math inline">\(N_a=N_a(\xi)\)</span>。我们也需要映射<span class="math inline">\(\vec{\xi}_{,\vec{x}}\)</span>的表达式，于是有
 <span class="math display">\[\int\Omega f(\vec{x})d\Omega=\int_\xi
 f(\vec{\xi})|\vec{x}_{,\vec{\xi}}|d\vec{\xi}\tag{8.5}\]</span>
-将式（8.4）和式（8.5）重写为矩阵形式 <span
-class="math display">\[\left\{
+将式（8.4）和式（8.5）重写为矩阵形式 <span class="math display">\[\left\{
   \begin{matrix}
   N_{a,x}\\
   N_{a,y}
@@ -411,8 +288,7 @@ class="math display">\[\left\{
   \eta_x&amp;\eta_y
   \end{matrix}
   \right]\tag{8.6}
-  \]</span> 根据<span
-class="math inline">\(x(\xi,\eta)=\sum^2_{a=0}N_a(\xi,\eta)x^e_a，y(\xi,\eta)=\sum^2_{a=0}N_a(\xi,\eta)y^e_a\)</span>，计算得到
+  \]</span> 根据<span class="math inline">\(x(\xi,\eta)=\sum^2_{a=0}N_a(\xi,\eta)x^e_a，y(\xi,\eta)=\sum^2_{a=0}N_a(\xi,\eta)y^e_a\)</span>，计算得到
 <span class="math display">\[\vec{x}_{,\vec{\xi}}=
     \left[
   \begin{matrix}
@@ -420,19 +296,9 @@ class="math inline">\(x(\xi,\eta)=\sum^2_{a=0}N_a(\xi,\eta)x^e_a，y(\xi,\eta)=\
   y_{,\xi}&amp;y_{,\eta}
   \end{matrix}
   \right]\tag{8.6}
-  \]</span> 而<span
-class="math inline">\(\vec{\xi_{,\vec{x}}}=(\vec{x}_{,\xi})^{-1}\)</span>。
-<br>根据以上内容，计算任意单元内<span
-class="math inline">\(N_{a,x}\)</span>和<span
-class="math inline">\(N_{b,x}\)</span>的步骤如下： <br>1.计算正交点<span
-class="math inline">\(l_{\xi}\)</span>处的<span
-class="math inline">\(N_{a,\xi}\)</span>； <br>2.使用<span
-class="math inline">\(N_{a,\xi}\)</span>计算<span
-class="math inline">\(\vec{x}_{,\vec{\xi}}\)</span>; <br>3.计算<span
-class="math inline">\(\vec{\xi_{,\vec{x}}}=(\vec{x}_{,\xi})^{-1}\)</span>；
-<br>4.使用<span
-class="math inline">\(N_{a,\xi}\xi_{,x}\)</span>计算<span
-class="math inline">\(N_{a,x}\)</span> <br>5.对b重复1-4。</p>
+  \]</span> 而<span class="math inline">\(\vec{\xi_{,\vec{x}}}=(\vec{x}_{,\xi})^{-1}\)</span>。
+<br>根据以上内容，计算任意单元内<span class="math inline">\(N_{a,x}\)</span>和<span class="math inline">\(N_{b,x}\)</span>的步骤如下： <br>1.计算正交点<span class="math inline">\(l_{\xi}\)</span>处的<span class="math inline">\(N_{a,\xi}\)</span>； <br>2.使用<span class="math inline">\(N_{a,\xi}\)</span>计算<span class="math inline">\(\vec{x}_{,\vec{\xi}}\)</span>; <br>3.计算<span class="math inline">\(\vec{\xi_{,\vec{x}}}=(\vec{x}_{,\xi})^{-1}\)</span>；
+<br>4.使用<span class="math inline">\(N_{a,\xi}\xi_{,x}\)</span>计算<span class="math inline">\(N_{a,x}\)</span> <br>5.对b重复1-4。</p>
 
       </div>
     </div>
