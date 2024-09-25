@@ -212,13 +212,13 @@ T}{dx^2}\right]dx=\int^L_0K\frac{d\phi}{dx}\frac{dT}{dx}dx-K\phi\frac{dT}{dx}\Bi
 \]</span> 于是方程（1.10）可重写为 <span class="math display">\[\int^L_0K\frac{d\phi}{dx}\frac{dT}{dx}dx-\int^L_0\phi
 Qdx-K\phi\frac{dT}{dx}\Big |^L_0=0\tag{1.14}
 \]</span> 这仅仅是一个“弱”形式的问题，因为它只包含解<span class="math inline">\(T(x)\)</span>的一阶导数，而方程（1.10）包含二阶导数。对函数<span class="math inline">\(T(x)\)</span>的微分要求已经减弱，因此得名“弱形式”。请注意，到目前为止还没有进行任何近似，也就是说，在表述中没有丢失任何东西，另一方面，简单的分段线性近似现在变得合理。
-### 例 1 &gt; 考虑方程（1.1），使用边界条件<span class="math inline">\(T(0)=T_0\)</span>以及对流边界条件<span class="math inline">\(-K\frac{dT}{dx}\Big
+&gt; <strong>例1</strong> 考虑方程（1.1），使用边界条件<span class="math inline">\(T(0)=T_0\)</span>以及对流边界条件<span class="math inline">\(-K\frac{dT}{dx}\Big
 |_{x=L}=h(T-T_\infty)\)</span>。式中<span class="math inline">\(h\)</span>为热对流传导常数，<span class="math inline">\(T_\infty\)</span>为参考温度。
 加权残差公式（式（1.9）），对于这个问题保持不变，因为它由式（1.1）推导而来，与给定的边界条件无关。每当在边界点给出温度时，我们将在该点的热流项设为零，通过要求权重函数在该点消失来实现。在这种情况下，令<span class="math inline">\(\phi(0) =
 0\)</span>，并使用其他边界项中的对流边界条件，方程（1.9）的形式变为
 <span class="math display">\[\int^L_0K\frac{d\phi}{dx}\frac{dT}{dx}-\int^L_0\phi
-Qdx+\phi(L)h(T_L-T_\infty)=0\tag{1.15}\]</span>
-&gt;即加权残差公式。稍后，我们将进一步要求加权函数在边界点处等于1。在这种情况下，<span class="math inline">\(\phi(L) =
+Qdx+\phi(L)h(T_L-T_\infty)=0\tag{1.15}\]</span> &gt;
+即加权残差公式。稍后，我们将进一步要求加权函数在边界点处等于1。在这种情况下，<span class="math inline">\(\phi(L) =
 1\)</span>，因此加权函数永远不会明确出现在边界项中。</p>
 对每个权重函数<span class="math inline">\(\phi(x)\)</span>使用公式（1.7），可将方程（1.14）改写为
 <span class="math display">\[\sum^{n+1}_{j=1}K\Big
