@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     <title>
       
-        有限元理论推导（五） | 芥川龙之介的幽灵
+        07-有限元理论推导（五） | 芥川龙之介的幽灵
       
     </title>
     <meta name="description" content="" />
@@ -150,7 +150,7 @@
   <article class="post-content">
     <div class="post-inner">
       <div class="post-content__head">
-        <div class="post-title">有限元理论推导（五）</div>
+        <div class="post-title">07-有限元理论推导（五）</div>
         <div class="post-info">
           
   
@@ -172,29 +172,20 @@
 一套确定单元形状的关系，以及 (2)
 插值函数的阶数。并不是必须在插值方程和坐标变换中使用相同的形状函数，也就是说，可以存在两套“全局”节点。在等参单元的情况下，这两套全局节点是相同的。几乎所有当前在工业和学术研究中使用的有限元程序都使用等参单元。等参单元基于具有独立变量ξ和η的局部坐标系，这些变量通常在空间坐标中从-1变化到1。相同的局部坐标关系用于定义单元内的一个变量，以及用节点的全局坐标来定义单元内某点的全局坐标。</p>
 <h2 id="自然坐标系">5.2 自然坐标系</h2>
-<p>我们首先表示<span class="math inline">\(x\)</span>和<span
-class="math inline">\(y\)</span>为<span
-class="math inline">\(\xi\)</span>和<span
-class="math inline">\(\eta\)</span>的函数，即： <span
-class="math display">\[
+<p>我们首先表示<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span>为<span class="math inline">\(\xi\)</span>和<span class="math inline">\(\eta\)</span>的函数，即： <span class="math display">\[
 x=x(\xi,\eta)
 \]</span> <span class="math display">\[
 \begin{equation}
 y=y(\xi,\eta)
 \end{equation}
-\]</span> 其中插值函数也用<span
-class="math inline">\(\xi\)</span>和<span
-class="math inline">\(\eta\)</span>表示： <span
-class="math display">\[\begin{equation}
+\]</span> 其中插值函数也用<span class="math inline">\(\xi\)</span>和<span class="math inline">\(\eta\)</span>表示： <span class="math display">\[\begin{equation}
 N_i=N_i(\xi,\eta)
 \end{equation}
 \]</span>
-由于我们在积分方程中处理的是笛卡尔导数，我们使用链式法则转换<span
-class="math inline">\(N_i\)</span>的导数。 <span class="math display">\[
+由于我们在积分方程中处理的是笛卡尔导数，我们使用链式法则转换<span class="math inline">\(N_i\)</span>的导数。 <span class="math display">\[
 \frac{\partial N_i}{\partial \xi}=\frac{\partial N_i}{\partial
 x}\frac{\partial x}{\partial\xi}+\frac{\partial N_i}{\partial
-y}\frac{\partial y}{\partial\xi}\]</span> <span
-class="math display">\[\begin{equation}
+y}\frac{\partial y}{\partial\xi}\]</span> <span class="math display">\[\begin{equation}
 \frac{\partial N_i}{\partial \eta}=\frac{\partial N_i}{\partial
 x}\frac{\partial x}{\partial\eta}+\frac{\partial N_i}{\partial
 y}\frac{\partial y}{\partial\eta}
@@ -215,9 +206,7 @@ y}\frac{\partial y}{\partial\eta}
 \frac{\partial N_i}{\partial x}\\\frac{\partial N_i}{\partial y}
 \end{bmatrix}
 \end{equation}
-\]</span> 为了找到<span
-class="math inline">\(N_i\)</span>的导数，我们将方程4转化为 <span
-class="math display">\[\begin{equation}
+\]</span> 为了找到<span class="math inline">\(N_i\)</span>的导数，我们将方程4转化为 <span class="math display">\[\begin{equation}
 \begin{bmatrix}
 \frac{\partial N_i}{\partial x}\\\frac{\partial N_i}{\partial y}
 \end{bmatrix}=\boldsymbol{J}^{-1}\begin{bmatrix}
@@ -230,9 +219,7 @@ class="math display">\[\begin{equation}
 \frac{\partial N_i}{\partial\xi}\\\frac{\partial N_i}{\partial\eta}
 \end{bmatrix}
 \end{equation}
-\]</span> 其中<span
-class="math inline">\(|\boldsymbol{J}|\)</span>表示<span
-class="math inline">\(\boldsymbol{J}\)</span>的行列式。从方程5中我们得到：
+\]</span> 其中<span class="math inline">\(|\boldsymbol{J}|\)</span>表示<span class="math inline">\(\boldsymbol{J}\)</span>的行列式。从方程5中我们得到：
 <span class="math display">\[
 \begin{equation}
 \frac{\partial N_i}{\partial
@@ -271,9 +258,7 @@ x}{\partial\xi}
 \begin{equation}
 dA=dxdy=|\boldsymbol{J}|d\xi d\eta
 \end{equation}
-\]</span> <span class="math inline">\(x\)</span>, <span
-class="math inline">\(y\)</span>坐标由其节点值定义为： <span
-class="math display">\[
+\]</span> <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>坐标由其节点值定义为： <span class="math display">\[
 x=\sum^n_{i=1}N_i[\xi,\eta]x_i
 \]</span> <span class="math display">\[
 \begin{equation}
@@ -281,15 +266,11 @@ y=\sum^n_{i=1}N_i[\xi,\eta]y_i
 \end{equation}
 \]</span> 其中<span class="math inline">\(n =
 4\)</span>对于双线性四节点单元，<span class="math inline">\(n =
-8\)</span>或<span
-class="math inline">\(9\)</span>对于二次或双二次四边形。假设变量<span
-class="math inline">\(\phi\)</span>可以近似为 <span
-class="math display">\[
+8\)</span>或<span class="math inline">\(9\)</span>对于二次或双二次四边形。假设变量<span class="math inline">\(\phi\)</span>可以近似为 <span class="math display">\[
 \begin{equation}
 \phi=\alpha_1+\alpha_2x+\alpha_3y
 \end{equation}
-\]</span> 对于节点<span class="math inline">\(i\)</span>， <span
-class="math display">\[
+\]</span> 对于节点<span class="math inline">\(i\)</span>， <span class="math display">\[
 \begin{equation}
 \phi_i=\alpha_1+\alpha_2x_i+\alpha_3y_i
 \end{equation}
@@ -306,106 +287,64 @@ class="math display">\[
 \]</span></p>
 <h2 id="形状函数">5.3 形状函数</h2>
 形状函数与第3章和第4章中用于二维(2-D)三角形和四边形的形状函数相同。 ###
-5.3.1 双线性四边形 四节点双线性四边形的形状函数可以写为 <span
-class="math display">\[
+5.3.1 双线性四边形 四节点双线性四边形的形状函数可以写为 <span class="math display">\[
 \begin{equation}
 N_i=\frac{1}{4}(1+\xi_i\xi)(1+\eta_i\eta),i=1,\cdots,4
 \end{equation}
-\]</span> 其中<span class="math inline">\(\xi_i\)</span>和<span
-class="math inline">\(\eta_i\)</span>代表单元边，如图1a中定义，即在节点1处，<span
-class="math inline">\(\xi = \eta = -1\)</span>，因此<span
-class="math inline">\(\xi_01 = -1,\eta_1 = -1\)</span>; 在节点2处，<span
-class="math inline">\(\xi = \xi_2 = 1\)</span>, <span
-class="math inline">\(\eta = \eta_2 = -1\)</span>;
+\]</span> 其中<span class="math inline">\(\xi_i\)</span>和<span class="math inline">\(\eta_i\)</span>代表单元边，如图1a中定义，即在节点1处，<span class="math inline">\(\xi = \eta = -1\)</span>，因此<span class="math inline">\(\xi_01 = -1,\eta_1 = -1\)</span>; 在节点2处，<span class="math inline">\(\xi = \xi_2 = 1\)</span>, <span class="math inline">\(\eta = \eta_2 = -1\)</span>;
 等等。因此展开形式方程16变成方程17： <span class="math display">\[N_1 =
 (1 - \xi)(1 - \eta) / 4\]</span> <span class="math display">\[N_2 = (1 +
 \xi)(1 - \eta) / 4\]</span> <span class="math display">\[N_3 = (1 +
-\xi)(1 + \eta) / 4\]</span> <span
-class="math display">\[\begin{equation}
+\xi)(1 + \eta) / 4\]</span> <span class="math display">\[\begin{equation}
    N_4 = (1 - \xi)(1 + \eta) / 4
 \end{equation}\]</span> <br>
 <center>
 <figure>
-<img src="/有限元理论推导（五）/1.png"
-alt="图1 线性以及8节点二次单元" />
+<img src="/2024/09/18/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E4%BA%94%EF%BC%89/1.png" alt="图1 线性以及8节点二次单元">
 <figcaption aria-hidden="true">图1 线性以及8节点二次单元</figcaption>
 </figure>
 </center>
 <p>在这种情况下，<span class="math inline">\(-1\le\xi\le 1\)</span>
-且<span class="math inline">\(-1\le\eta\le 1\)</span>。如果<span
-class="math inline">\(\xi,
-\eta\)</span>坐标系位于左下角，则形状函数变为： <span
-class="math display">\[N_1 = (1 - \xi)(1 - \eta)\]</span> <span
-class="math display">\[N_2 = \xi(1 - \eta)\]</span> <span
-class="math display">\[N_3 = \xi\eta\]</span> <span
-class="math display">\[\begin{equation}
+且<span class="math inline">\(-1\le\eta\le 1\)</span>。如果<span class="math inline">\(\xi,
+\eta\)</span>坐标系位于左下角，则形状函数变为： <span class="math display">\[N_1 = (1 - \xi)(1 - \eta)\]</span> <span class="math display">\[N_2 = \xi(1 - \eta)\]</span> <span class="math display">\[N_3 = \xi\eta\]</span> <span class="math display">\[\begin{equation}
    N_4 = (1 - \xi)\eta
 \end{equation}\]</span></p>
 <h3 id="八节点二次四边形">5.3.2 八节点二次四边形</h3>
-<p>对于八节点二次四边形，形状函数如下（图1b）， 角节点： <span
-class="math display">\[
+<p>对于八节点二次四边形，形状函数如下（图1b）， 角节点： <span class="math display">\[
 \begin{equation}
 N_i = (1 + \xi_i\xi)(1 + \eta_i\eta)(\xi_i\xi+\eta_i\eta-1) / 4
-\end{equation}\]</span> 中边节点： <span
-class="math display">\[\begin{equation}
+\end{equation}\]</span> 中边节点： <span class="math display">\[\begin{equation}
 \xi_i=0;N_i = (1 - \xi^2)(1 + \eta_i\eta)
 \end{equation}\]</span></p>
 <h3 id="线性三角形">5.3.3 线性三角形</h3>
 将三角形单元的面积坐标系统<span class="math inline">\(（L_i, i = 1, 2,
 3）\)</span>转换为用于四边形单元的ξ, η系统（Heinrich和Pepper, 1999;
 Zienkiewicz, 1977; Zienkiewicz和Taylor
-1989）是很简单的。<br>三节点线性三角形的形状函数可以用<span
-class="math inline">\(\xi,\eta\)</span>坐标表示为: <span
-class="math display">\[
+1989）是很简单的。<br>三节点线性三角形的形状函数可以用<span class="math inline">\(\xi,\eta\)</span>坐标表示为: <span class="math display">\[
 N_1=L_1=1-\xi-\eta
 \]</span> <span class="math display">\[
 N_2=L_2=\xi
 \]</span> <span class="math display">\[\begin{equation}
 N_3=L_3=\eta
 \end{equation}
-\]</span> 其中<span
-class="math inline">\(\xi,\eta\)</span>在图2a中定义。在这种情况下<span
-class="math inline">\(0\xi\le 1\)</span>且<span
-class="math inline">\(0\le\xi\le 1\)</span>。 <br>
+\]</span> 其中<span class="math inline">\(\xi,\eta\)</span>在图2a中定义。在这种情况下<span class="math inline">\(0\xi\le 1\)</span>且<span class="math inline">\(0\le\xi\le 1\)</span>。 <br>
 <center>
 <figure>
-<img src="/有限元理论推导（五）/2.png"
-alt="图2 自然坐标系下的三角形单元" />
+<img src="/2024/09/18/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E4%BA%94%EF%BC%89/2.png" alt="图2 自然坐标系下的三角形单元">
 <figcaption aria-hidden="true">图2 自然坐标系下的三角形单元</figcaption>
 </figure>
 </center>
 <h3 id="二次三角形">5.3.4 二次三角形</h3>
-<p>对于六节点三角形，形状函数定义为（图2b）， 角节点： <span
-class="math display">\[\begin{equation}N_i = (2L_i - 1)L_i, i = 1, 2,
+<p>对于六节点三角形，形状函数定义为（图2b）， 角节点： <span class="math display">\[\begin{equation}N_i = (2L_i - 1)L_i, i = 1, 2,
 3\end{equation}\]</span> 其中可以表示为<span class="math inline">\(\xi,
-\eta\)</span>坐标： <span
-class="math display">\[N_1=(2(1-\xi-\eta)-1)(1-\xi-\eta)\]</span> <span
-class="math display">\[N_2=(2\xi-1)\xi\]</span> <span
-class="math display">\[\begin{equation}N_3=(2\eta-1)\eta\end{equation}\]</span>
+\eta\)</span>坐标： <span class="math display">\[N_1=(2(1-\xi-\eta)-1)(1-\xi-\eta)\]</span> <span class="math display">\[N_2=(2\xi-1)\xi\]</span> <span class="math display">\[\begin{equation}N_3=(2\eta-1)\eta\end{equation}\]</span>
 中边节点：<span class="math display">\[N_i = 4L_jL_k, i = 4, 5, 6; j =
-2, 3, 1; k = 3, 1, 2\]</span> 或者，以<span
-class="math inline">\(\xi\)</span>, <span
-class="math inline">\(\eta\)</span>形式： <span
-class="math display">\[N_4=4\xi\eta\]</span> <span
-class="math display">\[N_5=4\eta(1-\xi-\eta)\]</span> <span
-class="math display">\[\begin{equation}N_6=4\xi(1-\xi-\eta)\end{equation}\]</span>
-其中<span class="math inline">\(0\le\xi\le 1\)</span>且<span
-class="math inline">\(0\le\eta\le 1\)</span>。 ### 5.3.5 方向余弦
-使用<span class="math inline">\(\xi\)</span>, <span
-class="math inline">\(\eta\)</span>坐标，可以轻松获得与诺伊曼边界条件相关的单元边的方向余弦<span
-class="math inline">\(n_x\)</span>和<span
-class="math inline">\(n_y\)</span>。如图3所示的任意单元边，在点<span
-class="math inline">\(\boldsymbol{r}\)</span>处的切向量<span
-class="math inline">\(\boldsymbol{dr}\)</span>定义为 <span
-class="math display">\[\begin{equation}
+2, 3, 1; k = 3, 1, 2\]</span> 或者，以<span class="math inline">\(\xi\)</span>, <span class="math inline">\(\eta\)</span>形式： <span class="math display">\[N_4=4\xi\eta\]</span> <span class="math display">\[N_5=4\eta(1-\xi-\eta)\]</span> <span class="math display">\[\begin{equation}N_6=4\xi(1-\xi-\eta)\end{equation}\]</span>
+其中<span class="math inline">\(0\le\xi\le 1\)</span>且<span class="math inline">\(0\le\eta\le 1\)</span>。 ### 5.3.5 方向余弦
+使用<span class="math inline">\(\xi\)</span>, <span class="math inline">\(\eta\)</span>坐标，可以轻松获得与诺伊曼边界条件相关的单元边的方向余弦<span class="math inline">\(n_x\)</span>和<span class="math inline">\(n_y\)</span>。如图3所示的任意单元边，在点<span class="math inline">\(\boldsymbol{r}\)</span>处的切向量<span class="math inline">\(\boldsymbol{dr}\)</span>定义为 <span class="math display">\[\begin{equation}
     \boldsymbol{dr}= dx\hat{i} + dy\hat{j}
 \end{equation}
-\]</span> 其中<span class="math inline">\(\hat{i}\)</span>和<span
-class="math inline">\(\hat{j}\)</span>分别是<span
-class="math inline">\(x\)</span>和<span
-class="math inline">\(y\)</span>方向的单位向量。如果<span
-class="math inline">\(s\)</span>表示沿边<span
-class="math inline">\(\boldsymbol{S}\)</span>的弧长坐标，我们也可以写成
+\]</span> 其中<span class="math inline">\(\hat{i}\)</span>和<span class="math inline">\(\hat{j}\)</span>分别是<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span>方向的单位向量。如果<span class="math inline">\(s\)</span>表示沿边<span class="math inline">\(\boldsymbol{S}\)</span>的弧长坐标，我们也可以写成
 <span class="math display">\[\begin{equation}
 \boldsymbol{dr}=\left(\frac{dx}{dx}\boldsymbol{\hat{i}}+\frac{dy}{ds}\boldsymbol{\hat{j}}\right)ds
 \end{equation}
@@ -417,9 +356,7 @@ class="math inline">\(\boldsymbol{S}\)</span>的弧长坐标，我们也可以�
 \begin{equation}
 |\boldsymbol{dr}|=ds\sqrt{dx^2+dy^2}
 \end{equation}
-\]</span> 单位切向量<span
-class="math inline">\(\boldsymbol{\hat{t}}\)</span>为 <span
-class="math display">\[
+\]</span> 单位切向量<span class="math inline">\(\boldsymbol{\hat{t}}\)</span>为 <span class="math display">\[
 \begin{equation}
 \boldsymbol{\hat{t}}=\frac{\boldsymbol{dr}}{|\boldsymbol{dr}|}=\frac{\boldsymbol{dr}}{ds}=\left(\frac{dx}{ds}\boldsymbol{\hat{i}}+\frac{dy}{ds}\boldsymbol{\hat{j}}\right)
 \end{equation}
@@ -432,9 +369,7 @@ cos\theta&amp;-sin\theta\\
 sin\theta&amp;cos\theta
 \end{bmatrix}
 \end{equation}
-\]</span> 然后，指向单元边外侧的单位法向量<span
-class="math inline">\(\boldsymbol{\hat{n}}\)</span>是 <span
-class="math display">\[
+\]</span> 然后，指向单元边外侧的单位法向量<span class="math inline">\(\boldsymbol{\hat{n}}\)</span>是 <span class="math display">\[
 \begin{equation}
 \boldsymbol{\hat{n}}=Rot(-90\degree)\boldsymbol{\hat{t}}=\begin{bmatrix}
 0&amp;1\\-1&amp;0
@@ -447,11 +382,7 @@ class="math display">\[
 \]</span>
 使用方程31，可以轻松获得线性和二次四边形单元以及三角形单元的方向余弦。</p>
 <h2 id="单元矩阵">5.4 单元矩阵</h2>
-<p>我们将为线性四边形设置局部坐标系的矩阵关系。请记住，我们可以在单元内的任何地方设置我们的局部坐标系。一个标量变量<span
-class="math inline">\(\phi\)</span>，它可以代表未知的温度、浓度或速度等，是使用方程14进行插值的。<span
-class="math inline">\(\phi\)</span>的导数<span
-class="math inline">\(\partial\phi/\partial\xi\)</span>和<span
-class="math inline">\(\partial\phi/\partial\eta\)</span>使用下述方程表示：
+<p>我们将为线性四边形设置局部坐标系的矩阵关系。请记住，我们可以在单元内的任何地方设置我们的局部坐标系。一个标量变量<span class="math inline">\(\phi\)</span>，它可以代表未知的温度、浓度或速度等，是使用方程14进行插值的。<span class="math inline">\(\phi\)</span>的导数<span class="math inline">\(\partial\phi/\partial\xi\)</span>和<span class="math inline">\(\partial\phi/\partial\eta\)</span>使用下述方程表示：
 <span class="math display">\[
 \begin{equation}
 \begin{bmatrix}
@@ -466,10 +397,7 @@ class="math inline">\(\partial\phi/\partial\eta\)</span>使用下述方程表示
 \frac{\partial\phi}{\partial y}
 \end{bmatrix}
 \end{equation}
-\]</span> 因此，由于<span
-class="math inline">\(N_i\)</span>是用于近似<span
-class="math inline">\(\phi\)</span>的形状函数，我们得到 <span
-class="math display">\[
+\]</span> 因此，由于<span class="math inline">\(N_i\)</span>是用于近似<span class="math inline">\(\phi\)</span>的形状函数，我们得到 <span class="math display">\[
 \begin{equation}
 \begin{bmatrix}
 \frac{\partial\phi}{\partial\xi}\\
