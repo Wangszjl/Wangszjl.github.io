@@ -285,7 +285,7 @@ h^{(e)}+\alpha_3(h^{(e)})^2=T^{(e)}_3\tag{2.17c}\]</span></p>
 因此，形状函数为 <span class="math display">\[N^{(e)}_1(x)=1-3\left[\frac{x}{h^{(e)}}\right]+2\left[\frac{x}{h^{(e)}}\right]^2\tag{2.18a}\]</span>
 <span class="math display">\[N^{(e)}_2(x)=4\left[\frac{x}{h^{(e)}}\right]\left[1-\frac{x}{h^{(e)}}\right]\tag{2.18b}\]</span>
 <span class="math display">\[N^{(e)}_3(x)=\frac{x}{h^{(e)}}\left[2\frac{x}{h^{(e)}}-1\right]\tag{2.18c}\]</span>
-在这种情况下，用于将全局系统与局部参考系统关联的表示法在图6中展示，该图展示了一个由<span class="math inline">\(n\)</span>个二次元素组成的网格。这里的第 <span class="math inline">\(i\)</span>个元素被定义为 <span class="math display">\[e_i=\{x|x_{2i-1}\le x\le
+在这种情况下，用于将全局系统与局部参考系统关联的表示法在图6中展示，该图展示了一个由<span class="math inline">\(n\)</span>个二次单元组成的网格。这里的第 <span class="math inline">\(i\)</span>个单元被定义为 <span class="math display">\[e_i=\{x|x_{2i-1}\le x\le
 x_{2i+1}\}\tag{2.19}\]</span> <br>
 <center>
 <figure>
@@ -294,7 +294,7 @@ x_{2i+1}\}\tag{2.19}\]</span> <br>
 二次单元局部和全局坐标系之间的关系，三角形表示每个单元的内部节点</figcaption>
 </figure>
 </center>
-<p>元素的长度由下式给出： <span class="math display">\[h^{(i)}=x_{2i+1}-x_{2i-1}\tag{2.20}\]</span>
+<p>单元的长度由下式给出： <span class="math display">\[h^{(i)}=x_{2i+1}-x_{2i-1}\tag{2.20}\]</span>
 函数<span class="math inline">\(T^{(e)}(x)\)</span>的导数分别由方程（2.20）和方程（2.21）得到:
 <span class="math display">\[T^{(e)}(x)=N^{(e)}_1T^{(e)}_1+N^{(e)}_2(x)T^{(e)}_2+N^{(e)}_3(x)T^{(e)}_3=
 \left[
@@ -335,10 +335,10 @@ h^{(e)}\)</span>的位置。按照与线性和二次单元相同的过程，我�
 <span class="math display">\[
 N^{(e)}_4(x)=\frac{x}{h^{(e)}}\Bigg(1-\frac{3x}{h^{(e)}}\Bigg)\Bigg(1-\frac{3x}{2h^{(e)}}\Bigg)\tag{2.24c}
 \]</span> 关于之前定义的单元，需要注意以下几点： 1.
-尽管二次和三次单元的导数是独立变量<span class="math inline">\(x\)</span>的函数，但它们在单元间的节点处不会连续。这里使用的插值类型被称为拉格朗日插值，它只保证函数在元素边界处的连续性。这些元素被称为<span class="math inline">\(C^0\)</span>元素，其中零上标意味着只有零阶导数是连续的，即函数本身。
+尽管二次和三次单元的导数是关于独立变量<span class="math inline">\(x\)</span>的函数，但它们在单元间的节点处不会连续。这里使用的插值类型被称为拉格朗日插值，它只保证函数在单元边界处的连续性。这些单元被称为<span class="math inline">\(C^0\)</span>单元，其中零上标意味着只有零阶导数是连续的，即函数本身。
 2.
-显然，甚至更高阶的元素，例如四次、五次等，可以通过在元素中添加更多的插值节点来构建。实际上，我们可以构建在节点处也插值导数的单元。最简单的这类元素是立方埃尔米特元素，它在位于单元两端的节点处插值函数及其一阶导数。这些是<span class="math inline">\(C^1\)</span>元素，因为现在一阶导数将在整个域中连续。甚至可以构建更复杂的单元。事实上，几乎没有限制可以达到的复杂度或预设单元行为的程度。然而，必须牢记，单元越复杂，计算成本就越高。实际上，在多维计算中，立方单元已经变得过于昂贵，很少用于流体和热传递应用。
-3. 之前考虑的元素插值函数具有如下性质：<span class="math inline">\(N_i(x)e_j = \delta_{ij}\)</span>，其中 <span class="math inline">\(\delta_{ij}\)</span> 是克罗内克 delta 函数，即，
+显然，甚至更高阶的单元，例如四次、五次等，可以通过在单元中添加更多的插值节点来构建。实际上，我们可以构建在节点处也插值导数的单元。最简单的这类单元是立方埃尔米特单元，它在位于单元两端的节点处插值函数及其一阶导数。这些是<span class="math inline">\(C^1\)</span>单元，因为现在一阶导数将在整个域中连续。甚至可以构建更复杂的单元。事实上，几乎没有限制可以达到的复杂度或预设单元行为的程度。然而，必须牢记，单元越复杂，计算成本就越高。实际上，在多维计算中，立方单元已经变得过于昂贵，很少用于流体和热传递应用。
+3. 之前考虑的单元插值函数具有如下性质：<span class="math inline">\(N_i(x)e_j = \delta_{ij}\)</span>，其中 <span class="math inline">\(\delta_{ij}\)</span> 是克罗内克 delta 函数，即，
 <span class="math display">\[
    \delta_{ij} = \begin{cases}
      1, &amp; \text{if } i = j \\
@@ -346,8 +346,8 @@ N^{(e)}_4(x)=\frac{x}{h^{(e)}}\Bigg(1-\frac{3x}{h^{(e)}}\Bigg)\Bigg(1-\frac{3x}{
    \end{cases}\tag{2.25}
    \]</span></p>
 <p>并且 <span class="math inline">\(x_j\)</span> 是节点坐标。 4.
-所选择的插值类型定义了依赖变量在元素内可以采取的“形状”，即线性的、二次等。因此，使用“形状函数”这个名称来表示定义元素的函数
-<span class="math inline">\(N_i\)</span>。还应注意，高阶函数总是精确地简化为低阶函数；即，二次元素精确地表示线性函数和常数函数，立方元素表示二次、线性和常数函数等。这一事实保证了如果使用高阶元素，可以获得更好的近似。</p>
+所选择的插值类型定义了依赖变量在单元内可以采取的“形状”，即线性的、二次等。因此，使用“形状函数”这个名称来表示定义单元的函数
+<span class="math inline">\(N_i\)</span>。还应注意，高阶函数总是精确地简化为低阶函数；即，二次单元精确地表示线性函数和常数函数，立方单元表示二次、线性和常数函数等。这一事实保证了如果使用高阶单元，可以获得更好的近似。</p>
 <h2 id="稳态传导方程">2.3 稳态传导方程</h2>
 <h3 id="galerkin表述">2.3.1 Galerkin表述</h3>
 <p>考虑在区间<span class="math inline">\(0 \leq x \leq
@@ -359,17 +359,17 @@ T(x)\)</span>的问题，它满足具有内部热源的稳态1-D方程：</p>
 \]</span> <span class="math display">\[T=T_L,x=L\tag{2.28}\]</span>
 方程（2.26）的加权残差表达式为 <span class="math display">\[\int^L_0W\Bigg(-K\frac{d^2T}{dx^2}-Q\Bigg)dx=0\tag{2.29}
 \]</span> 进一步写成 <span class="math display">\[
-\int^L_0\Bigg(-K\frac{d^2T}{dx^2}-Q\Bigg)dx=\sum^2_{i=1}\int^{x_{i+1}}_{x_i}W\Bigg(-K\frac{d^2T}{dx^2}-Q\Bigg)dx
+\int^L_0W\Bigg(-K\frac{d^2T}{dx^2}-Q\Bigg)dx=\sum^2_{i=1}\int^{x_{i+1}}_{x_i}W\Bigg(-K\frac{d^2T}{dx^2}-Q\Bigg)dx
 =\int^{L/2}_0W\Bigg(-K\frac{d^2T}{dx^2}-Q\Bigg)dx+
 \int^{L}_{L/2}W\Bigg(-K\frac{d^2T}{dx^2}-Q\Bigg)dx=0\tag{2.30}
 \]</span> 全局函数<span class="math inline">\(T(x)\)</span>由下式近似得到： <span class="math display">\[
 T(x)=\sum^3_{j=1}N_j(x)T_j=N_1(x)T_1+N_2(x)T_2+N_3(x)T_3
-\tag{2.31}\]</span> 式中形状函数<span class="math inline">\(N_i(x),i=1,2,3\)</span>，由方程（2.2）至（2.4）给出，其中<span class="math inline">\(n=2\)</span>，<span class="math inline">\(x_1=0,x_2=L/2,x_3=L\)</span>。 令<span class="math inline">\(W_i(x)=N_i(x)\)</span>，式（2.20）的伽辽金形式变为
+\tag{2.31}\]</span> 式中形状函数<span class="math inline">\(N_i(x),i=1,2,3\)</span>，由方程（2.2）至（2.4）给出，其中<span class="math inline">\(n=2\)</span>，<span class="math inline">\(x_1=0,x_2=L/2,x_3=L\)</span>。 令<span class="math inline">\(W_i(x)=N_i(x)\)</span>，式（2.30）的伽辽金形式变为
 <span class="math display">\[
 \int^{L/2}_0\left[K\frac{dN_i}{dx}\Bigg(\sum^3_{j=1}\frac{dN_j}{dx}T_j\Bigg)-N_iQ\right]dx+\left[N_i\Bigg(-K\frac{dT}{dx}\Bigg)\right]^{L/2}_0
 +\int^L_{L/2}\left[K\frac{dN_i}{dx}\Bigg(\sum^3_{j=1}\frac{dN_j}{dx}T_j\Bigg)-N_iQ\right]dx+\left[N_i\Bigg(-K\frac{dT}{dx}\Bigg)\right]^L_{L/2}
 =0,i=1,2,3\tag{2.32}
-\]</span> 方程（2.32）的前两项分别对应单元<span class="math inline">\(e_1\)</span>和<span class="math inline">\(e_2\)</span>。现在一次考虑其中的每一个，使用局部单元坐标。对于元素<span class="math inline">\(e_1\)</span>，<span class="math inline">\(N_3(x) =
+\]</span> 方程（2.32）的前两项分别对应单元<span class="math inline">\(e_1\)</span>和<span class="math inline">\(e_2\)</span>。现在一次考虑其中的每一个，使用局部单元坐标。对于单元<span class="math inline">\(e_1\)</span>，<span class="math inline">\(N_3(x) =
 0\)</span>；因此，我们可以将来自<span class="math inline">\(i = 1,
 2\)</span>的方程以矩阵形式写成 <span class="math display">\[
 \int^{L/2}_0\Bigg\{K\Bigg(\left[
@@ -488,9 +488,9 @@ T(x)=\sum^3_{j=1}N_j(x)T_j=N_1(x)T_1+N_2(x)T_2+N_3(x)T_3
     \end{matrix}
     \right]
 \]</span>
-现在必须将每个元素的积分加在一起，以得到完整的方程组。这个操作被称为“组装”方程，并产生最终的全局<span class="math inline">\(3\times
+现在必须将每个单元的积分加在一起，以得到完整的方程组。这个操作被称为“组装”方程，并产生最终的全局<span class="math inline">\(3\times
 3\)</span>矩阵。这是使用方程和自由度的全局编号来完成的；这个过程如图7所示，并且等同于将不同单元中由同一权重函数产生的方程贡献相加。在这种情况下，对应于
-<span class="math inline">\(W_2=N_2\)</span>的每个单元的贡献如图7所示相加。在实践中，这是通过使用单元矩阵中的全局自由度编号，并将它们的贡献添加到全局矩阵中的相应位置来实现的。例如，在单元<span class="math inline">\(2\)</span>中，位置<span class="math inline">\((1,2)\)</span>对应于全局系统中的<span class="math inline">\((2,3)\)</span>，并将条目 <span class="math inline">\(-2k/L\)</span> 添加到全局矩阵的位置<span class="math inline">\((2,3)\)</span>.在图7中可以清楚地看到，涉及内部节点通量的表达式相互抵消；实际上，这正好说明通量在内部必须是连续的。因此，在构建单元方程时，这些项通常被省略。然而，如果省略了这些项，元素方程中的等式就不成立。尽管如此，习惯上会将涉及通量的项，例如方程（3.35），设置为等于零。因此，全局方程组变为：
+<span class="math inline">\(W_2=N_2\)</span>的每个单元的贡献如图7所示相加。在实践中，这是通过使用单元矩阵中的全局自由度编号，并将它们的贡献添加到全局矩阵中的相应位置来实现的。例如，在单元<span class="math inline">\(2\)</span>中，位置<span class="math inline">\((1,2)\)</span>对应于全局系统中的<span class="math inline">\((2,3)\)</span>，并将条目 <span class="math inline">\(-2k/L\)</span> 添加到全局矩阵的位置<span class="math inline">\((2,3)\)</span>.在图7中可以清楚地看到，涉及内部节点通量的表达式相互抵消；实际上，这正好说明通量在内部必须是连续的。因此，在构建单元方程时，这些项通常被省略。然而，如果省略了这些项，单元方程中的等式就不成立。尽管如此，习惯上会将涉及通量的项，例如方程（3.35），设置为等于零。因此，全局方程组变为：
 <span class="math display">\[
 \frac{2K}{L}
 \left[
@@ -512,7 +512,7 @@ T(x)=\sum^3_{j=1}N_j(x)T_j=N_1(x)T_1+N_2(x)T_2+N_3(x)T_3
      1\\2\\1   
     \end{matrix}
     \right]
-    +\\
+    +
         \left[
     \begin{matrix}
      q\\
@@ -546,7 +546,7 @@ T(x)=\sum^3_{j=1}N_j(x)T_j=N_1(x)T_1+N_2(x)T_2+N_3(x)T_3
     q\\
     0
     \end{matrix}
-    \right]+\\
+    \right]+
     \frac{2K}{L}T_L
     \left[
     \begin{matrix}
@@ -567,7 +567,7 @@ T(x)=\sum^3_{j=1}N_j(x)T_j=N_1(x)T_1+N_2(x)T_2+N_3(x)T_3
 <p>现在使用二次单元离散化区域，来近似方程（2.26）至（2.28）。我们现在使用相同数量的节点，但是是更高阶的近似。伽辽金描述与之前相似。由于局部和全局坐标系对于一个单元都是相同的，我们可以写成
 <span class="math display">\[\int^L_0\left[K\frac{dN_i}{dx}\Bigg(\sum^3_{j=1}\frac{dN_j}{dx}T_j\Bigg)-N_iQ\right]dx+\left[N_i\Bigg(-K\frac{dT}{dx}\Bigg)\right]^L_0=0\tag{2.39}\]</span>
 根据方程（3.18）、（3.21）和（3.23），得到矩阵形式： <span class="math display">\[
-\int^L_0\Bigg\{K\Bigg(\left[
+\int^L_0\left\{K\left(\left[
     \begin{matrix}
     \dfrac{1}{L}(\dfrac{4x}{L}-3)\\
     \dfrac{4}{L}(1-\dfrac{2x}{L})\\
@@ -581,7 +581,7 @@ T(x)=\sum^3_{j=1}N_j(x)T_j=N_1(x)T_1+N_2(x)T_2+N_3(x)T_3
     \dfrac{1}{L}(\dfrac{4x}{L}-1)
     \end{matrix}
     \right]
-    \Bigg)
+    \right)
     \left[
     \begin{matrix}
     T_1\\T_2\\T3
@@ -594,7 +594,7 @@ T(x)=\sum^3_{j=1}N_j(x)T_j=N_1(x)T_1+N_2(x)T_2+N_3(x)T_3
     \dfrac{x}{L}(\dfrac{2x}{L}-1)
     \end{matrix}
     \right]Q
-    \Bigg\}dx=
+    \right\}dx=
     \left[
     \begin{matrix}
     q\\0\\
@@ -965,7 +965,7 @@ x=N_1(\xi)x_1+N_2(\xi)x_2
 \]</span> <span class="math display">\[
 \int^{x_{i+1}}_{x_i}\frac{dN_j}{dx}N_k(x)dx=\int^1_{-1}N_k(\xi)d\xi\tag{2.70}
 \]</span>
-此外，方程(2.68)中的函数乘积可以很容易地用指数形式进行解析评估。这个程序在结构力学中是众所周知的，并且可以很容易地用于任何一维元素网格。积分关系表达为
+此外，方程(2.68)中的函数乘积可以很容易地用指数形式进行解析评估。这个程序在结构力学中是众所周知的，并且可以很容易地用于任何一维单元网格。积分关系表达为
 <span class="math display">\[
 \int^1_{-1}(N_1(\xi))^a(N_2(\xi))^bd\xi=2\frac{a!b!}{(1+a+b)!}\tag{2.71}
 \]</span> 式中<span class="math inline">\(a\)</span>和<span class="math inline">\(b\)</span>为无符号整数。我们可以对更高阶的单元使用自然坐标系，特别是二次单元。自然坐标系下的形状函数为
@@ -979,13 +979,13 @@ N_3(\xi)=\frac{1}{2}\xi(\xi+1)\tag{2.76}
 x_{2i+1}的单元\)</span>e_i<span class="math inline">\(映射到区间\)</span>-1<span class="math inline">\(的转化式为\)</span>$
 x=N_1()x_{2i-1}+N_2()x_{2i}+N_3()x_{2i+1} <span class="math display">\[
 注意，当 $x_{2i} =(x_{2i-1} + x_{2i+1})/2$
-时，这个表达式简化为方程(2.64)。这种表示法比2.2中的表示法更具一般性，因为它允许内部节点位于元素中点以外的位置。
+时，这个表达式简化为方程(2.64)。这种表示法比2.2中的表示法更具一般性，因为它允许内部节点位于单元中点以外的位置。
 从$N_i(x)$ 对$x$的导数可以通过以下方式获得：
 \]</span> = <span class="math display">\[
 \]</span> = <span class="math display">\[
 于是有
 \]</span> =x_{2i-1}+x_{2i}+x_{2i+1} $$
-在（2.79）中使用了元素坐标的全局值<span class="math inline">\(x^{(e_i)}_1\)</span>，<span class="math inline">\(x^{(e_i)}_2\)</span>，<span class="math inline">\(x^{(e_i)}_3\)</span>。<span class="math inline">\(dx/d\xi\)</span>为坐标变换的<strong><em>雅可比行列式</em></strong>，通常表示为<span class="math inline">\(\boldsymbol{J}\)</span>。</p>
+在（2.79）中使用了单元坐标的全局值<span class="math inline">\(x^{(e_i)}_1\)</span>，<span class="math inline">\(x^{(e_i)}_2\)</span>，<span class="math inline">\(x^{(e_i)}_3\)</span>。<span class="math inline">\(dx/d\xi\)</span>为坐标变换的<strong><em>雅可比行列式</em></strong>，通常表示为<span class="math inline">\(\boldsymbol{J}\)</span>。</p>
 <h2 id="随时间变化的扩散方程">2.6 随时间变化的扩散方程</h2>
 <p>我们现在将有限元算法扩展到非稳态热扩散方程。假设 <span class="math inline">\(Q =
 0\)</span>，即没有源或汇。热传导的控制方程通常写为：</p>
@@ -1066,7 +1066,7 @@ N_i}{\partial x}\frac{\partial N_j}{\partial
 x}dx\right]T^n_j+(\theta-1)\Delta t\left[N_i\Bigg(-\alpha\frac{\partial
 T^n}{\partial x}\Bigg)\right]^{x=L}_{x=0}\\
 \tag{2.103}
-\]</span> 在这个表达式中，可以看到当<span class="math inline">\(\theta=0\)</span>时。等式左侧只有质量矩阵项。这个项导致相邻元素之间的“连接度”比传统有限差分方法中的更高。</p>
+\]</span> 在这个表达式中，可以看到当<span class="math inline">\(\theta=0\)</span>时。等式左侧只有质量矩阵项。这个项导致相邻单元之间的“连接度”比传统有限差分方法中的更高。</p>
 <h2 id="矩阵公式化">2.7 矩阵公式化</h2>
 <p>有限元方法基于在特定节点位置对因变量的数值近似；产生一组必须直接或迭代求解的同时线性代数方程。对于之前讨论的示例问题，未知数的数量，因此方程的数量很少，可以通过手工推导的方式轻松解决。然而，对于大多数问题，节点的数量，由此产生的未知数的数量，将会大大增加，需要计算机来执行求解运算。
 <br>我们之前使用的系数矩阵是在每个单元上分析得到，并组装成全局数组。换句话说，从每个单元获得的局部系数矩阵被“塞进”一个大矩阵中，该矩阵包含所有局部单元的贡献。这个过程可以通过计算机程序中的“do循环”轻松执行。一旦我们为一个单元制定了有限元算法，该方法的通用性允许我们对所有单元使用相同的程序。因此，我们可以构建基于局部单元矩阵评估的全局矩阵，然后以我们希望的方式求解矩阵方程。
@@ -1080,9 +1080,9 @@ M^{(e_k)}=\sum^n_{k=1}\int_{0}^{h^{(e_k)}}
 [
     \begin{matrix}
      N_i^{(e_k)}&amp;N_j^{(e_k)}]
-\end{matrix}dx\tag{2.109} \]</span> 其中<span class="math inline">\(n\)</span>是单元的数量。求和意味着每个元素矩阵是一个<span class="math inline">\((n+1)\times (n+1)\)</span>
+\end{matrix}dx\tag{2.109} \]</span> 其中<span class="math inline">\(n\)</span>是单元的数量。求和意味着每个单元矩阵是一个<span class="math inline">\((n+1)\times (n+1)\)</span>
 矩阵，通过在不包含单元中节点的所有位置填充零来从单元矩阵扩展而来。
-<br>例如，考虑使用三个等长的线性元素离散区间<span class="math inline">\(0 \leq x \leq
+<br>例如，考虑使用三个等长的线性单元离散区间<span class="math inline">\(0 \leq x \leq
 1\)</span>。使用方程（2.108）评估局部质量矩阵得到 <span class="math display">\[\boldsymbol{M}^{(e_1)}=\boldsymbol{M}^{(e_2)}=\boldsymbol{M}^{(e_3)}=\frac{1}{18}
 \left[\begin{matrix}
 2&amp;1\\
@@ -1205,7 +1205,7 @@ Recipes”系列书籍中可以找到使用这些过程的 FORTRAN，C/C++，和
 的源代码列表。在 Kattan (2007) 中可以找到 MATLAB 示例（称为“for
 loops”）；这些同样在 Portela 和 Charaf (2002) 和 Aziz (2006) 中讨论了
 MAPLE
-程序。当网格结构使得矩阵的带状特性不被改变时（例如，在一维问题中，或在定义在矩形或平行六面体域上的二维和三维问题中），迭代方法具有优势，并且只需要几个解，如线性稳态问题的情况。如果计算网格是不规则的，或者如果必须一遍又一遍地解决相同的线性方程组（如在线性时间依赖问题或在优化问题中，同一系统必须为许多不同的右手边解），迭代方法就变得不那么有吸引力了。迭代方法的主要优势在于只需要在内存中存储矩阵的非零元素。与直接消元过程相比，这可能意味着巨大的存储节省。缺点是每次方程（2.115）中的<span class="math inline">\(\boldsymbol{B}\)</span>
+程序。当网格结构使得矩阵的带状特性不被改变时（例如，在一维问题中，或在定义在矩形或平行六面体域上的二维和三维问题中），迭代方法具有优势，并且只需要几个解，如线性稳态问题的情况。如果计算网格是不规则的，或者如果必须一遍又一遍地解决相同的线性方程组（如在线性时间依赖问题或在优化问题中，同一系统必须为许多不同的右手边解），迭代方法就变得不那么有吸引力了。迭代方法的主要优势在于只需要在内存中存储矩阵的非零单元。与直接消元过程相比，这可能意味着巨大的存储节省。缺点是每次方程（2.115）中的<span class="math inline">\(\boldsymbol{B}\)</span>
 改变时，都必须重复算法过程。
 <br>解决线性代数方程组的第二种方法包括直接求解系统；这些方法基于高斯消除。将系数矩阵<span class="math inline">\(\boldsymbol{A}\)</span>分解为一个下三角矩阵和一个上三角矩阵的乘积，称为<strong><em>LU</em></strong>分解，是迭代方法的有吸引力的替代方法。可以利用系数矩阵<span class="math inline">\(\boldsymbol{A}\)</span>的稀疏性质来编写耗时的消除步骤。使用<span class="math inline">\(LU\)</span>分解的消除程序是直接求解方程组的最流行技术（Atkinson,
 1985; Chapra和Canale, 2015）。<span class="math inline">\(LU\)</span>分解方法是高斯消除的一个变体；通过“分解”<span class="math inline">\(\boldsymbol{A}\)</span>矩阵为<span class="math inline">\(\boldsymbol{L}\)</span>和<span class="math inline">\(\boldsymbol{U}\)</span>矩阵的乘积，可以得到比原始消除更有效的算法。让我们将方程（2.115）重写为
@@ -1215,9 +1215,9 @@ MAPLE
 <span class="math display">\[\boldsymbol{L}(\boldsymbol{U}\phi-\boldsymbol{D})=\boldsymbol{A}\phi-\boldsymbol{B}\tag{2.133}\]</span>
 方程（2.133）有效的条件是 <span class="math display">\[\boldsymbol{LU}=\boldsymbol{A}\tag{2.134}\]</span>
 和 <span class="math display">\[\boldsymbol{LD}=\boldsymbol{B}\tag{2.135}\]</span>
-方程（2.134）被称为<span class="math inline">\(\boldsymbol{A}\)</span>的LU分解。这种类型的分解可以对任何非奇异矩阵<span class="math inline">\(\boldsymbol{A}\)</span>进行；然而，执行它没有唯一的方法。在文献中可以找到获得这种分解的不同方法。例如，如果将矩阵<span class="math inline">\(\boldsymbol{L}\)</span>的所有对角元素都设置为1，则会得到一个唯一的分解，这被称为Doolittle约简。如果矩阵<span class="math inline">\(\boldsymbol{A}\)</span>是对称的，可以以这样的方式进行分解
+方程（2.134）被称为<span class="math inline">\(\boldsymbol{A}\)</span>的LU分解。这种类型的分解可以对任何非奇异矩阵<span class="math inline">\(\boldsymbol{A}\)</span>进行；然而，执行它没有唯一的方法。在文献中可以找到获得这种分解的不同方法。例如，如果将矩阵<span class="math inline">\(\boldsymbol{L}\)</span>的所有对角单元都设置为1，则会得到一个唯一的分解，这被称为Doolittle约简。如果矩阵<span class="math inline">\(\boldsymbol{A}\)</span>是对称的，可以以这样的方式进行分解
 <span class="math display">\[\boldsymbol{L}=\boldsymbol{U}^T\tag{2.136}\]</span>
-这被称为Cholesky方法或平方根方法，因为需要平方根操作来获得对角元素<span class="math inline">\(u_{ii}\)</span>（这将在稍后更详细地讨论）。
+这被称为Cholesky方法或平方根方法，因为需要平方根操作来获得对角单元<span class="math inline">\(u_{ii}\)</span>（这将在稍后更详细地讨论）。
 <br>方程（2.135）被称为前向替代，并产生向量<span class="math inline">\(\boldsymbol{D}\)</span>。为了获得解向量<span class="math inline">\(\phi\)</span>，还需要一个步骤。一旦得到<span class="math inline">\(\boldsymbol{D}\)</span>，这可以通过求解方程（2.132）来提供，涉及与直接高斯消除中所需的相同类型的后向替代。大多数数值方法教科书都提供了使用这些过程的算法和子程序列表（见Atkinson,
 1985; Chapra和Canale, 2015; Conte, 1965; Isaacson和Keller, 1966）。
 <br>带状矩阵是一个方阵，除了主对角线中心的一条带外，所有系数都等于零。这样的系统经常出现在微分方程的求解中，特别是在工程和科学问题中。在有限元中，这样的矩阵出现在线性结构和扩散相关问题中。当方程是非线性的，如在流体流动中，可能会出现非对称带状矩阵。在这本入门书中，我们只关心线性对称带状系统方程；然而，与FORTRAN软件一起提供的矩阵求解器将处理对称或非对称带状矩阵。像高斯消除或LU分解这样的直接方法在求解问题的几何形状不规则且方法产生带状结构较差的矩阵时，比迭代方法具有更大的优势。当同一个系统必须为许多不同的右手边求解时，它们也更方便，因为只需要进行一次分解。通过可以非常高效地执行的简单前向和后向替代来获得解。对于单个解的强带状系统方程，这样的方法通常效率较低，并且在存储和操作零值时引入了不必要的计算工作。
@@ -1229,7 +1229,7 @@ MAPLE
 \times n\)</span>矩阵<span class="math inline">\(\boldsymbol{A}\)</span>，半带宽<span class="math inline">\(\ell\)</span>和带宽<span class="math inline">\(2\ell - 1\)</span>，指示<span class="math inline">\(\boldsymbol{A}\)</span>中存储需求的对称</figcaption>
 </figure>
 </center>
-<p>矩阵的带状特性以及因此的<span class="math inline">\(\ell\)</span>的大小，直接取决于节点编号的方式。带宽由所有元素中节点编号的最大差异决定。当我们进一步研究2-D和3-D元素时，这一事实将变得非常重要，并指出了“优化”节点编号的必要性。对于1-D元素，如果节点编号是顺序的，对于线性元素，得到的全局矩阵是三对角的，对于二次单元，是五对角的。然而，读者应该注意，如果节点编号不是顺序的，情况将不是如此。解决对称方程组的最有效和最受欢迎的方法之一是前面提到的Cholesky分解。该算法依赖于这样一个事实：对称矩阵可以分解为彼此转置的上三角和下三角矩阵，即
+<p>矩阵的带状特性以及因此的<span class="math inline">\(\ell\)</span>的大小，直接取决于节点编号的方式。带宽由所有单元中节点编号的最大差异决定。当我们进一步研究2-D和3-D单元时，这一事实将变得非常重要，并指出了“优化”节点编号的必要性。对于1-D单元，如果节点编号是顺序的，对于线性单元，得到的全局矩阵是三对角的，对于二次单元，是五对角的。然而，读者应该注意，如果节点编号不是顺序的，情况将不是如此。解决对称方程组的最有效和最受欢迎的方法之一是前面提到的Cholesky分解。该算法依赖于这样一个事实：对称矩阵可以分解为彼此转置的上三角和下三角矩阵，即
 <span class="math display">\[\boldsymbol{A}=\boldsymbol{U}^T\boldsymbol{U}\tag{2.137}\]</span>
 其中上标<span class="math inline">\(T\)</span>表示转置（见附录A）。方程(2.137)可以写成递归形式为
 <span class="math display">\[l_{ii} = \sqrt{q_{ii} - \sum_{k=1}^{i-1}
@@ -1238,14 +1238,14 @@ l_{ik}^2}, \quad i = 1, 2, \ldots, n \tag{2.138}\]</span> 和 <span class="math 
 前提是矩阵A是正定的。这个过程显著加快了LU分解步骤。然后可以执行前向和后向替代以得到解向量。在这种方法中，不需要进行枢轴操作以避免除以零。矩阵A的正定性保证了对于所有<span class="math inline">\(i\)</span>值，<span class="math inline">\(u_{ii}
 &gt; 0\)</span>。</p>
 <h2 id="小结">2.9 小结</h2>
-<p>本章的目的是阐述并确立将有限元方法应用于线性偏微分方程。从标量量的简单稳态扩散方程开始，有限元方法被应用于越来越复杂的方程，最终导致在工程和科学问题中常见的1-D时变扩散传输方程。在几个示例问题中推导和使用各种程度的形函数后，可以看到一个通用的有限元过程的演变，该过程可以应用于广泛的范围问题。在整个元素集或网格上的组装过程被展示出来，产生了一组全局矩阵。将全局矩阵系统简化为形式为<span class="math inline">\(\boldsymbol{A}\phi
+<p>本章的目的是阐述并确立将有限元方法应用于线性偏微分方程。从标量量的简单稳态扩散方程开始，有限元方法被应用于越来越复杂的方程，最终导致在工程和科学问题中常见的1-D时变扩散传输方程。在几个示例问题中推导和使用各种程度的形函数后，可以看到一个通用的有限元过程的演变，该过程可以应用于广泛的范围问题。在整个单元集或网格上的组装过程被展示出来，产生了一组全局矩阵。将全局矩阵系统简化为形式为<span class="math inline">\(\boldsymbol{A}\phi
 =\boldsymbol{B}\)</span>的简单线性（矩阵）方程，其中<span class="math inline">\(\phi\)</span>是包含未知变量的列向量，允许使用标准矩阵求解程序来求解<span class="math inline">\(\phi\)</span>。
 <br>大多数与有限元方法相关的基本“工具”可以从1-D问题的分析中发展出来。有限元方法的基本要素可以总结如下：</p>
 <ol type="1">
 <li>将加权残差法应用于控制方程和相关的边界条件。</li>
 <li>选择合适的形函数和加权因子（线性、二次、三次等）。</li>
 <li>对x轴进行离散化，并评估一般有限元域的Galerkin近似。</li>
-<li>将元素贡献组装成一组全局矩阵。</li>
+<li>将单元贡献组装成一组全局矩阵。</li>
 <li>将必要的边界条件数据（由已知值组成）应用于载荷向量。</li>
 <li>使用合适的矩阵求解程序，从初始条件数据<span class="math inline">\(\phi_{t_0} =
 \phi_0\)</span>开始，求解未知值的列向量<span class="math inline">\(\phi\)</span>，并通过时间<span class="math inline">\(t^{n+1} = t^n + \Delta
