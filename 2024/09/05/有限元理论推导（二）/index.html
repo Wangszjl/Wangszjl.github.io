@@ -170,7 +170,7 @@
 <h2 id="背景">2.1 背景</h2>
 <p>本部分以加权残差法的Galerkin形式为基础介绍有限元方法。有限元方法的第一步是将感兴趣的区域分割成包含节点的子区域，或单元，并在每个单元上定义要使用的“形状”类型。一个二阶单元有三个节点，它被优化地放置在单元的中点；一个三阶单元由四个节点组成，最好在单元的三分之一间隔处放置。单元和节点的集合称为“<strong><em>有限元网格</em></strong>”。在程序中使用的形状函数的类型直接与选择的网格类型相关。</p>
 <h2 id="形状函数">2.2 形状函数</h2>
-<p>在第一篇文章中，我们使用分段多项式形状函数<span class="math inline">\(f_i(x)\)</span>来处理一维（1-D）热传导问题。现在，我们将正式定义分段多项式插值的过程，并展示对特定的单元使用每个单元的局部函数更方便。</p>
+<p>在第一篇文章中，我们使用分段多项式形状函数<span class="math inline">\(\phi_i(x)\)</span>来处理一维（1-D）热传导问题。现在，我们将正式定义分段多项式插值的过程，并展示对特定的单元使用每个单元的局部函数更方便。</p>
 <h3 id="线性单元">2.2.1 线性单元</h3>
 让我们从定义一个网格开始，在<span class="math inline">\(0 \leq x \leq
 L\)</span>的范围内，单元不一定是等大小的。然后我们在每个单元上定义线性形状函数，如图1所示。
@@ -216,7 +216,7 @@ n\)</span>。 我们现在定义<span class="math inline">\(T(x)\)</span>如下�
 [\frac{x_2-x}{h_1}\Big]T_1+\Big
 [\frac{x-x_1}{h_1}\Big]T_2\tag{2.11}\]</span>
 这与方程2.5的表达式相同，其中<span class="math inline">\(n =
-1\)</span>。在实践中，与所考虑的特定单元相关的局部坐标系统中的每个单元进行工作将非常方便。如果我们在局部坐标系统中需要描述一个长度为<span class="math inline">\(h^{(e)}\)</span>的单元，我们将使用以下形式： <span class="math display">\[T^{(e)}(x)=N^{(e)}_1(x)T^{(e)}_1+N^{(e)}_2(x)T^{(e)}_2\tag{2.12}\]</span></p>
+1\)</span>。在实践中，如果我们在局部坐标系统中需要描述一个长度为<span class="math inline">\(h^{(e)}\)</span>的单元，我们将使用以下形式： <span class="math display">\[T^{(e)}(x)=N^{(e)}_1(x)T^{(e)}_1+N^{(e)}_2(x)T^{(e)}_2\tag{2.12}\]</span></p>
 式中的<span class="math inline">\((e)\)</span>表示的一个单元， <span class="math display">\[N^{(e)}_1(x)=\Big [1-\frac{x}{h^{(e)}}\Big
 ]\tag{2.13}\]</span> <span class="math display">\[N^{(e)}_2(x)=\frac{x}{h^{(e)}\tag{2.14}}\]</span>
 如图2所示，有 <span class="math display">\[\frac{dT^{(e)}}{dx}=\left[
@@ -1011,7 +1011,7 @@ t}-\alpha\frac{\partial^2T}{\partial x^2}\right]dx=0\tag{2.94}
 <span class="math display">\[
 T(x,t)=\sum^{n+1}_{i=1}N_i(x)T_i(t)\tag{2.95}
 \]</span> 式中<span class="math inline">\(n\)</span>为网格节点数。
-时间依赖性不影响形状函数，并保持在依赖变量中。温度的时间导数由以下公式给出：
+时间依赖性不影响形状函数，并保持在依赖变量中。温度的对空间的导数由以下公式给出：
 <span class="math display">\[\frac{\partial T}{\partial
 x}=\sum^{n+1}_{i=1}\frac{\partial N_i}{\partial
 x}T_i\equiv\left[\frac{\partial N_i}{\partial
@@ -1224,7 +1224,7 @@ MAPLE
 <br>对于具有半带宽或半带宽<span class="math inline">\(\ell\)</span>的对称矩阵，如图9所示，只需要在任何时候在核心中存储顺序为<span class="math inline">\(\ell\)</span>的上三角部分。总的存储需求是<span class="math inline">\(\ell[n-(\ell - 1)/2]\)</span>。 <br>
 <center>
 <figure>
-<img src="/2024/09/05/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E4%BA%8C%EF%BC%89/有限元理论推导（二）/9.png" alt="图9 带状n \times n矩阵\boldsymbol{A}，半带宽\ell和带宽2\ell - 1，指示\boldsymbol{A}中存储需求的对称">
+<img src="/2024/09/05/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E4%BA%8C%EF%BC%89/9.png" alt="图9 带状n \times n矩阵\boldsymbol{A}，半带宽\ell和带宽2\ell - 1，指示\boldsymbol{A}中存储需求的对称">
 <figcaption aria-hidden="true">图9 带状<span class="math inline">\(n
 \times n\)</span>矩阵<span class="math inline">\(\boldsymbol{A}\)</span>，半带宽<span class="math inline">\(\ell\)</span>和带宽<span class="math inline">\(2\ell - 1\)</span>，指示<span class="math inline">\(\boldsymbol{A}\)</span>中存储需求的对称</figcaption>
 </figure>
@@ -1244,7 +1244,7 @@ l_{ik}^2}, \quad i = 1, 2, \ldots, n \tag{2.138}\]</span> 和 <span class="math 
 <ol type="1">
 <li>将加权残差法应用于控制方程和相关的边界条件。</li>
 <li>选择合适的形函数和加权因子（线性、二次、三次等）。</li>
-<li>对x轴进行离散化，并评估一般有限元域的Galerkin近似。</li>
+<li>对<span class="math inline">\(x\)</span>轴进行离散化，并评估一般有限元域的Galerkin近似。</li>
 <li>将单元贡献组装成一组全局矩阵。</li>
 <li>将必要的边界条件数据（由已知值组成）应用于载荷向量。</li>
 <li>使用合适的矩阵求解程序，从初始条件数据<span class="math inline">\(\phi_{t_0} =
