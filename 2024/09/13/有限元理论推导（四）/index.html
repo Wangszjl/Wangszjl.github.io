@@ -174,8 +174,7 @@
 <br>
 <center>
 <figure>
-<img src="/有限元理论推导（四）/1.png"
-alt="图1 矩形计算域划分为四边形单元" />
+<img src="/2024/09/13/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E5%9B%9B%EF%BC%89/1.png" alt="图1 矩形计算域划分为四边形单元">
 <figcaption aria-hidden="true">图1
 矩形计算域划分为四边形单元</figcaption>
 </figure>
@@ -183,16 +182,13 @@ alt="图1 矩形计算域划分为四边形单元" />
 <br>
 <center>
 <figure>
-<img src="/有限元理论推导（四）/2.png" alt="图2 二维四边形单元" />
+<img src="/2024/09/13/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E5%9B%9B%EF%BC%89/2.png" alt="图2 二维四边形单元">
 <figcaption aria-hidden="true">图2 二维四边形单元</figcaption>
 </figure>
 </center>
 <p>请注意，如果我们连接一对对角线节点，我们得到两个三角形单元。双线性四边形单元包含四个局部节点，按逆时针顺序被指定为1、2、3和4。图2显示了一个包含四个局部节点的一般四边形单元。
 <br>四边形网格更接近标准的二维有限差分网格，而不是三角形网格。然而，四边形在离散化一个区域方面与三角形一样灵活。有限差分网格与四边形网格之间的不同之处在于，有限差分网格必须是正交的，即所有线交点（节点位置）必须彼此成直角；在有限元四边形中，每个单元都是独特的——每个单元的面可以有不同的大小和坡度。换句话说，有限差分网格是全局形成的，并且必须在所有表面和交点处垂直；有限元网格是局部形成的，不必是正交的（在物理空间中）——然而，它必须在计算域内几何上兼容以确保单元之间的连续性。
-<br>在这种情况下，连续性意味着插值函数必须在单元之间连续。如果控制方程包含二阶导数（例如，热扩散），则近似函数必须在单元之间连续。如果我们希望积分<span
-class="math inline">\(d^n\phi/dx^n\)</span>，那么<span
-class="math inline">\(\phi\)</span>必须具有连续的<span
-class="math inline">\((n-1)\)</span>阶导数，以便只在nth导数中存在有限的跳跃不连续。Carey和Oden
+<br>在这种情况下，连续性意味着插值函数必须在单元之间连续。如果控制方程包含二阶导数（例如，热扩散），则近似函数必须在单元之间连续。如果我们希望积分<span class="math inline">\(d^n\phi/dx^n\)</span>，那么<span class="math inline">\(\phi\)</span>必须具有连续的<span class="math inline">\((n-1)\)</span>阶导数，以便只在nth导数中存在有限的跳跃不连续。Carey和Oden
 (1983)，Cary (1997)，和Heinrich和Pepper
 (1999)对有限元和三角形及四边形单元的这种要求及其影响进行了更详细的讨论。尽管需要额外的节点来定义四边形，但对于相同数量的节点点，单元的数量减少到三角形单元网格的一半。在离散化几何域时，通常首先将区域划分为四边形。如果需要三角形单元，四边形很容易细分。在几乎所有情况下，由四边形单元组成的网格就足够了，通常比由三角形单元组成的网格更准确。四边形网格扩展到三维是容易获得的，即一个盒子，并且比一组3-D四面体更容易在概念上可视化。</p>
 <h2 id="形状函数">4.3 形状函数</h2>
@@ -202,85 +198,43 @@ class="math inline">\((n-1)\)</span>阶导数，以便只在nth导数中存在�
 通过使用局部自然坐标系统进一步扩展单元，可以得到一个泛化的四边形，其中矩形是其子集。我们从矩形单元开始。四节点双线性矩形的插值函数给出为
 <span class="math display">\[ \begin{equation}
   f = a_1 + a_2 x + a_3 y + a_4 xy
-\end{equation}\]</span> 选择<span
-class="math inline">\(xy\)</span>项而不是<span
-class="math inline">\(x^2\)</span>或<span
-class="math inline">\(y^2\)</span>，因为<span
-class="math inline">\(xy\)</span>不破坏对称性，并假设沿<span
-class="math inline">\(x\)</span>或<span
-class="math inline">\(y\)</span>的<span
-class="math inline">\(\phi\)</span>呈线性变化。对于常数<span
-class="math inline">\(x\)</span>的线，单元在<span
-class="math inline">\(y\)</span>方向上是线性的，反之亦然；对于常数<span
-class="math inline">\(y\)</span>的线，单元在<span
-class="math inline">\(x\)</span>方向上是线性的，因此得名双线性单元。<span
-class="math inline">\(\phi\)</span>的梯度被视为一个坐标方向上的线性函数，即，
+\end{equation}\]</span> 选择<span class="math inline">\(xy\)</span>项而不是<span class="math inline">\(x^2\)</span>或<span class="math inline">\(y^2\)</span>，因为<span class="math inline">\(xy\)</span>不破坏对称性，并假设沿<span class="math inline">\(x\)</span>或<span class="math inline">\(y\)</span>的<span class="math inline">\(\phi\)</span>呈线性变化。对于常数<span class="math inline">\(x\)</span>的线，单元在<span class="math inline">\(y\)</span>方向上是线性的，反之亦然；对于常数<span class="math inline">\(y\)</span>的线，单元在<span class="math inline">\(x\)</span>方向上是线性的，因此得名双线性单元。<span class="math inline">\(\phi\)</span>的梯度被视为一个坐标方向上的线性函数，即，
 <span class="math display">\[\begin{equation} \frac{\partial
 \phi}{\partial x} = \alpha_2 + \alpha_4 y,
 \frac{\partial \phi}{\partial y} = \alpha_3 + \alpha_4 x
 \end{equation} \]</span>
-图3显示了矩形单元和节点配置。如果到坐标原点的距离，位于单元中点，用<span
-class="math inline">\(a\)</span>和<span
-class="math inline">\(b\)</span>表示，节点值给出为 <span
-class="math display">\[\phi=\phi_1,x=-b,y=-a\]</span> <span
-class="math display">\[\phi=\phi_2,x=b,y=-a\]</span> <span
-class="math display">\[\phi=\phi_3,x=b,y=a\]</span> <span
-class="math display">\[\begin{equation}\phi=\phi_4,x=-b,y=a\end{equation}\]</span>
+图3显示了矩形单元和节点配置。如果到坐标原点的距离，位于单元中点，用<span class="math inline">\(a\)</span>和<span class="math inline">\(b\)</span>表示，节点值给出为 <span class="math display">\[\phi=\phi_1,x=-b,y=-a\]</span> <span class="math display">\[\phi=\phi_2,x=b,y=-a\]</span> <span class="math display">\[\phi=\phi_3,x=b,y=a\]</span> <span class="math display">\[\begin{equation}\phi=\phi_4,x=-b,y=a\end{equation}\]</span>
 <br>
 <center>
 <figure>
-<img src="/有限元理论推导（四）/3.png" alt="图3 四节点矩形单元" />
+<img src="/2024/09/13/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E5%9B%9B%EF%BC%89/3.png" alt="图3 四节点矩形单元">
 <figcaption aria-hidden="true">图3 四节点矩形单元</figcaption>
 </figure>
 </center>
 <p>将这些值代入方程(1)中，对于<span class="math inline">\(\alpha_is，i =
-1, 4\)</span>，得到 <span
-class="math display">\[\alpha_1=\frac{\phi_1+\phi_2+\phi_3+\phi_4}{4}
-\]</span> <span
-class="math display">\[\alpha_2=\frac{-\phi_1+\phi_2+\phi_3-\phi_4}{4b}
-\]</span> <span
-class="math display">\[\alpha_3=\frac{-\phi_1-\phi_2+\phi_3+\phi_4}{4a}\]</span>
-<span
-class="math display">\[\begin{equation}\alpha_4=\frac{\phi_1-\phi_2+\phi_3-\phi_4}{4ab}\end{equation}\]</span>
+1, 4\)</span>，得到 <span class="math display">\[\alpha_1=\frac{\phi_1+\phi_2+\phi_3+\phi_4}{4}
+\]</span> <span class="math display">\[\alpha_2=\frac{-\phi_1+\phi_2+\phi_3-\phi_4}{4b}
+\]</span> <span class="math display">\[\alpha_3=\frac{-\phi_1-\phi_2+\phi_3+\phi_4}{4a}\]</span>
+<span class="math display">\[\begin{equation}\alpha_4=\frac{\phi_1-\phi_2+\phi_3-\phi_4}{4ab}\end{equation}\]</span>
 如果我们现在用节点值和形状函数近似ϕ，就像我们在方程4.7中做的那样，我们得到
-<span
-class="math display">\[\begin{equation}\phi=N_1\phi_1+N_2\phi_2+N_3\phi_3+N_4\phi_4\end{equation}\]</span>
-其中形状函数给出为 <span
-class="math display">\[N_1=\frac{1}{4ab}(b-x)(a-y)\]</span> <span
-class="math display">\[N_2=\frac{1}{4ab}(b+x)(a-y)\]</span> <span
-class="math display">\[N_3=\frac{1}{4ab}(b+x)(a+y)\]</span> <span
-class="math display">\[\begin{equation}N_4=\frac{1}{4ab}(b-x)(a+y)\end{equation}\]</span>
-我们在方程（6）中看到，形状函数可以用长度比，<span
-class="math inline">\(x/b\)</span>和<span
-class="math inline">\(x/a\)</span>来表示。例如， <span
-class="math display">\[\begin{equation}N_1
+<span class="math display">\[\begin{equation}\phi=N_1\phi_1+N_2\phi_2+N_3\phi_3+N_4\phi_4\end{equation}\]</span>
+其中形状函数给出为 <span class="math display">\[N_1=\frac{1}{4ab}(b-x)(a-y)\]</span> <span class="math display">\[N_2=\frac{1}{4ab}(b+x)(a-y)\]</span> <span class="math display">\[N_3=\frac{1}{4ab}(b+x)(a+y)\]</span> <span class="math display">\[\begin{equation}N_4=\frac{1}{4ab}(b-x)(a+y)\end{equation}\]</span>
+我们在方程（6）中看到，形状函数可以用长度比，<span class="math inline">\(x/b\)</span>和<span class="math inline">\(x/a\)</span>来表示。例如， <span class="math display">\[\begin{equation}N_1
 =\frac{1}{4ab}(b-x)(a-y=\frac{1}{4}(\frac{a-y}{a})\frac{b-x}{b})\end{equation}\]</span>
-其中<span class="math inline">\(-1\le x/b\le 1\)</span>且<span
-class="math inline">\(-1\le y/a\le 1\)</span>。</p>
+其中<span class="math inline">\(-1\le x/b\le 1\)</span>且<span class="math inline">\(-1\le y/a\le 1\)</span>。</p>
 <h3 id="二次矩形单元">4.3.2 二次矩形单元</h3>
 <p>我们也可以像对三角形单元那样开发二维高阶四边形单元。这样做有两种方法，可以得到两种不同的二次单元：一种在每个角落有一个节点，每个边的中点有一个节点；另一种有九个节点，第九个节点在单元的中心。</p>
-我们将在这里讨论八节点单元。四节点双线性和八节点二次四边形，以及九节点双二次单元，在工业中主要使用，并且被发现对大多数计算目的来说是足够的。八节点二次单元的插值多项式，如图4所示，由八项组成。未知变量<span
-class="math inline">\(\phi\)</span>表示为 <span
-class="math display">\[\begin{equation}\phi = \alpha_1 + \alpha_2 x +
+我们将在这里讨论八节点单元。四节点双线性和八节点二次四边形，以及九节点双二次单元，在工业中主要使用，并且被发现对大多数计算目的来说是足够的。八节点二次单元的插值多项式，如图4所示，由八项组成。未知变量<span class="math inline">\(\phi\)</span>表示为 <span class="math display">\[\begin{equation}\phi = \alpha_1 + \alpha_2 x +
 \alpha_3 y + \alpha_4 xy + \alpha_5 x^2 + \alpha_6 y^2 + \alpha_7 x^2y +
 \alpha_8 xy^2\end{equation}\]</span> <br>
 <center>
 <figure>
-<img src="/有限元理论推导（四）/4.png" alt="图4 八节点单元" />
+<img src="/2024/09/13/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E5%9B%9B%EF%BC%89/4.png" alt="图4 八节点单元">
 <figcaption aria-hidden="true">图4 八节点单元</figcaption>
 </figure>
 </center>
-<p>如果节点值定义如图4所示。 <span
-class="math display">\[\phi=\phi_1,x=-b,y=-a\]</span> <span
-class="math display">\[\phi=\phi_2,x=0,y=-a\]</span> <span
-class="math display">\[\phi=\phi_3,x=b,y=-a\]</span> <span
-class="math display">\[\phi=\phi_4,x=b,y=0\]</span> <span
-class="math display">\[\phi=\phi_5,x=b,y=a\]</span> <span
-class="math display">\[\phi=\phi_6,x=0,y=a\]</span> <span
-class="math display">\[\phi=\phi_7,x=-b,y=a\]</span> <span
-class="math display">\[\begin{equation}\phi=\phi_8,x=-b,y=0\end{equation}\]</span>
-从方程9代入方程8得到以下八个方程（用矩阵形式表示）： <span
-class="math display">\[ \begin{equation}\begin{bmatrix}
+<p>如果节点值定义如图4所示。 <span class="math display">\[\phi=\phi_1,x=-b,y=-a\]</span> <span class="math display">\[\phi=\phi_2,x=0,y=-a\]</span> <span class="math display">\[\phi=\phi_3,x=b,y=-a\]</span> <span class="math display">\[\phi=\phi_4,x=b,y=0\]</span> <span class="math display">\[\phi=\phi_5,x=b,y=a\]</span> <span class="math display">\[\phi=\phi_6,x=0,y=a\]</span> <span class="math display">\[\phi=\phi_7,x=-b,y=a\]</span> <span class="math display">\[\begin{equation}\phi=\phi_8,x=-b,y=0\end{equation}\]</span>
+从方程9代入方程8得到以下八个方程（用矩阵形式表示）： <span class="math display">\[ \begin{equation}\begin{bmatrix}
 1 &amp; -b &amp; -a &amp; ab &amp; b^2 &amp; a^2 &amp; -ab^2 &amp; -a^b
 \\
 1 &amp; 0 &amp; -a &amp; 0 &amp; 0 &amp; a^2 &amp; 0 &amp; 0 \\
@@ -313,78 +267,47 @@ class="math display">\[ \begin{equation}\begin{bmatrix}
 \phi_6 \\
 \phi_7 \\
 \phi_8 \\
-\end{bmatrix}\end{equation}\]</span> 从中可以得到<span
-class="math inline">\(\alpha_is，i = 1, \cdots,
-8\)</span>。用节点值和形状函数近似ϕ得到 <span
-class="math display">\[\begin{equation}
+\end{bmatrix}\end{equation}\]</span> 从中可以得到<span class="math inline">\(\alpha_is，i = 1, \cdots,
+8\)</span>。用节点值和形状函数近似ϕ得到 <span class="math display">\[\begin{equation}
 \phi = N_1 \phi_1 + N_2 \phi_2 + N_3 \phi_3 + N_4 \phi_4 + N_5 \phi_5 +
 N_6 \phi_6 + N_7 \phi_7 + N_8 \phi_8
 \end{equation}
 \]</span> 形状函数为（参见Carey, 1997; Heinrich和Pepper, 1999;
-Zienkiewicz和Taylor, 1989） <span
-class="math display">\[N_1=-\frac{1}{4(ab)^2}(b-x)(a-y)(ab+ax+by)\]</span>
+Zienkiewicz和Taylor, 1989） <span class="math display">\[N_1=-\frac{1}{4(ab)^2}(b-x)(a-y)(ab+ax+by)\]</span>
 <span class="math display">\[N_2=\frac{1}{2ab^2}(b^2-x^2)(a-y)\]</span>
-<span
-class="math display">\[N_3=\frac{1}{4(ab)^2}(b-x)(a-y)(ay-by-ab)\]</span>
+<span class="math display">\[N_3=\frac{1}{4(ab)^2}(b-x)(a-y)(ay-by-ab)\]</span>
 <span class="math display">\[N_4=\frac{1}{2a^2b}(a^2-y^2)(b+x)\]</span>
-<span
-class="math display">\[N_5=\frac{1}{4(ab)^2}(b+x)(a+y)(ax+by-ab+yb)\]</span>
+<span class="math display">\[N_5=\frac{1}{4(ab)^2}(b+x)(a+y)(ax+by-ab+yb)\]</span>
 <span class="math display">\[N_6=-\frac{1}{2ab^2}(b^2-x^2)(a+y)\]</span>
-<span
-class="math display">\[\begin{equation}N_7=-\frac{1}{4(ab)^2}(b-x)(a+y)(ab+xa-by)\end{equation}\]</span>
-于是<span class="math inline">\(\phi\)</span>的梯度变为 <span
-class="math display">\[\frac{\partial \phi}{\partial
-x}=\alpha_2+\alpha_4y+2\alpha_5x+2\alpha_7xy+\alpha_8y^2\]</span> <span
-class="math display">\[\begin{equation}
+<span class="math display">\[\begin{equation}N_7=-\frac{1}{4(ab)^2}(b-x)(a+y)(ab+xa-by)\end{equation}\]</span>
+于是<span class="math inline">\(\phi\)</span>的梯度变为 <span class="math display">\[\frac{\partial \phi}{\partial
+x}=\alpha_2+\alpha_4y+2\alpha_5x+2\alpha_7xy+\alpha_8y^2\]</span> <span class="math display">\[\begin{equation}
   \frac{\partial \phi}{\partial
 y}=\alpha_3+\alpha_4x+2\alpha_6y+\alpha_7x^2+2\alpha_8xy
-\end{equation}\]</span> 注意到<span
-class="math inline">\(\partial\phi/\partial x\)</span>在<span
-class="math inline">\(x\)</span>方向上为线性，但在<span
-class="math inline">\(y\)</span>方向上为二次，而<span
-class="math inline">\(\partial\phi/\partial
-y\)</span>相反。就长度比例而言，<span
-class="math inline">\(N_1\)</span>的形状函数可以重写为 <span
-class="math display">\[\begin{equation}N_1=-\frac{1}{4}\Bigg(1-\frac{x}{b}\Bigg)\Bigg(1-\frac{y}{a}\Bigg)\Bigg(1+\frac{x}{a}+\frac{y}{a}\Bigg)\end{equation}\]</span></p>
+\end{equation}\]</span> 注意到<span class="math inline">\(\partial\phi/\partial x\)</span>在<span class="math inline">\(x\)</span>方向上为线性，但在<span class="math inline">\(y\)</span>方向上为二次，而<span class="math inline">\(\partial\phi/\partial
+y\)</span>相反。就长度比例而言，<span class="math inline">\(N_1\)</span>的形状函数可以重写为 <span class="math display">\[\begin{equation}N_1=-\frac{1}{4}\Bigg(1-\frac{x}{b}\Bigg)\Bigg(1-\frac{y}{a}\Bigg)\Bigg(1+\frac{x}{a}+\frac{y}{a}\Bigg)\end{equation}\]</span></p>
 <h2 id="自然坐标系统">4.4 自然坐标系统</h2>
 <p>在大多数情况下，要建模的物理域并不包括直边、正交边界。具有曲线边界的区域可以使用具有曲线边的四边形单元进行离散化，以获得更准确的解决方案。通过用曲线坐标表示x，y坐标，从直线边转换为曲线边：
-<span class="math display">\[ x = x(\xi, \eta) \]</span> <span
-class="math display">\[ \begin{equation}y = y(\xi, \eta) \end{equation}
-\]</span> <span
-class="math inline">\(\xi,\eta\)</span>的选择取决于单元几何形状。当坐标变量在<span
-class="math inline">\(-1\le\xi \le\eta\le
-1\)</span>范围内时，通常将<span
-class="math inline">\(\xi,\eta\)</span>坐标系统称为“自然”坐标系统。对于矩形情况，我们可以找到一组无量纲坐标<span
-class="math inline">\(\xi,\eta\)</span>，使得 <span
-class="math display">\[ \xi = \frac{x}{b} \]</span> <span
-class="math display">\[ \begin{equation}\eta = \frac{y}{a}
+<span class="math display">\[ x = x(\xi, \eta) \]</span> <span class="math display">\[ \begin{equation}y = y(\xi, \eta) \end{equation}
+\]</span> <span class="math inline">\(\xi,\eta\)</span>的选择取决于单元几何形状。当坐标变量在<span class="math inline">\(-1\le\xi \le\eta\le
+1\)</span>范围内时，通常将<span class="math inline">\(\xi,\eta\)</span>坐标系统称为“自然”坐标系统。对于矩形情况，我们可以找到一组无量纲坐标<span class="math inline">\(\xi,\eta\)</span>，使得 <span class="math display">\[ \xi = \frac{x}{b} \]</span> <span class="math display">\[ \begin{equation}\eta = \frac{y}{a}
 \end{equation}\]</span></p>
-其中<span
-class="math inline">\(\xi,\eta\)</span>有效地用局部坐标替换了<span
-class="math inline">\(x\)</span>和<span
-class="math inline">\(y\)</span>全局坐标，用于单个单元；我们之前提到这些特定的比率称为长度比（图3和4）。因此，利用我们在方程16中的定义，我们将双线性形状函数（6）在自然坐标系统中重写为
+其中<span class="math inline">\(\xi,\eta\)</span>有效地用局部坐标替换了<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span>全局坐标，用于单个单元；我们之前提到这些特定的比率称为长度比（图3和4）。因此，利用我们在方程16中的定义，我们将双线性形状函数（6）在自然坐标系统中重写为
 <span class="math display">\[N_1=\frac{1}{4}(1-\xi)(1-\eta)\]</span>
 <span class="math display">\[N_2=\frac{1}{4}(1+\xi)(1-\eta)\]</span>
 <span class="math display">\[N_3=\frac{1}{4}(1+\xi)(1+\eta)\]</span>
-<span
-class="math display">\[\begin{equation}N_4=\frac{1}{4}(1-\xi)(1+\eta)\end{equation}\]</span>
-我们看到局部坐标系统总是在-1和1之间变化，并且在制定导数项时利用这一事实。图5显示了以单元为中心的<span
-class="math inline">\(\xi,\eta\)</span>坐标系统。注意，这个新坐标系统不再重要，它必须是正交的——它也可以是曲线的。然而，不能直接获得关于<span
-class="math inline">\(x\)</span>和<span
-class="math inline">\(y\)</span>的导数，并且需要额外的转换。我们将在处理等参单元时说明这一点；现在，我们假设一个简单的笛卡尔坐标系统。
+<span class="math display">\[\begin{equation}N_4=\frac{1}{4}(1-\xi)(1+\eta)\end{equation}\]</span>
+我们看到局部坐标系统总是在-1和1之间变化，并且在制定导数项时利用这一事实。图5显示了以单元为中心的<span class="math inline">\(\xi,\eta\)</span>坐标系统。注意，这个新坐标系统不再重要，它必须是正交的——它也可以是曲线的。然而，不能直接获得关于<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span>的导数，并且需要额外的转换。我们将在处理等参单元时说明这一点；现在，我们假设一个简单的笛卡尔坐标系统。
 <br>
 <center>
 <figure>
-<img src="/有限元理论推导（四）/5.png"
-alt="图5 矩形单元的\xi,\eta坐标系" />
-<figcaption aria-hidden="true">图5 矩形单元的<span
-class="math inline">\(\xi,\eta\)</span>坐标系</figcaption>
+<img src="/2024/09/13/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E5%9B%9B%EF%BC%89/5.png" alt="图5 矩形单元的\xi,\eta坐标系">
+<figcaption aria-hidden="true">图5 矩形单元的<span class="math inline">\(\xi,\eta\)</span>坐标系</figcaption>
 </figure>
 </center>
 <p>对于导数项<span class="math inline">\(\partial N_i/\partial
 x\)</span>和<span class="math inline">\(\partial N_i/\partial
-y\)</span>的评估类似于第三篇文章中的三角形单元。雅可比矩阵通过 <span
-class="math display">\[\begin{equation}
+y\)</span>的评估类似于第三篇文章中的三角形单元。雅可比矩阵通过 <span class="math display">\[\begin{equation}
 \begin{bmatrix}
 \frac{\partial N_i}{\partial \xi} \\
 \frac{\partial N_i}{\partial \eta} \\
@@ -397,48 +320,29 @@ class="math display">\[\begin{equation}
 \begin{bmatrix}
 \frac{\partial N_i}{\partial x} \\
 \frac{\partial N_i}{\partial y} \\
-\end{bmatrix}\end{equation}\]</span> 其中雅可比矩阵的逆，<span
-class="math inline">\(\boldsymbol{J}^{-1}\)</span>，可以用来找到关于<span
-class="math inline">\(x\)</span>和<span
-class="math inline">\(y\)</span>的导数值以及变换的行列式。</p>
+\end{bmatrix}\end{equation}\]</span> 其中雅可比矩阵的逆，<span class="math inline">\(\boldsymbol{J}^{-1}\)</span>，可以用来找到关于<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span>的导数值以及变换的行列式。</p>
 <h2 id="使用高斯求积法进行数值积分">4.5 使用高斯求积法进行数值积分</h2>
 <p>将积分表述为ξ和η的形式可以得到简单的积分限。这在我们处理曲线边界或不平行于坐标轴的边界时特别有利。积分定义为
 <span class="math display">\[\begin{equation}\int^a_{-a} \int^b_{-b}
 F(x, y) dxdy== \int^1_{-1} \int^1_{-1} f(\xi, \eta)|\boldsymbol{J}|d\xi
-\, d\eta \quad (5.35)\end{equation}\]</span> 导热矩阵因此变为 <span
-class="math display">\[ \begin{equation}\boldsymbol{K}^{(e)} = \int
+\, d\eta \quad (5.35)\end{equation}\]</span> 导热矩阵因此变为 <span class="math display">\[ \begin{equation}\boldsymbol{K}^{(e)} = \int
 \int_{\Omega^{(e)}}\boldsymbol{K} \left[ \frac{\partial N_i}{\partial
 x}\frac{\partial N_j}{\partial x} + \frac{\partial N_i}{\partial
 y}\frac{\partial N_j}{\partial y} \right] dxdy=\\
 \int^1_{-1} \int^1_{-1} \left[] \frac{\partial N_i}{\partial
 \xi}\frac{\partial N_j}{\partial \xi} + \frac{\partial N_i}{\partial
 \eta}\frac{\partial N_j}{\partial \eta} \right)|J|d\xi d\eta
-\end{equation}\]</span> 其中导数<span
-class="math inline">\(\frac{\partial N_i}{\partial x}\)</span>和<span
-class="math inline">\(\frac{\partial N_i}{\partial
-y}\)</span>可以作为关于<span
-class="math inline">\(\xi,\eta\)</span>,<span
-class="math inline">\(\frac{\partial N_i}{\partial \xi}\)</span>和<span
-class="math inline">\(\frac{\partial N_i}{\partial
-\eta}\)</span>的函数，从方程18中计算得到。所有包含<span
-class="math inline">\(N_iN_j\)</span>乘积的面积积分项变为 <span
-class="math display">\[\begin{equation}
+\end{equation}\]</span> 其中导数<span class="math inline">\(\frac{\partial N_i}{\partial x}\)</span>和<span class="math inline">\(\frac{\partial N_i}{\partial
+y}\)</span>可以作为关于<span class="math inline">\(\xi,\eta\)</span>,<span class="math inline">\(\frac{\partial N_i}{\partial \xi}\)</span>和<span class="math inline">\(\frac{\partial N_i}{\partial
+\eta}\)</span>的函数，从方程18中计算得到。所有包含<span class="math inline">\(N_iN_j\)</span>乘积的面积积分项变为 <span class="math display">\[\begin{equation}
   \int\int_{\Omega^{(e)}} N_i N_j dxdy = \int^1_{-1} \int^1_{-1} N_i N_j
 |\boldsymbol{J}|d\xi d\eta
 \end{equation}\]</span>
-积分中的右侧项不再涉及简单多项式，并且由于导数表达式中出现的<span
-class="math inline">\(1/|\boldsymbol{J}|\)</span>项，它们可能变得麻烦。最常见的做法是使用称为高斯求积法的数值积分过程。该过程易于编程并且可以为积分提供几乎精确的值。高斯求积法用一组点上的加权和近似定积分。例如，在一维中，
+积分中的右侧项不再涉及简单多项式，并且由于导数表达式中出现的<span class="math inline">\(1/|\boldsymbol{J}|\)</span>项，它们可能变得麻烦。最常见的做法是使用称为高斯求积法的数值积分过程。该过程易于编程并且可以为积分提供几乎精确的值。高斯求积法用一组点上的加权和近似定积分。例如，在一维中，
 <span class="math display">\[\begin{equation}
   \int^1_{-1} f(\xi) d\xi\approxeq\sum^N_{i=1} W_i f(\xi_i)
-\end{equation}\]</span> 其中<span
-class="math inline">\(N\)</span>是积分点数<span
-class="math inline">\(W_i\)</span>是权重因子,<span
-class="math inline">\(\xi_i\)</span>是高斯点。</p>
-使用<span
-class="math inline">\(N\)</span>个高斯点，我们可以精确积分<span
-class="math inline">\(2N-1\)</span>阶的多项式。因此，如果<span
-class="math inline">\(f(\xi)\)</span>是一个三次多项式<span
-class="math inline">\(f(\xi) = a + b\xi + c\xi^2 +
+\end{equation}\]</span> 其中<span class="math inline">\(N\)</span>是积分点数<span class="math inline">\(W_i\)</span>是权重因子,<span class="math inline">\(\xi_i\)</span>是高斯点。</p>
+使用<span class="math inline">\(N\)</span>个高斯点，我们可以精确积分<span class="math inline">\(2N-1\)</span>阶的多项式。因此，如果<span class="math inline">\(f(\xi)\)</span>是一个三次多项式<span class="math inline">\(f(\xi) = a + b\xi + c\xi^2 +
 d\xi^3\)</span>，那么选择<span class="math inline">\(N =
 2，我们可以精确积分它。\xi_i\)</span>值定义为（Heinrich和Pepper, 1999）
 <span class="math display">\[
@@ -446,8 +350,7 @@ d\xi^3\)</span>，那么选择<span class="math inline">\(N =
 \xi_1 = -\frac{1}{\sqrt{3}}, \xi_2 = \frac{1}{\sqrt{3}}
 \end{equation}
 \]</span> 权重是<span class="math inline">\(W_1 = W_2 =
-1\)</span>，函数将被精确积分。对于方程37中的双重积分， <span
-class="math display">\[
+1\)</span>，函数将被精确积分。对于方程37中的双重积分， <span class="math display">\[
 \begin{equation}
 \int^1_{-1} \int^1_{-1} f(\xi, \eta)d\xi d\eta \approxeq \sum_{i=1}^N
 \sum_{j=1}^N W_i W_j f(\xi_i, \eta_j)
@@ -463,86 +366,135 @@ class="math display">\[
 九个积分点在图7中描述。点和相应的权重在表5.2中给出。 <br>
 <center>
 <figure>
-<img src="/有限元理论推导（四）/6.png" alt="图6 2\times2高斯点" />
-<figcaption aria-hidden="true">图6 <span
-class="math inline">\(2\times2\)</span>高斯点</figcaption>
+<img src="/2024/09/13/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E5%9B%9B%EF%BC%89/6.png" alt="图6 2\times2高斯点">
+<figcaption aria-hidden="true">图6 <span class="math inline">\(2\times2\)</span>高斯点</figcaption>
 </figure>
 </center>
 <br>
 <center>
 <figure>
-<img src="/有限元理论推导（四）/7.png"
-alt="图7 九个高斯点的数值积分采样位置" />
+<img src="/2024/09/13/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E5%9B%9B%EF%BC%89/7.png" alt="图7 九个高斯点的数值积分采样位置">
 <figcaption aria-hidden="true">图7
 九个高斯点的数值积分采样位置</figcaption>
 </figure>
 </center>
 <br>
 <center>
-表1 <span class="math inline">\(N = 3\)</span>的高斯点和权重 | 高斯点 |
-<span class="math inline">\(\xi_i\)</span> | <span
-class="math inline">\(\eta_i\)</span> | <span
-class="math inline">\(W_i\)</span> | <span
-class="math inline">\(W_j\)</span> |---|---|---|---|---| | 1 | -0.77460
-| -0.77460 | 0.55556 | 0.55556 | | 2 | 0.0 | -0.77460 | 0.88889 |
-0.55556 | | 3 | 0.77460 | -0.77460 | 0.55556 | 0.55556 | | 4 | 0.77460 |
-0.0 | 0.55556 | 0.88889 | 0.55556 | | 5 | 0.77460 | 0.77460 | 0.55556 |
-0.88889 | | 6 | 0.0 | 0.77460 | 0.88889 | 0.55556 | | 7 | -0.77460 |
-0.77460 | 0.55556 | 0.55556 | | 8 | -0.77460 | 0.0 | 0.55556 | 0.88889 |
-| 9 | 0.0 | 0.0 | 0.88889 | 0.88889 |
+<p>表1 <span class="math inline">\(N = 3\)</span>的高斯点和权重</p>
+<table>
+<thead>
+<tr>
+<th>高斯点</th>
+<th><span class="math inline">\(\xi_i\)</span></th>
+<th><span class="math inline">\(\eta_i\)</span></th>
+<th><span class="math inline">\(W_i\)</span></th>
+<th><span class="math inline">\(W_j\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>-0.77460</td>
+<td>-0.77460</td>
+<td>0.55556</td>
+<td>0.55556</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.0</td>
+<td>-0.77460</td>
+<td>0.88889</td>
+<td>0.55556</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0.77460</td>
+<td>-0.77460</td>
+<td>0.55556</td>
+<td>0.55556</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.77460</td>
+<td>0.0</td>
+<td>0.55556</td>
+<td>0.88889</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0.77460</td>
+<td>0.77460</td>
+<td>0.55556</td>
+<td>0.88889</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0.0</td>
+<td>0.77460</td>
+<td>0.88889</td>
+<td>0.55556</td>
+</tr>
+<tr>
+<td>7</td>
+<td>-0.77460</td>
+<td>0.77460</td>
+<td>0.55556</td>
+<td>0.55556</td>
+</tr>
+<tr>
+<td>8</td>
+<td>-0.77460</td>
+<td>0.0</td>
+<td>0.55556</td>
+<td>0.88889</td>
+</tr>
+<tr>
+<td>9</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.88889</td>
+<td>0.88889</td>
+</tr>
+</tbody>
+</table>
 </center>
-<p>使用双线性四边形得到的解涉及每个单元的<span
-class="math inline">\(4\times
-4\)</span>矩阵乘法；而二次四边形则处理<span
-class="math inline">\(8\times
+<p>使用双线性四边形得到的解涉及每个单元的<span class="math inline">\(4\times
+4\)</span>矩阵乘法；而二次四边形则处理<span class="math inline">\(8\times
 8\)</span>矩阵，或者每个单元的产品计算是线性单元的四倍。此外，双线性单元需要在四个高斯点进行评估，而二次单元则涉及九个高斯点。因此，在构建四节点双线性单元的单元刚度矩阵方面，操作成本是获得八节点二次单元的单元刚度矩阵的九分之一。这在选择要使用的单元类型时可能是一个重要的考虑因素，因为它意味着CPU时间几乎相差一个数量级。</p>
 <h2 id="稳态传导方程">4.6 稳态传导方程</h2>
-<p>我们再次关注确定二维域内稳态热传导。此时，我们将热传导矩阵推广以允许各向异性材料，假设坐标轴与导热张量的主轴重合，即热传导在<span
-class="math inline">\(x-y\)</span>坐标系统中由 <span
-class="math display">\[\begin{equation}\boldsymbol{K} = \begin{bmatrix}
+<p>我们再次关注确定二维域内稳态热传导。此时，我们将热传导矩阵推广以允许各向异性材料，假设坐标轴与导热张量的主轴重合，即热传导在<span class="math inline">\(x-y\)</span>坐标系统中由 <span class="math display">\[\begin{equation}\boldsymbol{K} = \begin{bmatrix}
 K_{xx} &amp; 0 \\
 0 &amp; K_{yy} \\
-\end{bmatrix}\end{equation}\]</span> 给出。然后基本方程可以写成 <span
-class="math display">\[\begin{equation}
+\end{bmatrix}\end{equation}\]</span> 给出。然后基本方程可以写成 <span class="math display">\[\begin{equation}
    - \frac{\partial}{\partial x} \left( K_{xx} \frac{\partial
 T}{\partial x} \right) - \frac{\partial}{\partial y} \left( K_{yy}
 \frac{\partial T}{\partial y} \right) = Q
-\end{equation}\]</span> 现在热流条件采取的形式 <span
-class="math display">\[\begin{equation}
+\end{equation}\]</span> 现在热流条件采取的形式 <span class="math display">\[\begin{equation}
   -\left(K_{xx} \frac{\partial T}{\partial x} n_x + K_{yy}
 \frac{\partial T}{\partial y} n_y\right) = q
-\end{equation} \]</span> 其中<span
-class="math inline">\(n_x\)</span>和<span
-class="math inline">\(n_y\)</span>定义如方程（3.29）。按照与方程（3.26）相同的程序，方程27的加权残差形式是
+\end{equation} \]</span> 其中<span class="math inline">\(n_x\)</span>和<span class="math inline">\(n_y\)</span>定义如方程（3.29）。按照与方程（3.26）相同的程序，方程27的加权残差形式是
 <span class="math display">\[\begin{equation}
   \int_\Omega W \left[ - \frac{\partial}{\partial x} \left( K_{xx}
 \frac{\partial T}{\partial x} \right) - \frac{\partial}{\partial y}
 \left( K_{yy} \frac{\partial T}{\partial y} \right) - Q \right]d\Omega=0
-\end{equation}\]</span> 应用格林定理后， <span
-class="math display">\[\begin{equation}
+\end{equation}\]</span> 应用格林定理后， <span class="math display">\[\begin{equation}
   \int_\Omega\left[ K_{xx} \frac{\partial W}{\partial x} \frac{\partial
 T}{\partial x} + K_{yy} \frac{\partial W}{\partial y} \frac{\partial
 T}{\partial y}-WQ\right]dxdy + \int_{\Gamma_B} W \left( -K_{xx}
 \frac{\partial T}{\partial x} n_x - K_{yy} \frac{\partial T}{\partial y}
 n_y \right)dΓ=0
 \end{equation}\]</span></p>
-<p>我们现在使用双线性形状函数近似<span
-class="math inline">\(T\)</span>，即 <span
-class="math display">\[\begin{equation}
+<p>我们现在使用双线性形状函数近似<span class="math inline">\(T\)</span>，即 <span class="math display">\[\begin{equation}
   T = \sum_{i=1}^4 N_i T_i
-\end{equation} \]</span> 设<span
-class="math inline">\(W=N_i\)</span>。方程26的Galerkin公式变为 <span
-class="math display">\[\begin{equation} \int_\Omega \left( K_{xx}
+\end{equation} \]</span> 设<span class="math inline">\(W=N_i\)</span>。方程26的Galerkin公式变为 <span class="math display">\[\begin{equation} \int_\Omega \left( K_{xx}
 \frac{\partial N_i}{\partial x} \frac{\partial N_j}{\partial x} + K_{yy}
 \frac{\partial N_i}{\partial y} \frac{\partial N_j}{\partial y} \right)
 T_jdxdy = \int_\Omega N_i Qdxdy-\int_{\Gamma_B}N_iqd\Gamma
 \end{equation}\]</span>
-其中方程29已被用来替换边界积分中的施加热流。我们现在将方程32转换为自然<span
-class="math inline">\(\xi，\eta\)</span>坐标系统。我们在该系统中定义温度为
+其中方程29已被用来替换边界积分中的施加热流。我们现在将方程32转换为自然<span class="math inline">\(\xi，\eta\)</span>坐标系统。我们在该系统中定义温度为
 <span class="math display">\[\begin{equation}
   T(\xi, \eta) = \sum_{i=1}^4 N_i(\xi, \eta) T_i
-\end{equation}\]</span> 其中形状函数<span
-class="math inline">\(N_i(\xi，\eta)\)</span>在方程17中给出，定义在图5所示的通用单元上。第一导数值从
+\end{equation}\]</span> 其中形状函数<span class="math inline">\(N_i(\xi，\eta)\)</span>在方程17中给出，定义在图5所示的通用单元上。第一导数值从
 <span class="math display">\[ \begin{equation}
   \begin{bmatrix}
     \frac{\partial N_i}{\partial x}\\ \frac{\partial N_i}{\partial y}
@@ -565,17 +517,14 @@ J_{12}&amp;J_{22}
 x_2-x_1&amp;0\\
 0&amp;y_4-y_1
 \end{bmatrix}
-\end{equation}\]</span> 使用方程13获得。雅可比矩阵的逆如下式所示 <span
-class="math display">\[\begin{equation}
+\end{equation}\]</span> 使用方程13获得。雅可比矩阵的逆如下式所示 <span class="math display">\[\begin{equation}
    \boldsymbol{J}^{-1} =\frac{1}{|\boldsymbol{J}|}\begin{bmatrix}
 J_{22} &amp; -J_{12} \\
 -J_{21} &amp; J_{11} \\
 \end{bmatrix}
-\end{equation}\]</span> 其中 <span
-class="math display">\[\begin{equation}
+\end{equation}\]</span> 其中 <span class="math display">\[\begin{equation}
    |J| = J_{11}J_{22} - J_{12}J_{21}
-\end{equation}\]</span> 因此，方程32变为 <span
-class="math display">\[\begin{equation}
+\end{equation}\]</span> 因此，方程32变为 <span class="math display">\[\begin{equation}
 \int^1_{-1} \int^1_{-1} \left[K_{xx}\left(\frac{\partial
 N_i}{\partial\xi}\frac{\partial\xi}{\partial x}+\frac{\partial
 N_i}{\partial\eta}\frac{\partial\eta}{\partial
@@ -591,13 +540,9 @@ N_j}{\partial\eta}\frac{\partial\eta}{\partial y}\right)
 = -\int^1_{-1}qN_id\Gamma+ \int^1_{-1}\int^1_{-1}QN_id\xi d\eta
 \end{equation}\]</span> 其中<span class="math inline">\(\frac{\partial
 N_i}{\partial x}\)</span>和<span class="math inline">\(\frac{\partial
-N_i}{\partial y}\)</span>用方程34表示为<span
-class="math inline">\(\frac{\partial N_i}{\partial \xi}\)</span>和<span
-class="math inline">\(\frac{\partial N_i}{\partial \eta}\)</span>。 ##
+N_i}{\partial y}\)</span>用方程34表示为<span class="math inline">\(\frac{\partial N_i}{\partial \xi}\)</span>和<span class="math inline">\(\frac{\partial N_i}{\partial \eta}\)</span>。 ##
 4.7 稳态传导与边界对流
-如上一篇文章所讨论的，边界上的对流发生会改变边界条件，即载荷向量和刚度矩阵。稳态传导方程与方程27相同，但沿<span
-class="math inline">\(\Gamma_B\)</span>的边界条件由下式给出： <span
-class="math display">\[
+如上一篇文章所讨论的，边界上的对流发生会改变边界条件，即载荷向量和刚度矩阵。稳态传导方程与方程27相同，但沿<span class="math inline">\(\Gamma_B\)</span>的边界条件由下式给出： <span class="math display">\[
 \begin{equation}
 -\left(K_{xx}\frac{\partial T}{\partial x}n_x+K_{yy}\frac{\partial
 T}{\partial y}n_y\right)=h(T-T_\infty)
@@ -614,13 +559,9 @@ y}\frac{\partial N_j}{\partial y}\right)dxdy\right]T_j\\
 \]</span>
 其中方程39已被用来定义对流梯度边界条件项。评估方程40的过程与之前完全相同；在这种情况下，我们必须考虑包含对流热通量的表面积分。当单元边是直线时，这些积分的评估可以进行解析。当单元不再是矩形（或者有曲面，如我们稍后在二次单元中将看到的），必须进行数值积分。</p>
 <h2 id="二次四边形单元">4.8 二次四边形单元</h2>
-<p>如4.3.2节所讨论的，最常用的二次四边形单元由八个节点组成——四个角节点加上四个中边节点，如图7所示。虽然使用二次单元需要更多的计算工作，但精度的提高，或者对稳态问题的收敛解的更接近的近似，是显著的。双线性单元的误差减少率是<span
-class="math inline">\(O(h^2)\)</span>，其中h是单元大小；对于二次单元，误差减少为<span
-class="math inline">\(O(h^3)\)</span>。使用二次单元获得解决方案的过程与双线性单元完全相同。</p>
+<p>如4.3.2节所讨论的，最常用的二次四边形单元由八个节点组成——四个角节点加上四个中边节点，如图7所示。虽然使用二次单元需要更多的计算工作，但精度的提高，或者对稳态问题的收敛解的更接近的近似，是显著的。双线性单元的误差减少率是<span class="math inline">\(O(h^2)\)</span>，其中h是单元大小；对于二次单元，误差减少为<span class="math inline">\(O(h^3)\)</span>。使用二次单元获得解决方案的过程与双线性单元完全相同。</p>
 <h2 id="时间依赖性扩散">4.9 时间依赖性扩散</h2>
-<p>如果一个人希望以瞬态、时间依赖的模式解决问题，与时间导数项相关的质量矩阵<span
-class="math inline">\(\boldsymbol{M}\)</span>为 <span
-class="math display">\[\begin{equation}
+<p>如果一个人希望以瞬态、时间依赖的模式解决问题，与时间导数项相关的质量矩阵<span class="math inline">\(\boldsymbol{M}\)</span>为 <span class="math display">\[\begin{equation}
 \int_\Omega\frac{\partial T}{\partial
 t}N_idxdy=\left[\int^1_{-1}\int^1_{-1}N_iN_j|\boldsymbol{J}|d\xi
 d\eta\right]\left[\frac{\partial T_j}{\partial
