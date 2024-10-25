@@ -177,10 +177,10 @@
 n\)</span>个节点）并且更稀疏；因此，直接解通常仅限于相对较小的问题。第二，通常需要在变量变化迅速或存在不连续性的区域进行本地网格细化。很快就能明显看出使用高效的矩阵求解器的重要性。在本章及后续章节中，我们的方法将使用某种形式的高斯-赛德尔迭代法，或者是一种在许多有限元程序中常用的高斯消元法的改进形式——乔利斯基分解。
 <br>在本章中，我们介绍了用于离散化2-D域的两种通用单元形式中的第一个——三角形，基于一般四边形几何的第二种单元将在后续讨论。历史上，有限元方法首先采用三角形单元来模拟结构问题。今天，许多商业上可用的结构分析有限元代码使用三角形和四边形的混合。</p>
 <h2 id="网格">3.2 网格</h2>
-选择的单元是包含三个顶点节点的三角形。知道在哪里最佳地放置和调整单元的大小更多是一种艺术而不是科学。一般来说，在物理域中函数预期变化更快的区域，会放置更多的单元。正如人们可以很快猜到的，网格生成可能需要几次“尝试”才能得到一个好的网格。求解扩散型方程的解决方案相当宽容——即使在最粗糙的网格上，通常也能获得解决方案（尽管不是最高精度的）。另一方面，非线性方程的解决方案，特别是那些以对流为主的，几乎可以保证需要几次重新网格化才能获得合适的解决方案。大多数分析师，即使是那些在使用有限元方法方面有相当专长的分析师，通常也会在审查问题时询问同事关于他们的网格的意见。
+<p>选择的单元是包含三个顶点节点的三角形。知道在哪里最佳地放置和调整单元的大小更多是一种艺术而不是科学。一般来说，在物理域中函数预期变化更快的区域，会放置更多的单元。正如人们可以很快猜到的，网格生成可能需要几次“尝试”才能得到一个好的网格。求解扩散型方程的解决方案相当宽容——即使在最粗糙的网格上，通常也能获得解决方案（尽管不是最高精度的）。另一方面，非线性方程的解决方案，特别是那些以对流为主的，几乎可以保证需要几次重新网格化才能获得合适的解决方案。大多数分析师，即使是那些在使用有限元方法方面有相当专长的分析师，通常也会在审查问题时询问同事关于他们的网格的意见。
 <br>在创建三角单元网格时，建议在梯度最大的方向上更紧密地放置单元。等边形状的单元比长而窄的三角形单元更准确，并且在处理曲线不规则边界时，单元的边应紧密近似边界。使用线性三节点单元（直线边）可能需要许多单元才能减少解决方案中的误差；另一方面，使用二次曲线边三角形单元可以提高准确性，并能自然适应曲线边界，但需要更多的计算工作。网格生成可以使用计算机程序更容易地执行。网格生成计算机代码MESH-2D允许生成2-D线性或二次三角形单元。由COMSOL创建的示例文件是使用COMSOL
 5.2中包含的网格生成预处理器模块创建的。Persson和Strang（2004）描述了一个简单的2-D网格生成器，可以在MATLAB中使用。
-<br>开发网格的首要任务是将问题域细分为规则的几何形状，即由矩形、圆形等组成的宏区域。几乎所有不规则形状都可以简化为简单的几何原语。通过处理原始简单形状，相对容易地对大域进行网格划分，并在边界处交错单元。请注意，我们可以利用一般四边形原语来生成三角形——一个四边形至少包含两个三角形单元。图1显示了一个使用线性三角形单元离散化的不规则形状，嵌入到两个宏1观四边形单元中，其中一个四边形进一步细分为三角形单元。使用二次（曲线边）单元将更准确地近似曲线边界——这一概念在MESH-2D中被利用，以更准确地模拟不规则形状。
+<br>开发网格的首要任务是将问题域细分为规则的几何形状，即由矩形、圆形等组成的宏区域。几乎所有不规则形状都可以简化为简单的几何原语。通过处理原始简单形状，相对容易地对大域进行网格划分，并在边界处交错单元。请注意，我们可以利用一般四边形原语来生成三角形——一个四边形至少包含两个三角形单元。图1显示了一个使用线性三角形单元离散化的不规则形状，嵌入到两个宏1观四边形单元中，其中一个四边形进一步细分为三角形单元。使用二次（曲线边）单元将更准确地近似曲线边界——这一概念在MESH-2D中被利用，以更准确地模拟不规则形状。</p>
 <br>
 <center>
 <figure>
@@ -189,9 +189,10 @@ n\)</span>个节点）并且更稀疏；因此，直接解通常仅限于相对�
 划分为线性三角形单元的非规则区域</figcaption>
 </figure>
 </center>
-<br>由于有限元方法基于非结构化网格的使用，即计算是在单元对单元的基础上进行的，我们可以自由地放置我们想要的单元，并将它们连接到其他单元，而不考虑“正交性”或顺序节点编号（如1-D单元中那样）。事实上，我们可以创建一个通用的或通用的单元，然后将作为问题域中所有单元的模型。
+<p><br>由于有限元方法基于非结构化网格的使用，即计算是在单元对单元的基础上进行的，我们可以自由地放置我们想要的单元，并将它们连接到其他单元，而不考虑“正交性”或顺序节点编号（如1-D单元中那样）。事实上，我们可以创建一个通用的或通用的单元，然后将作为问题域中所有单元的模型。
 <br>遵循大多数有限元方案中通常采用的程序，与一个三角形单元相关的本地节点编号将以逆时针顺序指定为
-1、2 和 3。一个典型的包含三个角节点的线性三角形单元如图2所示。 <br>
+1、2 和 3。一个典型的包含三个角节点的线性三角形单元如图2所示。</p>
+<br>
 <center>
 <figure>
 <img src="/2024/09/12/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E4%B8%89%EF%BC%89/2.png" alt="图1 划分为线性三角形单元的非规则区域">
@@ -275,7 +276,7 @@ x\)</span>的值可以从方程（3.8）容易确定： <span class="math displa
 形状函数的其余导数以直接的方式获得。变量<span class="math inline">\(\partial\phi/\partial x\)</span>的值为 <span class="math display">\[ \frac{\partial \phi}{\partial x} =
 \frac{1}{2A}[(y_2-y_3)\phi_1+(y_3-y_1)\phi_2+(y_1-y_2)\phi_3]\tag{3.14}\]</span></p>
 <h2 id="二次形状函数">3.3.2 二次形状函数</h2>
-与1-D单元一样，我们也可以在线性三角形单元上写出二次近似。二次三角形单元有六个节点，如图3所示。采用这种特定的节点编号系统的原因将在我们考虑三角形的自然面积坐标时变得明显。
+<p>与1-D单元一样，我们也可以在线性三角形单元上写出二次近似。二次三角形单元有六个节点，如图3所示。采用这种特定的节点编号系统的原因将在我们考虑三角形的自然面积坐标时变得明显。</p>
 <br>
 <center>
 <figure>
@@ -304,8 +305,9 @@ x^2y + \alpha_9 xy^2 + \alpha_{10} y^3\tag{3.17} \]</span>
 我们通过下式定义三个坐标变量<span class="math inline">\(L_1\)</span>,
 <span class="math inline">\(L_2\)</span>, 和<span class="math inline">\(L_3\)</span>， <span class="math display">\[ L_i =
 \frac{A_i}{A} \tag{3.18}\]</span></p>
-其中<span class="math inline">\(A_1\)</span>, <span class="math inline">\(A_2\)</span>, 和 <span class="math inline">\(A_3\)</span>是由连接三角形内某点<span class="math inline">\(P\)</span>与角节点（如图4所示）定义的局部面积，使得<span class="math inline">\(A_i\)</span>是与节点<span class="math inline">\(i\)</span>相对的面积。 <br>恒定<span class="math inline">\(L_i\)</span>的线将平行于相对节点<span class="math inline">\(i\)</span>的三角形边。注意在三角形内的任何点<span class="math inline">\(L_1 + L_2 + L_3 =
-1\)</span>。图5显示了每个坐标的增加方向。很明显，每个<span class="math inline">\(L_i\)</span>在与节点<span class="math inline">\(i\)</span>相对的边上变化在0到1之间，位于节点<span class="math inline">\(i\)</span>处。 <br>
+<p>其中<span class="math inline">\(A_1\)</span>, <span class="math inline">\(A_2\)</span>, 和 <span class="math inline">\(A_3\)</span>是由连接三角形内某点<span class="math inline">\(P\)</span>与角节点（如图4所示）定义的局部面积，使得<span class="math inline">\(A_i\)</span>是与节点<span class="math inline">\(i\)</span>相对的面积。 <br>恒定<span class="math inline">\(L_i\)</span>的线将平行于相对节点<span class="math inline">\(i\)</span>的三角形边。注意在三角形内的任何点<span class="math inline">\(L_1 + L_2 + L_3 =
+1\)</span>。图5显示了每个坐标的增加方向。很明显，每个<span class="math inline">\(L_i\)</span>在与节点<span class="math inline">\(i\)</span>相对的边上变化在0到1之间，位于节点<span class="math inline">\(i\)</span>处。</p>
+<br>
 <center>
 <figure>
 <img src="/2024/09/12/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E4%B8%89%EF%BC%89/4.png" alt="图4 面坐标系">
@@ -340,9 +342,10 @@ L_3)|\boldsymbol{J}|dL_1dL_2\tag{3.24}\]</span></p>
 w_mg[(L_1)_m, (L_2)_m, (L_3)_m]\tag{3.25}\]</span> 其中 <span class="math inline">\(g(\cdot)\)</span> 包括<span class="math inline">\(\boldsymbol{J}\)</span>，<span class="math inline">\(1/2\)</span> 因子考虑了局部坐标系统中的面积 <span class="math inline">\((L_i)_m\)</span> 表示三角形中特定点，<span class="math inline">\(w_m\)</span> 是与程序相关联的权重。</p>
 <p>数值积分公式的阶数必须至少比坐标<span class="math inline">\(L_1\)</span>, <span class="math inline">\(L_2\)</span>, 和<span class="math inline">\(L_3\)</span>的幂次和大一整数。例如，要积分<span class="math inline">\(L_1L_2L_3\)</span>的乘积，指数和为3，将使用四次积分方案。</p>
 <h2 id="三角形单元中的传导函数">3.6 三角形单元中的传导函数</h2>
-考虑确定由于在各向同性 2-D
+<p>考虑确定由于在各向同性 2-D
 域内传导而产生的稳态温度分布的问题，该域由边界<span class="math inline">\(\Gamma\)</span>描述，如图6所示。<span class="math inline">\(T(x, y)\)</span>的控制方程写为 <span class="math display">\[ -K\Bigg(\frac{\partial^2 T}{\partial x^2} +
-\frac{\partial^2 T}{\partial y^2}\Bigg) = Q\tag{3.26}\]</span> 式中<span class="math inline">\(K\)</span>是假定为常数的热导率，<span class="math inline">\(Q\)</span>是源/汇项。 <br>
+\frac{\partial^2 T}{\partial y^2}\Bigg) = Q\tag{3.26}\]</span> 式中<span class="math inline">\(K\)</span>是假定为常数的热导率，<span class="math inline">\(Q\)</span>是源/汇项。</p>
+<br>
 <center>
 <figure>
 <img src="/2024/09/12/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E4%B8%89%EF%BC%89/6.png" alt="图6 热传导的二维域">
@@ -402,7 +405,37 @@ b_3b_1+c_3c_1&amp;b_3b_2+c_3c_2&amp;b_3b_3+c_3c_3
 \Bigg],\\
 i=1,2,3;j=1,2,3\tag{3.41}\]</span> <br>
 <center>
-表1 线性三角形单元形状函数的系数值 |<span class="math inline">\(i\)</span>|<span class="math inline">\(a_i\)</span>|<span class="math inline">\(b_i\)</span>|<span class="math inline">\(c_i\)</span>| |--|--|--|--| |1|<span class="math inline">\(x_2y_3-x_3y_2\)</span>|<span class="math inline">\(y_2-y_3\)</span>|<span class="math inline">\(x_3-x_2\)</span>| |2|<span class="math inline">\(x_3y_1-x_1y_3\)</span>|<span class="math inline">\(y_3-y_1\)</span>|<span class="math inline">\(x_1-x_3\)</span>| |3|<span class="math inline">\(x_1y_2-x_2y_1\)</span>|<span class="math inline">\(y_1-y_2\)</span>|<span class="math inline">\(x_2-x_1\)</span>|
+<p>表1 线性三角形单元形状函数的系数值</p>
+<table>
+<thead>
+<tr>
+<th><span class="math inline">\(i\)</span></th>
+<th><span class="math inline">\(a_i\)</span></th>
+<th><span class="math inline">\(b_i\)</span></th>
+<th><span class="math inline">\(c_i\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="math inline">\(x_2y_3-x_3y_2\)</span></td>
+<td><span class="math inline">\(y_2-y_3\)</span></td>
+<td><span class="math inline">\(x_3-x_2\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="math inline">\(x_3y_1-x_1y_3\)</span></td>
+<td><span class="math inline">\(y_3-y_1\)</span></td>
+<td><span class="math inline">\(x_1-x_3\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="math inline">\(x_1y_2-x_2y_1\)</span></td>
+<td><span class="math inline">\(y_1-y_2\)</span></td>
+<td><span class="math inline">\(x_2-x_1\)</span></td>
+</tr>
+</tbody>
+</table>
 </center>
 <p><br>载荷向量<span class="math inline">\(\boldsymbol{F}\)</span>的分量由两个积分组成。由于<span class="math inline">\(N_i =
 L_i\)</span>，第一个积分对于热源可以明确地写成 <span class="math display">\[\boldsymbol{F}_Q^{(e)}=Q\int_{A^{(e)}}
@@ -456,8 +489,9 @@ F_{q_{3-1}}^{(e)}=-\frac{q\ell^{(e)}_{3-1}}{2}\Bigg[
 \boldsymbol{F}^{(e)}_Q+\boldsymbol{F}^{(e)}_{q1-2}+\boldsymbol{F}^{(e)}_{q2-3}+\boldsymbol{F}^{(e)}_{q3-1}\tag{3.44}\]</span>
 其中最后三项中的通量边界值取决于指定的单元边。方程（3.41）到（3.43）作为三角形单元的一般有限元关系。我们只需要输入实际值就可以得到由单元网格指定的节点温度值。在下一节中，我们将应用一般关系来解决一个具有边界对流的单元问题。</p>
 <h2 id="具有边界对流的稳态传导">3.7 具有边界对流的稳态传导</h2>
-假设我们有一个如图7所示的离散化，其中一个面上指定了对流条件，该面连接节点2和3。我们希望解决在<span class="math inline">\(\ell ^{(e)}_{2-3}\)</span>上具有边界条件 <span class="math display">\[-K\frac{\partial T}{\partial n} = h(T -
-T_{\infty})\tag{3.45}\]</span> 的方程（3.26）的稳态传导问题。 <br>
+<p>假设我们有一个如图7所示的离散化，其中一个面上指定了对流条件，该面连接节点2和3。我们希望解决在<span class="math inline">\(\ell ^{(e)}_{2-3}\)</span>上具有边界条件 <span class="math display">\[-K\frac{\partial T}{\partial n} = h(T -
+T_{\infty})\tag{3.45}\]</span> 的方程（3.26）的稳态传导问题。</p>
+<br>
 <center>
 <figure>
 <img src="/2024/09/12/%E6%9C%89%E9%99%90%E5%85%83%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC%EF%BC%88%E4%B8%89%EF%BC%89/7.png" alt="图7 单面有对流的元件中的热传导">
@@ -750,7 +784,7 @@ S_1\\S_2\\S_3
 \boldsymbol{F^{(e)}}=\boldsymbol{F}^{(e)}_Q+\boldsymbol{F}^{(e)}_b\tag{3.81}
 \]</span> 矩阵<span class="math inline">\(\boldsymbol{H}^{(e)}\)</span>和向量<span class="math inline">\(\boldsymbol{F^{(e)}}\)</span>包含了沿单元的一个或多个侧面的混合边界条件（3.69）的贡献。在这种情况下，矩阵系数项是从线性三角形二维单元中获得的。请记住，有限元程序和得到的矩阵方程适用于任何类型的单元和任何数量的空间维度。</p>
 <h2 id="带宽">3.11 带宽</h2>
-当处理二维和三维单元时，带宽的概念变得重要。正如上一篇文章简要讨论的，矩阵的带宽由节点编号序列决定，如图8所示。在一维问题中，单元和节点编号是顺序的。
+<p>当处理二维和三维单元时，带宽的概念变得重要。正如上一篇文章简要讨论的，矩阵的带宽由节点编号序列决定，如图8所示。在一维问题中，单元和节点编号是顺序的。</p>
 <br>
 <center>
 <figure>
