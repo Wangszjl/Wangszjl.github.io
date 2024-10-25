@@ -762,8 +762,43 @@ S_1\\S_2\\S_3
 <p><br>与单元相关的“全局”节点编号称为“单元连通性”。在一维线性单元中，与单元相关联的两个“局部”节点，即每个单元的两端都有一个节点。</p>
 <br>
 <center>
-表2 一维单元连接性 |单元序号|局部节点1|局部节点2| |--|--|--| |1|1|2
-|2|2|3 |3|3|4 |4|4|5 |5|5|6
+<p>表2 一维单元连接性</p>
+<table>
+<thead>
+<tr>
+<th>单元序号</th>
+<th>局部节点1</th>
+<th>局部节点2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>5</td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
 </center>
 <p><br>当从弱表述公式派生的单元矩阵方程被“组装”在整个问题域上时，即所有单元都被纳入，得到的全局线性方程组<span class="math inline">\(\boldsymbol{A}\phi=\boldsymbol{F}\)</span>涉及一个<span class="math inline">\(n \times n\)</span>的方阵，其中<span class="math inline">\(n\)</span>是节点的总数（表2）。在图8中，全局矩阵<span class="math inline">\(\boldsymbol{A}\)</span>是一个<span class="math inline">\(6 \times
 6\)</span>的方阵。正如图3.7所示，两个相邻的一维线性单元的组装产生一个在整个网格上通用的三对角矩阵。因此，<span class="math inline">\(6 \times
