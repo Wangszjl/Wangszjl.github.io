@@ -976,16 +976,18 @@ N_2(\xi)=1-\xi^2\tag{2.75}
 \]</span> <span class="math display">\[
 N_3(\xi)=\frac{1}{2}\xi(\xi+1)\tag{2.76}
 \]</span> 在区间<span class="math inline">\(x_{2i-1}\le x\le
-x_{2i+1}的单元\)</span>e_i<span class="math inline">\(映射到区间\)</span>-1<span class="math inline">\(的转化式为\)</span>$
-x=N_1()x_{2i-1}+N_2()x_{2i}+N_3()x_{2i+1} <span class="math display">\[
-注意，当 $x_{2i} =(x_{2i-1} + x_{2i+1})/2$
+x_{2i+1}\)</span>的单元<span class="math inline">\(e_i\)</span>映射到区间<span class="math inline">\(-1\le\xi\le 1\)</span>的转化式为 <span class="math display">\[
+x=N_1(\xi)x_{2i-1}+N_2(\xi)x_{2i}+N_3(\xi)x_{2i+1}\tag{2.77}
+\]</span> 注意，当 <span class="math inline">\(x_{2i} =(x_{2i-1} +
+x_{2i+1})/2\)</span>
 时，这个表达式简化为方程(2.64)。这种表示法比2.2中的表示法更具一般性，因为它允许内部节点位于单元中点以外的位置。
-从$N_i(x)$ 对$x$的导数可以通过以下方式获得：
-\]</span> = <span class="math display">\[
-\]</span> = <span class="math display">\[
-于是有
-\]</span> =x_{2i-1}+x_{2i}+x_{2i+1} $$
-在（2.79）中使用了单元坐标的全局值<span class="math inline">\(x^{(e_i)}_1\)</span>，<span class="math inline">\(x^{(e_i)}_2\)</span>，<span class="math inline">\(x^{(e_i)}_3\)</span>。<span class="math inline">\(dx/d\xi\)</span>为坐标变换的<strong><em>雅可比行列式</em></strong>，通常表示为<span class="math inline">\(\boldsymbol{J}\)</span>。</p>
+从<span class="math inline">\(N_i(x)\)</span> 对<span class="math inline">\(x\)</span>的导数可以通过以下方式获得： <span class="math display">\[
+\frac{dN_i}{d\xi}=\frac{dN_i}{dx}\frac{dx}{d\xi}
+\]</span> <span class="math display">\[
+\frac{dN_i}{dx}=\frac{1}{dx/d\xi}\frac{dN_i}{d\xi}\tag{2.78}
+\]</span> 于是有 <span class="math display">\[
+\frac{dx}{d\xi}=\frac{dN_1}{d\xi}x_{2i-1}+\frac{dN_2}{d\xi}x_{2i}+\frac{dN_3}{d\xi}x_{2i+1}\tag{2.79}
+\]</span> 在（2.79）中使用了单元坐标的全局值<span class="math inline">\(x^{(e_i)}_1\)</span>，<span class="math inline">\(x^{(e_i)}_2\)</span>，<span class="math inline">\(x^{(e_i)}_3\)</span>。<span class="math inline">\(dx/d\xi\)</span>为坐标变换的<strong><em>雅可比行列式</em></strong>，通常表示为<span class="math inline">\(\boldsymbol{J}\)</span>。</p>
 <h2 id="随时间变化的扩散方程">2.6 随时间变化的扩散方程</h2>
 <p>我们现在将有限元算法扩展到非稳态热扩散方程。假设 <span class="math inline">\(Q =
 0\)</span>，即没有源或汇。热传导的控制方程通常写为：</p>
